@@ -54,13 +54,11 @@ public class HomeFragment extends Fragment {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 if (itemId == R.id.tab_rate) {
-                    viewPager.setCurrentItem(0, false);
+                    viewPager.setCurrentItem(0);
                 } else if (itemId == R.id.tab_favorite) {
-                    viewPager.setCurrentItem(1, false);
-
+                    viewPager.setCurrentItem(1);
                 } else if (itemId == R.id.tab_my_page) {
-                    viewPager.setCurrentItem(2, false);
-
+                    viewPager.setCurrentItem(2);
                 }
                 return true;
             }
