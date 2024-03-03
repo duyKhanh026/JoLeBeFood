@@ -27,7 +27,5 @@ public class MainActivity extends AppCompatActivity {
 
         // Thêm một Fragment vào FragmentContainerView hoặc FrameLayout với một id duy nhất và thực thi ngay lập tức
         transaction.replace(R.id.fragment_container, new HomeFragment()).commitNow();
-
-
     }
 }
