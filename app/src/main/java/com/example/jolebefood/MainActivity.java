@@ -7,9 +7,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.example.jolebefood.fragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,5 +23,16 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Lấy FragmentManager từ hỗ trợ Fragment
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        // Bắt đầu một FragmentTransaction
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+
+        // Thêm một Fragment vào FragmentContainerView hoặc FrameLayout với một id duy nhất và thực thi ngay lập tức
+        transaction.replace(R.id.fragment_container, new HomeFragment()).commitNow();
+
+
     }
 }

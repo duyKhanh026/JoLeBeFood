@@ -20,6 +20,7 @@
         android:background="@color/privateColor"
         app:itemIconTint="@color/custom_color_home"
         app:itemTextColor="@color/custom_color_home"
-        app:menu="@menu/menu_home"/>
+        app:menu="@menu/menu_home"
+        />
 
 </RelativeLayout>
