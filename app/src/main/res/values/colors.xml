@@ -4,4 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="privateColor">#239B56</color>
     <color name="yellow">#fff908</color>
+    <color name="tab_rate">#3F51B5</color>
+    <color name="tab_favorite">#1CB6A9</color>
+    <color name="tab_my_page">#E9FAAB</color>
 </resources>
