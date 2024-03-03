@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "559740643373",
+    "project_id": "jolebefood",
+    "storage_bucket": "jolebefood.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559740643373:android:3fac2f534ebeb6789bb0a4",
+        "android_client_info": {
+          "package_name": "com.example.jolebefood"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVu2bXx6WSdwPXLeT9eqRLdDw0OI1jeA0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
