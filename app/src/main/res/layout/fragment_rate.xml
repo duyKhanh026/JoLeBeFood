@@ -6,13 +6,111 @@
     android:background="@color/tab_rate"
     tools:context=".fragment.tab_home.RateFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello_Rate_Fragment"
-        android:textSize="12pt"
-        />
 
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hello_Rate_Fragment"
+            android:background="@color/privateColor"
+            android:paddingTop="10dp"
+            android:textColor="@color/white"
+            android:textSize="12pt"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thử Nghiệm firebase"
+            android:paddingTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12pt"
+            />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Tên: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/firstName_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Họ: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/lastName_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Tuổi: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/age_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Username: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/userName_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+
+        </TableLayout>
+        <Button
+            android:id="@+id/nhapBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhập"
+            />
+
+    </LinearLayout>
 
 </FrameLayout>

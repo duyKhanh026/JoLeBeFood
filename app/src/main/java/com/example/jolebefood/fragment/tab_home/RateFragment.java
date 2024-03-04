@@ -4,10 +4,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.jolebefood.MainActivity;
 import com.example.jolebefood.R;
+import com.example.jolebefood.Users;
+import com.example.jolebefood.databinding.ActivityMainBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +26,10 @@ import com.example.jolebefood.R;
  * create an instance of this fragment.
  */
 public class RateFragment extends Fragment {
+    String firstName, lastName, age,userName;
+    FirebaseDatabase db;
+    DatabaseReference reference;
+    View view;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +74,43 @@ public class RateFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_rate, container, false);
+        view = inflater.inflate(R.layout.fragment_rate, container, false);
+
+        EditText firstName_text = view.findViewById(R.id.firstName_text);
+        EditText lastName_text = view.findViewById(R.id.lastName_text);
+        EditText age_text = view.findViewById(R.id.age_text);
+        EditText userName_text = view.findViewById(R.id.userName_text);
+        Button nhapBtn = view.findViewById(R.id.nhapBtn);
+
+        nhapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstName = firstName_text.getText().toString();
+                lastName = lastName_text.getText().toString();
+                age = age_text.getText().toString();
+                userName = userName_text.getText().toString();
+
+                if (!firstName.isEmpty() && !lastName.isEmpty() && !age.isEmpty() && !userName.isEmpty()){
+                    Users users = new Users(firstName, lastName, age, userName);
+
+                    db = FirebaseDatabase.getInstance();
+
+                    reference = db.getReference("User");
+                    reference.child(userName).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            firstName_text.setText("");
+                            lastName_text.setText("");
+                            age_text.setText("");
+                            userName_text.setText("");
+                            Toast.makeText(getContext(),"Successfuly updated", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        });
+
+
+        return view;
     }
 }
