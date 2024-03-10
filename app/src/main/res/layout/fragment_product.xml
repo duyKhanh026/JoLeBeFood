@@ -7,6 +7,8 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Danh mục sản phẩm"
+        android:text="Danh Mục"
+        android:background="@color/privateColor"
+        android:textColor="@color/white"
         android:textSize="10pt"/>
 </RelativeLayout>
