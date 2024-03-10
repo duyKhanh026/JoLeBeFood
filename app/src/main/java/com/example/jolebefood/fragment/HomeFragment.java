@@ -59,6 +59,8 @@ public class HomeFragment extends Fragment {
                     viewPager.setCurrentItem(1);
                 } else if (itemId == R.id.tab_my_page) {
                     viewPager.setCurrentItem(2);
+                } else if (itemId == R.id.tab_khuyenmai){
+                    viewPager.setCurrentItem(3);
                 }
                 return true;
             }
@@ -81,6 +83,9 @@ public class HomeFragment extends Fragment {
                         break;
                     case 2:
                         bottomNavigationView.getMenu().findItem(R.id.tab_my_page).setChecked(true);
+                        break;
+                    case 3:
+                        bottomNavigationView.getMenu().findItem(R.id.tab_khuyenmai).setChecked(true);
                         break;
                 }
             }
