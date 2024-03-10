@@ -11,15 +11,6 @@
         android:layout_height="match_parent"
 
         android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello_Rate_Fragment"
-            android:background="@color/privateColor"
-            android:paddingTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="12pt"
-            />
 
         <TextView
             android:layout_width="match_parent"
