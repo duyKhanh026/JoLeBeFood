@@ -1,47 +1,59 @@
 package com.example.jolebefood.AdapterRecycleView;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.DTO.KhuyenMaiDTO;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
 
 public class KhuyenMai_Item extends RecyclerView.Adapter<KhuyenMai_Item.MyViewHolder> {
 
-    ArrayList<String> listkm;
+    ArrayList<KhuyenMaiDTO> dataList;
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.khuyenmai_item, parent, false);
+        return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
+        KhuyenMaiDTO khuyenMaiDTO = dataList.get(position);
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return dataList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        private TextView TenKM;
+        private TextView phuongthuc;
+        private ImageView img;
 
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.txtDanhMuc_LS);
+            TenKM = itemView.findViewById(R.id.discount_text);
+            phuongthuc = itemView.findViewById(R.id.method_payment);
+            img = itemView.findViewById(R.id.imagemethod);
         }
 
        public void bindData(String data) {
-            textView.setText(data);
+//            textView.setText(data);
         }
+
+
     }
 }
