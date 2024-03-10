@@ -1,6 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginBottom="10dp"
+    android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <TextView
+                android:id="@+id/discount_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Giảm 20k món ăn"
+                android:textSize="80px"
+                android:padding="20px"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                />
+    
+            <TextView
+                android:id="@+id/method_payment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Use with momo"
+                android:layout_below="@id/discount_text"
+                android:textSize="50px"
+                android:paddingLeft="20px"
+                android:textColor="@color/black"
+                />
+    
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="120px"
+            android:layout_height="120px"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="40px"
+            android:layout_marginRight="70px"
+            tools:srcCompat="@tools:sample/avatars" />
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#A6A3A3"
+        android:layout_margin="25px"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:id="@+id/ap_dung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Áp dụng tại một số nhà hàng"
+            android:textSize="50px"
+            android:paddingLeft="20px"
+            android:textColor="@color/black"
+            />
+
+        <TextView
+            android:id="@+id/toi_thieu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Đặt tối thiểu 50k"
+            android:textSize="50px"
+            android:paddingLeft="20px"
+            android:textColor="@color/black"
+            android:layout_below="@id/ap_dung"/>
+
+    </RelativeLayout>
+</LinearLayout>
