@@ -1,24 +1,46 @@
 package com.example.jolebefood;
 
-import android.os.Bundle;
+import static android.app.PendingIntent.getActivity;
 
-import androidx.activity.EdgeToEdge;
+import android.os.Bundle;
+import android.util.Log;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.jolebefood.AdapterRecycleView.ChiTietDonHang_Item;
+
+import java.util.ArrayList;
 
 public class ChiTietDonHang extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+
+    private ChiTietDonHang_Item adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_chi_tiet_don_hang);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        AnhXa();
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(ChiTietDonHang.this));
+
+        ArrayList<String> dataList = new ArrayList<>();
+
+        dataList.add("Món gà");
+        dataList.add("Món bò");
+        dataList.add("Món heo");
+        dataList.add("Món rau");
+
+
+        adapter = new ChiTietDonHang_Item(dataList);
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void AnhXa(){
+        recyclerView = findViewById(R.id.listSP_CTDH);
     }
 }

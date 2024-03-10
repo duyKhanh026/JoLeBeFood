@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginBottom="10dp">
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/imgMonAn_CTDH"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginTop="10dp"
+            android:text="Chân gà rút xương"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#433C3C"
+            android:layout_toRightOf="@id/imgMonAn_CTDH"
+            android:id="@+id/txtTenMonAn_CTDH"
+            android:paddingBottom="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="x1"
+            android:textSize="18sp"
+            android:id="@+id/txtSoLuong_CTDH"
+            android:layout_below="@id/txtTenMonAn_CTDH"
+            android:layout_toRightOf="@id/imgMonAn_CTDH"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="đ113.000"
+            android:textSize="18sp"
+            android:layout_below="@id/txtSoLuong_CTDH"
+            android:layout_alignParentRight="true"
+            android:textColor="#F44336"
+            android:padding="5dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/txtGia_LS"/>
+</RelativeLayout>

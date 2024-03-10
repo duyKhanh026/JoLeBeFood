@@ -3,7 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#B8B2B2">
+    android:background="#E1DCDC">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,6 +27,25 @@
             android:background="@color/black"/>
 
     </RelativeLayout>
+    
+    <EditText
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:hint="Nhập từ khóa tìm kiếm..."
+        android:padding="10dp"
+        android:singleLine="true"
+        android:visibility="visible"
+        android:textSize="18sp"/>
+
+
+
+
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

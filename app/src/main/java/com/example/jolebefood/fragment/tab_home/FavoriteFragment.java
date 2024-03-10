@@ -28,10 +28,6 @@ public class FavoriteFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    View view;
-
-    LSuMuaHang_Item adapter;
-
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -70,22 +66,7 @@ public class FavoriteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.activity_lich_su_mua_hang, container, false);
-
-        RecyclerView recyclerView = view.findViewById(R.id.RecycleView_LichSu);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-        ArrayList<String> dataList = new ArrayList<>();
-        dataList.add("Món gà");
-        dataList.add("Món bò");
-        dataList.add("Món heo");
-        dataList.add("Món rau");
-
-        adapter = new LSuMuaHang_Item(dataList);
-        recyclerView.setAdapter(adapter);
-
-        return view;
+        return inflater.inflate(R.layout.fragment_favorite, container, false);
 
 
     }
