@@ -55,9 +55,9 @@ public class HomeFragment extends Fragment {
                 int itemId = item.getItemId();
                 if (itemId == R.id.tab_rate) {
                     viewPager.setCurrentItem(0);
-                } else if (itemId == R.id.tab_favorite) {
-                    viewPager.setCurrentItem(1);
                 } else if (itemId == R.id.tab_my_page) {
+                    viewPager.setCurrentItem(1);
+                } else if (itemId == R.id.tab_favorite) {
                     viewPager.setCurrentItem(2);
                 } else if (itemId == R.id.tab_khuyenmai){
                     viewPager.setCurrentItem(3);
@@ -79,10 +79,10 @@ public class HomeFragment extends Fragment {
                         bottomNavigationView.getMenu().findItem(R.id.tab_rate).setChecked(true);
                         break;
                     case 1:
-                        bottomNavigationView.getMenu().findItem(R.id.tab_favorite).setChecked(true);
+                        bottomNavigationView.getMenu().findItem(R.id.tab_my_page).setChecked(true);
                         break;
                     case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.tab_my_page).setChecked(true);
+                        bottomNavigationView.getMenu().findItem(R.id.tab_favorite).setChecked(true);
                         break;
                     case 3:
                         bottomNavigationView.getMenu().findItem(R.id.tab_khuyenmai).setChecked(true);

@@ -8,9 +8,17 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/t1d"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello_My_Page_Fragment"
+        android:text="My_Page_Fragment"
+        android:textSize="12pt"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="40dp"
+        android:text="Chổ này để Kiên làm"
         android:textSize="12pt"
         />
 
