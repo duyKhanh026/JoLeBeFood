@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
@@ -19,13 +18,15 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
                 return new FavoriteFragment();
             case 2:
                 return new MyPageFragment();
-            default:
+            case 3:
+                return new KhuyenMaiFragment();
+            default: // 0
                 return new RateFragment();
         }
     }
 
     @Override
     public int getCount() {
-        return 3; // do có 3 tab
+        return 4; // do có 4 tab
     }
 }
