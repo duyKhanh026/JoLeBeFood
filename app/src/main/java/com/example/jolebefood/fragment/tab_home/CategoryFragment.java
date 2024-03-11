@@ -13,13 +13,7 @@ import com.example.jolebefood.AdapterRecycleView.Category_Item;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProductFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ProductFragment extends Fragment {
+public class CategoryFragment extends Fragment {
     View view;
     Category_Item adapter;
 
@@ -32,7 +26,7 @@ public class ProductFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public ProductFragment() {
+    public CategoryFragment() {
         // Required empty public constructor
     }
 
@@ -45,8 +39,8 @@ public class ProductFragment extends Fragment {
      * @return A new instance of fragment GalleryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProductFragment newInstance(String param1, String param2) {
-        ProductFragment fragment = new ProductFragment();
+    public static CategoryFragment newInstance(String param1, String param2) {
+        CategoryFragment fragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
