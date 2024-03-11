@@ -17,7 +17,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new MyPageFragment();
             case 2:
-                return new FavoriteFragment();
+                return new AccFragment();
             case 3:
                 return new CartFragment();
             case 4:
@@ -29,6 +29,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 5; // do có 4 tab
+        return 6; // do có 6 tab
     }
 }

@@ -57,13 +57,16 @@ public class HomeFragment extends Fragment {
                     viewPager.setCurrentItem(0);
                 } else if (itemId == R.id.tab_my_page) {
                     viewPager.setCurrentItem(1);
-                } else if (itemId == R.id.tab_favorite) {
+                } else if (itemId == R.id.tab_acc) {
                     viewPager.setCurrentItem(2);
                 } else if (itemId == R.id.tab_cart){
                     viewPager.setCurrentItem(3);
                 } else if (itemId == R.id.tab_khuyenmai){
                     viewPager.setCurrentItem(4);
                 }
+//                else if (itemId == R.id.tab_acc){
+//                    viewPager.setCurrentItem(5);
+//                }
                 return true;
             }
         });
@@ -84,7 +87,7 @@ public class HomeFragment extends Fragment {
                         bottomNavigationView.getMenu().findItem(R.id.tab_my_page).setChecked(true);
                         break;
                     case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.tab_favorite).setChecked(true);
+                        bottomNavigationView.getMenu().findItem(R.id.tab_acc).setChecked(true);
                         break;
                     case 3:
                         bottomNavigationView.getMenu().findItem(R.id.tab_cart).setChecked(true);
@@ -92,6 +95,9 @@ public class HomeFragment extends Fragment {
                     case 4:
                         bottomNavigationView.getMenu().findItem(R.id.tab_khuyenmai).setChecked(true);
                         break;
+//                    case 5:
+//                        bottomNavigationView.getMenu().findItem(R.id.tab_acc).setChecked(true);
+//                        break;
                 }
             }
             @Override
