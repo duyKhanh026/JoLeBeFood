@@ -3,7 +3,7 @@
     android:layout_height="wrap_content"
     android:background="@color/white"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginBottom="10dp">
+    android:layout_marginTop="5dp">
 
         <ImageView
             android:layout_width="80dp"
@@ -18,7 +18,7 @@
             android:singleLine="true"
             android:layout_marginTop="10dp"
             android:text="Chân gà rút xương"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textStyle="bold"
             android:textColor="#433C3C"
             android:layout_toRightOf="@id/imgMonAn_CTDH"
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="x1"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:id="@+id/txtSoLuong_CTDH"
             android:layout_below="@id/txtTenMonAn_CTDH"
             android:layout_toRightOf="@id/imgMonAn_CTDH"/>
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="đ113.000"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:layout_below="@id/txtSoLuong_CTDH"
             android:layout_alignParentRight="true"
             android:textColor="#F44336"
