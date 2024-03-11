@@ -16,7 +16,7 @@ import com.example.jolebefood.R;
  * create an instance of this fragment.
  */
 public class CartFragment extends Fragment {
-
+    View view;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -61,6 +61,7 @@ public class CartFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        view  =  inflater.inflate(R.layout.fragment_cart, container, false);
+        return view;
     }
 }
