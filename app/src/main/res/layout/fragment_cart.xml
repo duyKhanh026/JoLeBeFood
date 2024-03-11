@@ -30,4 +30,12 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="100dp"
+        android:textSize="12pt"
+        android:text="Sang làm phần này"
+        />
+
 </FrameLayout>
