@@ -6,8 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.AdapterRecycleView.Category_Item;
+import com.example.jolebefood.AdapterRecycleView.LSuMuaHang_Item;
 import com.example.jolebefood.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +21,8 @@ import com.example.jolebefood.R;
  * create an instance of this fragment.
  */
 public class ProductFragment extends Fragment {
+    View view;
+    Category_Item adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +67,21 @@ public class ProductFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_product, container, false);
+        view = inflater.inflate(R.layout.fragment_category, container, false);
+
+        RecyclerView recyclerView = view.findViewById(R.id.recycleView);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ArrayList<String> dataList = new ArrayList<>();
+        ArrayList<Integer> imgList = new ArrayList<>();
+        dataList.add("Món gà");
+        imgList.add(R.drawable.comga);
+        dataList.add("Món bò");
+        imgList.add(R.drawable.combo);
+
+        adapter = new Category_Item(dataList, imgList);
+        recyclerView.setAdapter(adapter);
+        return view;
     }
 }

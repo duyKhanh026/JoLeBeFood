@@ -23,7 +23,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 4:
                 return new KhuyenMaiFragment();
             default: // 0
-                return new RateFragment();
+                return new ProductFragment();
         }
     }
 
