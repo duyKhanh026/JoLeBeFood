@@ -4,11 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.tab_home.ProductFragment">
-    <TextView
+    <RelativeLayout
+        android:id="@+id/relativ"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Danh Mục"
-        android:background="@color/privateColor"
-        android:textColor="@color/white"
-        android:textSize="10pt"/>
+        android:background="@color/orange">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Danh Mục"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:padding="21dp"/>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/search"
+            android:layout_alignParentRight="true"
+            android:padding="20dp"
+            android:background="@color/orange"/>
+
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/relativ">
+
+
+    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>

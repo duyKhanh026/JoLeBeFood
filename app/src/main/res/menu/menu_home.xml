@@ -11,7 +11,9 @@
     <item android:id="@+id/tab_favorite"
         android:icon="@drawable/baseline_add_location_alt_24"
         android:title="@string/tab_favorite"/>
-
+    <item android:id="@+id/tab_cart"
+        android:icon="@drawable/baseline_add_shopping_cart_24"
+        android:title="Giỏ hàng"/>
 
     <item android:id="@+id/tab_khuyenmai"
         android:icon="@drawable/icons8_percent_64"

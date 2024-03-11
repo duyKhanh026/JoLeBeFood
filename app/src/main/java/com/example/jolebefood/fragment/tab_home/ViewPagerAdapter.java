@@ -19,14 +19,16 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 2:
                 return new FavoriteFragment();
             case 3:
+                return new CartFragment();
+            case 4:
                 return new KhuyenMaiFragment();
             default: // 0
-                return new ProductFragment();
+                return new RateFragment();
         }
     }
 
     @Override
     public int getCount() {
-        return 4; // do có 4 tab
+        return 5; // do có 4 tab
     }
 }
