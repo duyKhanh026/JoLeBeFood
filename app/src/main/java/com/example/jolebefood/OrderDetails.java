@@ -3,30 +3,29 @@ package com.example.jolebefood;
 import static android.app.PendingIntent.getActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.AdapterRecycleView.ChiTietDonHang_Item;
+import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
 
 import java.util.ArrayList;
 
-public class ChiTietDonHang extends AppCompatActivity {
+public class OrderDetails extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    private ChiTietDonHang_Item adapter;
+    private Order_Details_Item adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chi_tiet_don_hang);
+        setContentView(R.layout.activity_order_details);
 
         AnhXa();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(ChiTietDonHang.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(OrderDetails.this));
 
         ArrayList<String> dataList = new ArrayList<>();
 
@@ -36,7 +35,7 @@ public class ChiTietDonHang extends AppCompatActivity {
         dataList.add("Món rau");
 
 
-        adapter = new ChiTietDonHang_Item(dataList);
+        adapter = new Order_Details_Item(dataList);
         recyclerView.setAdapter(adapter);
     }
 

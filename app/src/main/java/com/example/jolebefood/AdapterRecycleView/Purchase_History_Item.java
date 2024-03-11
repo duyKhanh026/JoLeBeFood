@@ -5,30 +5,29 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.ChiTietDonHang;
+import com.example.jolebefood.OrderDetails;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
 
-public class LSuMuaHang_Item extends RecyclerView.Adapter<LSuMuaHang_Item.MyViewHolder>{
+public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History_Item.MyViewHolder>{
 
     private ArrayList<String> dataList;
 
-    public LSuMuaHang_Item(ArrayList<String> dataList) {
+    public Purchase_History_Item(ArrayList<String> dataList) {
         this.dataList = dataList;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lichsumuahang_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_history_item, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -44,7 +43,7 @@ public class LSuMuaHang_Item extends RecyclerView.Adapter<LSuMuaHang_Item.MyView
 
                 Toast.makeText(context, holder.textView.getText(), Toast.LENGTH_SHORT).show();
                 // Tạo Intent với context đã lấy
-                Intent intent = new Intent(context, ChiTietDonHang.class);
+                Intent intent = new Intent(context, OrderDetails.class);
                 // Start activity bằng context
                 context.startActivity(intent);
             }

@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.AdapterRecycleView.LSuMuaHang_Item;
+import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
@@ -28,7 +28,7 @@ public class MyPageFragment extends Fragment {
 
     View view;
 
-    LSuMuaHang_Item adapter;
+    Purchase_History_Item adapter;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -69,7 +69,7 @@ public class MyPageFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         // Inflate the layout for this fragment
-        view =  inflater.inflate(R.layout.activity_lich_su_mua_hang, container, false);
+        view =  inflater.inflate(R.layout.activity_order_history, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.RecycleView_LichSu);
 
@@ -81,7 +81,7 @@ public class MyPageFragment extends Fragment {
         dataList.add("Món heo");
         dataList.add("Món rau");
 
-        adapter = new LSuMuaHang_Item(dataList);
+        adapter = new Purchase_History_Item(dataList);
         recyclerView.setAdapter(adapter);
 
 
