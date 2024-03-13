@@ -7,7 +7,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_margin="10px"
     android:padding="20px"
-    android:background="@drawable/background_radius">
+    android:background="@drawable/background_radius"
+    android:elevation="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -44,7 +45,7 @@
             android:layout_width="120px"
             android:layout_height="120px"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="40px"
+            android:layout_marginTop="20px"
             android:layout_marginRight="70px"
             tools:srcCompat="@drawable/momo_logo"
             />
