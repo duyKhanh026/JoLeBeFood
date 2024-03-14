@@ -19,7 +19,7 @@
             android:name=".OrderHistory"
             android:exported="false" />
         <activity
-            android:name=".KhuyenMai"
+            android:name=".Discount"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

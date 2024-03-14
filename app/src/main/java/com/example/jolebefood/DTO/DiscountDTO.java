@@ -1,6 +1,6 @@
 package com.example.jolebefood.DTO;
 
-public class KhuyenMaiDTO {
+public class DiscountDTO {
 
     String MaKM;
     String TenKM;
@@ -9,11 +9,11 @@ public class KhuyenMaiDTO {
     boolean tinhtrangsudung;
     int img;
 
-    public KhuyenMaiDTO(){
+    public DiscountDTO(){
 
     }
 
-    public KhuyenMaiDTO(String maKM, String tenKM, int giatriKM, String phuongthuctt, boolean tinhtrangsudung, int img) {
+    public DiscountDTO(String maKM, String tenKM, int giatriKM, String phuongthuctt, boolean tinhtrangsudung, int img) {
         MaKM = maKM;
         TenKM = tenKM;
         GiatriKM = giatriKM;
@@ -30,7 +30,7 @@ public class KhuyenMaiDTO {
         this.img = img;
     }
 
-    public KhuyenMaiDTO(String maKM, String tenKM, int giatriKM, String phuongthuctt, boolean tinhtrangsudung) {
+    public DiscountDTO(String maKM, String tenKM, int giatriKM, String phuongthuctt, boolean tinhtrangsudung) {
         MaKM = maKM;
         TenKM = tenKM;
         GiatriKM = giatriKM;

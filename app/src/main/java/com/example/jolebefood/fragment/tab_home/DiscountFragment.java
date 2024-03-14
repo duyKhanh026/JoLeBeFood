@@ -6,15 +6,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link KhuyenMaiFragment#newInstance} factory method to
+ * Use the {@link DiscountFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class KhuyenMaiFragment extends Fragment {
+public class DiscountFragment extends Fragment {
+
+    View view;
+    Discount_Item adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +33,7 @@ public class KhuyenMaiFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public KhuyenMaiFragment() {
+    public DiscountFragment() {
         // Required empty public constructor
     }
 
@@ -38,8 +46,8 @@ public class KhuyenMaiFragment extends Fragment {
      * @return A new instance of fragment GalleryFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static KhuyenMaiFragment newInstance(String param1, String param2) {
-        KhuyenMaiFragment fragment = new KhuyenMaiFragment();
+    public static DiscountFragment newInstance(String param1, String param2) {
+        DiscountFragment fragment = new DiscountFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +67,24 @@ public class KhuyenMaiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.khuyenmai, container, false);
+        view = inflater.inflate(R.layout.discount, container, false);
+
+        RecyclerView recyclerView = view.findViewById(R.id.RecycleView_KhuyenMai);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        ArrayList<String> dataList = new ArrayList<>();
+        dataList.add("Giảm 10k");
+        dataList.add("Giảm 15k");
+        dataList.add("Giảm 25k");
+        dataList.add("Giảm 20k");
+        dataList.add("Giảm 30k");
+        dataList.add("Giảm 40k");
+        dataList.add("Giảm 50k");
+
+        adapter = new Discount_Item(dataList);
+        recyclerView.setAdapter(adapter);
+
+        return view;
     }
 }

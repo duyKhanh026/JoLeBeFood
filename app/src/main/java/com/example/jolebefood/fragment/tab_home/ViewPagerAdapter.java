@@ -21,7 +21,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 3:
                 return new CartFragment();
             case 4:
-                return new KhuyenMaiFragment();
+                return new DiscountFragment();
             default: // 0
                 return new CategoryFragment();
         }

@@ -5,8 +5,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginBottom="10dp"
-    android:background="@color/white">
+    android:layout_margin="10px"
+    android:padding="20px"
+    android:background="@drawable/background_radius"
+    android:elevation="5dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -21,8 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giảm 20k món ăn"
-                android:textSize="80px"
-                android:padding="20px"
+                android:textSize="60px"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 />
@@ -33,8 +34,8 @@
                 android:layout_height="wrap_content"
                 android:text="Use with momo"
                 android:layout_below="@id/discount_text"
-                android:textSize="50px"
-                android:paddingLeft="20px"
+                android:textSize="40px"
+
                 android:textColor="@color/black"
                 />
         </RelativeLayout>
@@ -44,18 +45,19 @@
             android:layout_width="120px"
             android:layout_height="120px"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="40px"
+            android:layout_marginTop="20px"
             android:layout_marginRight="70px"
-            tools:srcCompat="@drawable/MoMo_Logo"
+            tools:srcCompat="@drawable/momo_logo"
             />
 
 
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:background="#A6A3A3"
-        android:layout_margin="25px"/>
+        android:layout_marginTop="20px"
+        android:layout_marginBottom="20px"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,8 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="- Áp dụng tại một số nhà hàng"
-            android:textSize="50px"
-            android:paddingLeft="20px"
+            android:textSize="40px"
+
             android:textColor="@color/black"
             />
 
@@ -75,8 +77,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="- Không yêu cầu đơn hàng tối thiểu"
-            android:textSize="50px"
-            android:paddingLeft="20px"
+            android:textSize="40px"
+
             android:textColor="@color/black"
             android:layout_below="@id/ap_dung"/>
 
