@@ -8,19 +8,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.DAO.CategoryDAO.CategoryDAO;
+import com.example.jolebefood.DTO.CategoryDTO;
+import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.OrderDetails;
 import com.example.jolebefood.R;
 
+import org.checkerframework.checker.nullness.qual.NonNull;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History_Item.MyViewHolder>{
 
-    private ArrayList<String> dataList;
+    private List<CategoryDTO> dataList;
 
-    public Purchase_History_Item(ArrayList<String> dataList) {
+    public Purchase_History_Item(List<CategoryDTO> dataList) {
         this.dataList = dataList;
     }
 
@@ -33,19 +38,23 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bindData(dataList.get(position));
+        holder.bindData(dataList.get(position).getTenDM());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Lấy context từ view được bấm vào
                 Context context = view.getContext();
+//
+//                Toast.makeText(context, holder.textView.getText(), Toast.LENGTH_SHORT).show();
+//                // Tạo Intent với context đã lấy
+//                Intent intent = new Intent(context, OrderDetails.class);
+//                // Start activity bằng context
+//                context.startActivity(intent);
 
-                Toast.makeText(context, holder.textView.getText(), Toast.LENGTH_SHORT).show();
-                // Tạo Intent với context đã lấy
-                Intent intent = new Intent(context, OrderDetails.class);
-                // Start activity bằng context
-                context.startActivity(intent);
+                new CategoryDAO().AddCategory(new CategoryDTO("4","Cá heo"),context);
+
+
             }
         });
     }

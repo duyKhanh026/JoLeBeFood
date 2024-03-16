@@ -10,9 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
+import com.example.jolebefood.DAO.CategoryDAO.CategoryDAO;
+import com.example.jolebefood.DAO.CategoryDAO.OnGetListCategoryListener;
+import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -75,15 +79,14 @@ public class MyPageFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ArrayList<String> dataList = new ArrayList<>();
-        dataList.add("Món gà");
-        dataList.add("Món bò");
-        dataList.add("Món heo");
-        dataList.add("Món rau");
-
-        adapter = new Purchase_History_Item(dataList);
-        recyclerView.setAdapter(adapter);
-
+        ArrayList<CategoryDTO> dataList = new ArrayList<>();
+        new CategoryDAO().getList(dataList, new OnGetListCategoryListener() {
+            @Override
+            public void onGetListDiscountSuccess(List<CategoryDTO> list) {
+                adapter = new Purchase_History_Item(dataList);
+                recyclerView.setAdapter(adapter);
+            }
+        });
 
 
         return view;
