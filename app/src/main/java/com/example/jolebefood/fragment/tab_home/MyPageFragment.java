@@ -80,13 +80,19 @@ public class MyPageFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ArrayList<CategoryDTO> dataList = new ArrayList<>();
-        new CategoryDAO().getList(dataList, new OnGetListCategoryListener() {
-            @Override
-            public void onGetListDiscountSuccess(List<CategoryDTO> list) {
-                adapter = new Purchase_History_Item(dataList);
-                recyclerView.setAdapter(adapter);
-            }
-        });
+//        new CategoryDAO().getList(dataList, new OnGetListCategoryListener() {
+//            @Override
+//            public void onGetListDiscountSuccess(List<CategoryDTO> list) {
+//
+//                adapter = new Purchase_History_Item(dataList);
+//                recyclerView.setAdapter(adapter);  }
+//        });
+
+        dataList.add(new CategoryDTO("1","Ga Ran"));
+        dataList.add(new CategoryDTO("2","Heo Ran"));
+
+        adapter = new Purchase_History_Item(dataList);
+        recyclerView.setAdapter(adapter);
 
 
         return view;
