@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,6 +15,27 @@
         android:theme="@style/Theme.JoLeBeFood"
         tools:targetApi="31">
         <activity
+            android:name=".SignIn_and_SignUp.SendOtp"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn_and_SignUp.VerifyPhone"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn_and_SignUp.Register"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn_and_SignUp.Login_Gmail"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn_and_SignUp.Login_Phone"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn_and_SignUp.MainMenu"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".OrderDetails"
             android:exported="false" />
         <activity
@@ -22,7 +45,7 @@
             android:name=".Discount"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SignIn_and_SignUp.Intro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
