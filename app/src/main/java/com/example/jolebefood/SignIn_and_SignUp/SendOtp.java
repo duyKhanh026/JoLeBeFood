@@ -1,5 +1,6 @@
 package com.example.jolebefood.SignIn_and_SignUp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -16,9 +17,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.jolebefood.MainActivity;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,7 +31,7 @@ import com.google.firebase.auth.PhoneAuthProvider;
 
 import java.util.concurrent.TimeUnit;
 
-public class VerifyPhone extends AppCompatActivity {
+public class SendOtp extends AppCompatActivity {
     String verificationId;
     FirebaseAuth FAuth;
     Button verify , Resend ;
@@ -38,9 +41,9 @@ public class VerifyPhone extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verify_phone);
+        setContentView(R.layout.activity_send_otp);
 
-        phoneno = getIntent().getStringExtra("phonenumber").trim();
+        phoneno = getIntent().getStringExtra("Phonenum").trim();
 
         entercode = (EditText) findViewById(R.id.code);
         txt = (TextView) findViewById(R.id.text);
@@ -75,7 +78,7 @@ public class VerifyPhone extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
 
                 txt.setVisibility(View.VISIBLE);
-                txt.setText("Resend Code Within"+millisUntilFinished/1000+"Seconds");
+                txt.setText("Resend Code Within "+millisUntilFinished/1000+" Seconds");
 
             }
 
@@ -119,13 +122,12 @@ public class VerifyPhone extends AppCompatActivity {
                 }.start();
             }
         });
-
     }
-
     private void Resendotp(String phonenum) {
 
         sendverificationcode(phonenum);
     }
+
 
     private void sendverificationcode(String number) {
 
@@ -151,7 +153,7 @@ public class VerifyPhone extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(VerifyPhone.this , "m thất bại rồi",Toast.LENGTH_LONG).show();
+            Toast.makeText(SendOtp.this , "m thất bại rồi",Toast.LENGTH_LONG).show();
 
         }
 
@@ -167,26 +169,27 @@ public class VerifyPhone extends AppCompatActivity {
     private void verifyCode(String code) {
 
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId , code);
-        linkCredential(credential);
+        signInWithPhone(credential);
     }
 
-    private void linkCredential(PhoneAuthCredential credential) {
+    private void signInWithPhone(PhoneAuthCredential credential) {
 
-        FAuth.getCurrentUser().linkWithCredential(credential)
-                .addOnCompleteListener(VerifyPhone.this, new OnCompleteListener<AuthResult>() {
+        FAuth.signInWithCredential(credential)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if(task.isSuccessful()){
-
-                            Intent intent = new Intent(VerifyPhone.this , MainMenu.class);
-                            startActivity(intent);
+                            startActivity(new Intent(SendOtp.this, MainActivity.class));
                             finish();
+
                         }else{
-                            ReusableCodeForAll.ShowAlert(VerifyPhone.this,"Error",task.getException().getMessage());
+                            ReusableCodeForAll.ShowAlert(SendOtp.this,"Error",task.getException().getMessage());
                         }
+
                     }
                 });
 
     }
+
 }

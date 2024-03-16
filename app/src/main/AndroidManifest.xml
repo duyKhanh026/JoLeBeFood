@@ -15,6 +15,9 @@
         android:theme="@style/Theme.JoLeBeFood"
         tools:targetApi="31">
         <activity
+            android:name=".SignIn_and_SignUp.SendOtp"
+            android:exported="false" />
+        <activity
             android:name=".SignIn_and_SignUp.VerifyPhone"
             android:exported="false" />
         <activity

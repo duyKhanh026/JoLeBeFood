@@ -58,9 +58,11 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.hbb20:ccp:2.7.1")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
+    implementation("com.google.firebase:firebase-auth:22.3.1")
     implementation("com.google.firebase:firebase-core:21.1.1")
     implementation("com.google.firebase:firebase-database:20.3.1")
     implementation("com.google.gms:google-services:4.4.1")
+
 
 
 }

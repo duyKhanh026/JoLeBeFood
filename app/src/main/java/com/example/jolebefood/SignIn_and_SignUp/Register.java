@@ -137,12 +137,12 @@ public class Register extends AppCompatActivity {
 
                                                                         dialog.dismiss();
 
-//                                                                        String phonenumber = Cpp.getSelectedCountryCodeWithPlus() + userPhone;
-//                                                                        Intent b = new Intent(Register.this,VerifyPhone.class);
-//                                                                        b.putExtra("phonenumber",phonenumber);
-//                                                                        startActivity(b);
-                                                                        Toast.makeText(Register.this,"Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                                                                        startActivity(new Intent(Register.this, Login_Gmail.class));
+                                                                        String phonenumber = Cpp.getSelectedCountryCodeWithPlus() + userPhone;
+                                                                        Intent b = new Intent(Register.this,VerifyPhone.class);
+                                                                        b.putExtra("phonenumber",phonenumber);
+                                                                        startActivity(b);
+//                                                                        Toast.makeText(Register.this,"Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+//                                                                        startActivity(new Intent(Register.this, Login_Gmail.class));
 
                                                                     }
                                                                 });
