@@ -8,9 +8,5 @@
     <color name="tab_rate">#3F51B5</color>
     <color name="tab_favorite">#1CB6A9</color>
     <color name="tab_my_page">#E9FAAB</color>
-    <color name="grey">#F5F5F5</color>
-    <color name="gray">#2E4058</color>
-    <color name="blue">#0000FF</color>
-    <color name="red">#FF0000</color>
-
+    <color name="grey">#F0F0F0</color>
 </resources>
