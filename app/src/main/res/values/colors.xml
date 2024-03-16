@@ -12,4 +12,8 @@
     <color name="gray">#2E4058</color>
     <color name="blue">#0000FF</color>
     <color name="red">#FF0000</color>
+    <color name="blueish">#17A2C0</color>
+    <color name="DarkBlue">#250285</color>
+    <color name="blue_grey">#2E4858</color>
+    <color name="green">#5FB709</color>
 </resources>
