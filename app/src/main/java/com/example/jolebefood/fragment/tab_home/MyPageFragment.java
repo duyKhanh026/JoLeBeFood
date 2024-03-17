@@ -107,7 +107,7 @@ public class MyPageFragment extends Fragment {
 
             OrderDTO order = new OrderDTO("DH00" + (i + 1), sdt, maKM, "COD", 500000 + i * 10000, currentTimestamp, currentTimestamp, listOrderDetails);
             dataList.add(order);
-            new OrderDAO().SetDataOrder(order, view.getContext());
+            //new OrderDAO().SetDataOrder(order, view.getContext());
         }
 
 

@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CallRetrofit {
     private Retrofit retrofit;
 
-    private final String BASE_URL = "https://demofirebase-141fd-default-rtdb.firebaseio.com/";
+    private final String BASE_URL = "https://jolebefood-default-rtdb.asia-southeast1.firebasedatabase.app/";
 
 
     private final String TAG = "Kien Test CallRetrofit2";
