@@ -21,6 +21,50 @@
             android:textColor="@color/white"
             android:textSize="12pt"
             />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="ID danh mục: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/CategoryID_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Tên danh mục: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/Category_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+        </TableLayout>
+        <Button
+            android:id="@+id/nhapCategoryBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhập Danh mục"
+            />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -30,12 +74,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Tên: "
+                    android:text="Mã food: "
                     android:textSize="10pt"
                     />
 
                 <EditText
-                    android:id="@+id/firstName_text"
+                    android:id="@+id/foodID_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -47,12 +91,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Họ: "
+                    android:text="Tên food: "
                     android:textSize="10pt"
                     />
 
                 <EditText
-                    android:id="@+id/lastName_text"
+                    android:id="@+id/name_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -64,12 +108,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Tuổi: "
+                    android:text="Số lượng: "
                     android:textSize="10pt"
                     />
 
                 <EditText
-                    android:id="@+id/age_text"
+                    android:id="@+id/quantity_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -81,12 +125,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:text="Username: "
+                    android:text="Giá: "
                     android:textSize="10pt"
                     />
 
                 <EditText
-                    android:id="@+id/userName_text"
+                    android:id="@+id/price_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Mô tả: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/depr_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -96,10 +157,10 @@
 
         </TableLayout>
         <Button
-            android:id="@+id/nhapBtn"
+            android:id="@+id/nhapFoodBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nhập"
+            android:text="Nhập Food"
             />
 
     </LinearLayout>

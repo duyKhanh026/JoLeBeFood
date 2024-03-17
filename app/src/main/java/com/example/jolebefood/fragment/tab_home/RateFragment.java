@@ -11,10 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.jolebefood.MainActivity;
+import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.R;
-import com.example.jolebefood.Users;
-import com.example.jolebefood.databinding.ActivityMainBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
  * create an instance of this fragment.
  */
 public class RateFragment extends Fragment {
-    String firstName, lastName, age,userName;
+    String idCategory, nameCategory;
     FirebaseDatabase db;
     DatabaseReference reference;
     View view;
@@ -76,41 +74,33 @@ public class RateFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_rate, container, false);
 
-        EditText firstName_text = view.findViewById(R.id.firstName_text);
-        EditText lastName_text = view.findViewById(R.id.lastName_text);
-        EditText age_text = view.findViewById(R.id.age_text);
-        EditText userName_text = view.findViewById(R.id.userName_text);
-        Button nhapBtn = view.findViewById(R.id.nhapBtn);
+        EditText CategoryID_text = view.findViewById(R.id.CategoryID_text);
+        EditText Category_text = view.findViewById(R.id.Category_text);
+        Button nhapCategoryBtn = view.findViewById(R.id.nhapCategoryBtn);
 
-        nhapBtn.setOnClickListener(new View.OnClickListener() {
+        nhapCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firstName = firstName_text.getText().toString();
-                lastName = lastName_text.getText().toString();
-                age = age_text.getText().toString();
-                userName = userName_text.getText().toString();
+                idCategory = CategoryID_text.getText().toString();
+                nameCategory = Category_text.getText().toString();
 
-                if (!firstName.isEmpty() && !lastName.isEmpty() && !age.isEmpty() && !userName.isEmpty()){
-                    Users users = new Users(firstName, lastName, age, userName);
+                if (!idCategory.isEmpty() && !nameCategory.isEmpty()){
+                    CategoryDTO users = new CategoryDTO(idCategory, nameCategory);
 
                     db = FirebaseDatabase.getInstance();
 
-                    reference = db.getReference("User");
-                    reference.child(userName).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    reference = db.getReference("Category"); // tương tự from table trong sql
+                    reference.child(idCategory).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            firstName_text.setText("");
-                            lastName_text.setText("");
-                            age_text.setText("");
-                            userName_text.setText("");
-                            Toast.makeText(getContext(),"Successfuly updated", Toast.LENGTH_SHORT).show();
+                            CategoryID_text.setText("");
+                            Category_text.setText("");
+                            Toast.makeText(getContext(),"Successfuly Category updated", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
             }
         });
-
-
         return view;
     }
 }
