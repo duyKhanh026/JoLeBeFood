@@ -115,7 +115,7 @@
             android:textSize="18sp"
             android:padding="5dp"
             android:id="@+id/txtTongTien_LS"
-            android:textColor="#F44336"
+            android:textColor="@color/red"
             android:layout_alignParentRight="true"/>
 
 

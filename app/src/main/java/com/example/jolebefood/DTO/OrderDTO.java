@@ -1,13 +1,17 @@
 package com.example.jolebefood.DTO;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class OrderDTO {
     private String MaDH, SDT, MaKM, PhuongThucThanhToan;
     private int TongTien;
-    private LocalDateTime ThoiGianDat, ThoiGianHoanThanh;
+    private Timestamp ThoiGianDat, ThoiGianHoanThanh;
 
-    public OrderDTO(String maDH, String SDT, String maKM, String phuongThucThanhToan, int tongTien, LocalDateTime thoiGianDat, LocalDateTime thoiGianHoanThanh) {
+    private List<OrderDetailsDTO> listOrderDetails;
+
+    public OrderDTO(String maDH, String SDT, String maKM, String phuongThucThanhToan, int tongTien, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, List<OrderDetailsDTO> listOrderDetails) {
         MaDH = maDH;
         this.SDT = SDT;
         MaKM = maKM;
@@ -15,8 +19,8 @@ public class OrderDTO {
         TongTien = tongTien;
         ThoiGianDat = thoiGianDat;
         ThoiGianHoanThanh = thoiGianHoanThanh;
+        this.listOrderDetails = listOrderDetails;
     }
-
 
     public OrderDTO() {
     }
@@ -61,19 +65,21 @@ public class OrderDTO {
         TongTien = tongTien;
     }
 
-    public LocalDateTime getThoiGianDat() {
+    public Timestamp getThoiGianDat() {
         return ThoiGianDat;
     }
 
-    public void setThoiGianDat(LocalDateTime thoiGianDat) {
+    public void setThoiGianDat(Timestamp thoiGianDat) {
         ThoiGianDat = thoiGianDat;
     }
 
-    public LocalDateTime getThoiGianHoanThanh() {
+    public Timestamp getThoiGianHoanThanh() {
         return ThoiGianHoanThanh;
     }
 
-    public void setThoiGianHoanThanh(LocalDateTime thoiGianHoanThanh) {
+    public void setThoiGianHoanThanh(Timestamp thoiGianHoanThanh) {
         ThoiGianHoanThanh = thoiGianHoanThanh;
     }
+
+
 }

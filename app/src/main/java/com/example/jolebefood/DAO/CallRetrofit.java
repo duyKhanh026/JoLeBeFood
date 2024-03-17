@@ -1,8 +1,6 @@
 package com.example.jolebefood.DAO;
 import android.util.Log;
 
-import com.example.jolebefood.DAO.CategoryDAO.API;
-
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 

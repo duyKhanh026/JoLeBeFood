@@ -10,11 +10,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
-import com.example.jolebefood.DAO.CategoryDAO.CategoryDAO;
-import com.example.jolebefood.DAO.CategoryDAO.OnGetListCategoryListener;
+import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DTO.CategoryDTO;
+import com.example.jolebefood.DTO.OrderDTO;
+import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.R;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,17 +81,37 @@ public class MyPageFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ArrayList<CategoryDTO> dataList = new ArrayList<>();
+        ArrayList<OrderDTO> dataList = new ArrayList<>();
+
+
 //        new CategoryDAO().getList(dataList, new OnGetListCategoryListener() {
 //            @Override
 //            public void onGetListDiscountSuccess(List<CategoryDTO> list) {
-//
 //                adapter = new Purchase_History_Item(dataList);
-//                recyclerView.setAdapter(adapter);  }
+//                recyclerView.setAdapter(adapter);
+//            }
 //        });
 
-        dataList.add(new CategoryDTO("1","Ga Ran"));
-        dataList.add(new CategoryDTO("2","Heo Ran"));
+        // Tạo một thời gian hiện tại
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+
+        // Tạo và thêm 8 đối tượng OrderDTO vào danh sách dataList
+        for (int i = 0; i < 8; i++) {
+            String sdt = "012345678" + i; // Tạo số điện thoại khác nhau cho mỗi đối tượng
+            String maKM = (i % 2 == 0) ? "KM001" : "KM002"; // Chọn mã khuyến mãi là KM001 hoặc KM002
+
+            // Tạo list orderdetails
+            List<OrderDetailsDTO> listOrderDetails = new ArrayList<>();
+            listOrderDetails.add(new OrderDetailsDTO("SP001", "DH00" + (i + 1), 2, 100000));
+            listOrderDetails.add(new OrderDetailsDTO("SP002", "DH00" + (i + 1), 1, 150000));
+
+            OrderDTO order = new OrderDTO("DH00" + (i + 1), sdt, maKM, "COD", 500000 + i * 10000, currentTimestamp, currentTimestamp, listOrderDetails);
+            dataList.add(order);
+            new OrderDAO().SetDataOrder(order, view.getContext());
+        }
+
+
+
 
         adapter = new Purchase_History_Item(dataList);
         recyclerView.setAdapter(adapter);
