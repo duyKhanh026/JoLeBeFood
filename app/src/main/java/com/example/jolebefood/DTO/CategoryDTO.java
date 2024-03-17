@@ -1,29 +1,29 @@
 package com.example.jolebefood.DTO;
 
 public class CategoryDTO {
-    private String MaDM,TenDM;
+    private String maDM,tenDM;
 
     public CategoryDTO(String maDM, String tenDM) {
-        MaDM = maDM;
-        TenDM = tenDM;
+        this.maDM = maDM;
+        this.tenDM = tenDM;
     }
 
     public CategoryDTO() {
     }
 
     public String getMaDM() {
-        return MaDM;
+        return maDM;
     }
 
     public void setMaDM(String maDM) {
-        MaDM = maDM;
+        maDM = maDM;
     }
 
     public String getTenDM() {
-        return TenDM;
+        return tenDM;
     }
 
     public void setTenDM(String tenDM) {
-        TenDM = tenDM;
+        tenDM = tenDM;
     }
 }
