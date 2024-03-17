@@ -9,14 +9,9 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.jolebefood.DTO.DiscountDTO;
-import com.example.jolebefood.Discount;
 import com.example.jolebefood.R;
-import com.example.jolebefood.Users;
-import com.example.jolebefood.fragment.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
