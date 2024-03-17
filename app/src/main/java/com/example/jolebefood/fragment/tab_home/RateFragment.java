@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.jolebefood.DTO.CategoryDTO;
+import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
  */
 public class RateFragment extends Fragment {
     String idCategory, nameCategory;
+    String MaMonAn, TenMonAn, MoTa, MaKhuyenMai;
+    int Gia, soLuomg;
     FirebaseDatabase db;
     DatabaseReference reference;
     View view;
@@ -78,6 +81,13 @@ public class RateFragment extends Fragment {
         EditText Category_text = view.findViewById(R.id.Category_text);
         Button nhapCategoryBtn = view.findViewById(R.id.nhapCategoryBtn);
 
+        EditText foodID_text = view.findViewById(R.id.foodID_text);
+        EditText name_text = view.findViewById(R.id.name_text);
+        EditText quantity_text = view.findViewById(R.id.quantity_text);
+        EditText price_text = view.findViewById(R.id.price_text);
+        EditText depr_text = view.findViewById(R.id.depr_text);
+        Button nhapFoodBtn = view.findViewById(R.id.nhapFoodBtn);
+
         nhapCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,6 +109,33 @@ public class RateFragment extends Fragment {
                         }
                     });
                 }
+            }
+        });
+        nhapFoodBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MaMonAn = foodID_text.getText().toString();
+                TenMonAn = name_text.getText().toString();
+                MoTa = depr_text.getText().toString();
+                soLuomg = Integer.parseInt(quantity_text.getText().toString());
+                Gia = Integer.parseInt(price_text.getText().toString());
+
+
+//                if (!idCategory.isEmpty() && !nameCategory.isEmpty()){
+//                    ProductDTO users = new ProductDTO(MaMonAn, TenMonAn, MoTa, soLuomg, Gia, );
+//
+//                    db = FirebaseDatabase.getInstance();
+//
+//                    reference = db.getReference("Product"); // tương tự from table trong sql
+//                    reference.child(idCategory).setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            CategoryID_text.setText("");
+//                            Category_text.setText("");
+//                            Toast.makeText(getContext(),"Successfuly Category updated", Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+//                }
             }
         });
         return view;
