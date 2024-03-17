@@ -1,9 +1,11 @@
 package com.example.jolebefood.fragment.tab_home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -68,6 +70,17 @@ public class DiscountFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.discount, container, false);
+
+        Button btnnhap = (Button) view.findViewById(R.id.adddc_btn);
+        btnnhap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent it1 = new Intent(getActivity(), ImportDisCount.class);
+                startActivity(it1);
+
+            }
+        });
 
         RecyclerView recyclerView = view.findViewById(R.id.RecycleView_KhuyenMai);
 

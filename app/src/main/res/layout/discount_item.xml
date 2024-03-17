@@ -82,5 +82,15 @@
             android:textColor="@color/black"
             android:layout_below="@id/ap_dung"/>
 
+        <TextView
+            android:id="@+id/pttt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="- Áp dụng với momo"
+            android:textSize="40px"
+
+            android:textColor="@color/black"
+            android:layout_below="@id/toi_thieu"/>
+
     </RelativeLayout>
 </LinearLayout>

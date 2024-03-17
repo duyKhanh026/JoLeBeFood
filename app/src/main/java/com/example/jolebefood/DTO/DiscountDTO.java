@@ -6,36 +6,16 @@ public class DiscountDTO {
     String TenKM;
     int GiatriKM;
     String Phuongthuctt;
-    boolean tinhtrangsudung;
-    int img;
 
     public DiscountDTO(){
 
     }
 
-    public DiscountDTO(String maKM, String tenKM, int giatriKM, String phuongthuctt, boolean tinhtrangsudung, int img) {
+    public DiscountDTO(String maKM, String tenKM, int giatriKM, String phuongthuctt) {
         MaKM = maKM;
         TenKM = tenKM;
         GiatriKM = giatriKM;
         Phuongthuctt = phuongthuctt;
-        this.tinhtrangsudung = tinhtrangsudung;
-        this.img = img;
-    }
-
-    public int getImg() {
-        return img;
-    }
-
-    public void setImg(int img) {
-        this.img = img;
-    }
-
-    public DiscountDTO(String maKM, String tenKM, int giatriKM, String phuongthuctt, boolean tinhtrangsudung) {
-        MaKM = maKM;
-        TenKM = tenKM;
-        GiatriKM = giatriKM;
-        Phuongthuctt = phuongthuctt;
-        this.tinhtrangsudung = tinhtrangsudung;
     }
 
     public String getMaKM() {
@@ -70,11 +50,4 @@ public class DiscountDTO {
         Phuongthuctt = phuongthuctt;
     }
 
-    public boolean isTinhtrangsudung() {
-        return tinhtrangsudung;
-    }
-
-    public void setTinhtrangsudung(boolean tinhtrangsudung) {
-        this.tinhtrangsudung = tinhtrangsudung;
-    }
 }
