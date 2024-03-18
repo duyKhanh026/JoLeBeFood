@@ -110,7 +110,29 @@ public class Register extends AppCompatActivity {
                             new Register_DAO().SetDataUser(useridd, user,  new OnGetRegiterListener() {
                                 @Override
                                 public void OnSentGmail() {
-
+                                    auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+                                                builder.setMessage("Bạn đã đăng ký thành công! Đảm bảo xác minh email của bạn ");
+                                                builder.setCancelable(false);
+                                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dialog, int which) {
+                                                        dialog.dismiss();
+                                                        Toast.makeText(Register.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+                                                        startActivity(new Intent(Register.this, Login_Gmail.class));
+                                                    }
+                                                });
+                                                AlertDialog Alert = builder.create();
+                                                Alert.show();
+                                            }
+                                            else {
+                                                ReusableCodeForAll.ShowAlert(Register.this, "Error", task.getException().getMessage());
+                                            }
+                                        }
+                                    });
                                 }
                             });
 
