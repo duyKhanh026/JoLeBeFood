@@ -47,7 +47,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="20px"
             android:layout_marginRight="70px"
-            tools:srcCompat="@drawable/momo_logo"
+
             />
 
 
@@ -66,7 +66,7 @@
             android:id="@+id/ap_dung"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="- Áp dụng tại một số nhà hàng"
+            android:text="- Áp dụng tại một số cửa hàng"
             android:textSize="40px"
 
             android:textColor="@color/black"
@@ -83,10 +83,10 @@
             android:layout_below="@id/ap_dung"/>
 
         <TextView
-            android:id="@+id/pttt"
+            android:id="@+id/sl"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="- Áp dụng với momo"
+            android:text="- Số lượng có giới hạn"
             android:textSize="40px"
 
             android:textColor="@color/black"

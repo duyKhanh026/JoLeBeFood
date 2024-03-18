@@ -26,10 +26,5 @@ public class Discount extends AppCompatActivity {
         recyclerView = findViewById(R.id.RecycleView_KhuyenMai);
     }
 
-//    public void createkm(){
-//        kmai.add(new KhuyenMaiDTO("KM001", "Giảm 10", 10, "momo", true));
-//        kmai.add(new KhuyenMaiDTO("KM002", "Giảm 20", 20, "momo", true));
-//        kmai.add(new KhuyenMaiDTO("KM003", "Giảm 30", 30, "momo", true));
-//        kmai.add(new KhuyenMaiDTO("KM004", "Giảm 40", 40, "momo", true));
-//    }
+
 }

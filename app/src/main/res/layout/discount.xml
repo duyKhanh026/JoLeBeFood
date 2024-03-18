@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     android:orientation="vertical"
     android:background="@color/grey">
 
@@ -11,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20px"
+        android:background="@color/privateColor"
+        android:padding="10dp"
         >
 
     <TextView
@@ -19,8 +20,8 @@
         android:layout_height="wrap_content"
         android:text="Khuyến mãi"
         android:textSize="28dp"
-        android:textColor="@color/black"
-        android:layout_margin="5px"
+        android:textColor="@color/white"
+        android:layout_margin="15px"
         />
 
         <Button
@@ -37,6 +38,7 @@
         android:layout_height="match_parent"
         android:backgroundTint="@color/white"
         android:orientation="vertical"
+        android:padding="10dp"
         >
 
         <androidx.recyclerview.widget.RecyclerView
