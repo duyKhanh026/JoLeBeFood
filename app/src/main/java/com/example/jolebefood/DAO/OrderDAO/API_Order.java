@@ -1,6 +1,5 @@
 package com.example.jolebefood.DAO.OrderDAO;
 
-import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.DTO.OrderDTO;
 
 import java.util.List;
@@ -12,7 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
-public interface API {
+public interface API_Order {
     @GET("Order.json")
         // Thay đổi đường dẫn tùy theo cấu trúc thư mục của bạn
     Call<List<OrderDTO>> getData();

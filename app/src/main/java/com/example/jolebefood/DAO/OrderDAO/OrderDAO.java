@@ -2,10 +2,8 @@ package com.example.jolebefood.DAO.OrderDAO;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.jolebefood.DAO.CallRetrofit;
-import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.DTO.OrderDTO;
 
 import java.util.ArrayList;
@@ -20,7 +18,7 @@ public class OrderDAO {
 
     private final String TAG = "Kien Test DiscountDAO";
 
-    private API api;
+    private API_Order api;
 
     public OrderDAO(CallRetrofit retrofit) {
         this.retrofit = retrofit;
@@ -31,7 +29,7 @@ public class OrderDAO {
         retrofit = new CallRetrofit();
 
         if (retrofit != null) {
-            this.api = retrofit.getRetrofit().create(API.class); // Sử dụng giao diện
+            this.api = retrofit.getRetrofit().create(API_Order.class); // Sử dụng giao diện
         } else {
             // Xử lý trường hợp Retrofit instance bị null
             Log.e(TAG, "Retrofit instance is null");

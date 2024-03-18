@@ -14,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.jolebefood.DAO.RegisterDAO.OnGetRegiterListener;
+import com.example.jolebefood.DAO.RegisterDAO.Register_DAO;
+import com.example.jolebefood.DTO.UserDTO;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -102,58 +105,50 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            databaseReference = FirebaseDatabase.getInstance().getReference("Danh mục").child(useridd);
-                            final HashMap<String , String> hashMap = new HashMap<>();
-                            databaseReference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                            databaseReference = FirebaseDatabase.getInstance().getReference("User").child(useridd);
+                            UserDTO user = new UserDTO(userPassword,userName,userEmail,userAddress,userPhone);
+                            new Register_DAO().SetDataUser(useridd, user,  new OnGetRegiterListener() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    HashMap<String , String> hashMap1 = new HashMap<>();
-                                    hashMap1.put("Name",userName);
-                                    hashMap1.put("EmailId",userEmail);
-                                    hashMap1.put("Password",userPassword);
-                                    hashMap1.put("Phone",userPhone);
-                                    hashMap1.put("Address",userAddress);
+                                public void OnSentGmail() {
 
-                                    FirebaseDatabase.getInstance().getReference()
-                                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                            .setValue(hashMap1).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                            if(task.isSuccessful()){
-                                                                AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-                                                                builder.setMessage("Bạn đã đăng ký thành công! Đảm bảo xác minh email của bạn ");
-                                                                builder.setCancelable(false);
-                                                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                                                    @Override
-                                                                    public void onClick(DialogInterface dialog, int which) {
-
-                                                                        dialog.dismiss();
-
-                                                                        String phonenumber = Cpp.getSelectedCountryCodeWithPlus() + userPhone;
-                                                                        Intent b = new Intent(Register.this,VerifyPhone.class);
-                                                                        b.putExtra("phonenumber",phonenumber);
-                                                                        startActivity(b);
-//                                                                        Toast.makeText(Register.this,"Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-//                                                                        startActivity(new Intent(Register.this, Login_Gmail.class));
-
-                                                                    }
-                                                                });
-                                                                AlertDialog Alert = builder.create();
-                                                                Alert.show();
-                                                            }else{
-                                                                ReusableCodeForAll.ShowAlert(Register.this,"Error",task.getException().getMessage());
-                                                            }
-                                                        }
-                                                    });
-                                                }
-                                            });
                                 }
                             });
-//                            Toast.makeText(Register.this,"Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-//                            startActivity(new Intent(Register.this, MainMenu.class));
+
+//                            databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                        auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                            @Override
+//                                            public void onComplete(@NonNull Task<Void> task) {
+//                                                if (task.isSuccessful()) {
+//                                                    AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
+//                                                    builder.setMessage("Bạn đã đăng ký thành công! Đảm bảo xác minh email của bạn ");
+//                                                    builder.setCancelable(false);
+//                                                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                                                        @Override
+//                                                        public void onClick(DialogInterface dialog, int which) {
+//
+//                                                            dialog.dismiss();
+//
+//                                                            String phonenumber = Cpp.getSelectedCountryCodeWithPlus() + userPhone;
+//
+////                                                                        Intent b = new Intent(Register.this,VerifyPhone.class);
+////                                                                        b.putExtra("phonenumber",phonenumber);
+////                                                                        startActivity(b);
+//                                                            Toast.makeText(Register.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
+//                                                            startActivity(new Intent(Register.this, Login_Gmail.class));
+//
+//                                                        }
+//                                                    });
+//                                                    AlertDialog Alert = builder.create();
+//                                                    Alert.show();
+//                                                } else {
+//                                                    ReusableCodeForAll.ShowAlert(Register.this, "Error", task.getException().getMessage());
+//                                                }
+//                                            }
+//                                        });
+//                                    }
+//                            });
                         }else{
                             Toast.makeText(Register.this,"Đăng ký thất bại!"+task.getException(), Toast.LENGTH_SHORT).show();
                         }
