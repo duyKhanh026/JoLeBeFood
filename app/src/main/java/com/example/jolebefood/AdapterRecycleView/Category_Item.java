@@ -12,20 +12,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.R;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Category_Item extends RecyclerView.Adapter<Category_Item.MyViewHolder>{
     View view;
-    private ArrayList<String> dataList;
-    private ArrayList<Integer> imgIDList;
+    private List<CategoryDTO> mListFood;
+    Context context;
 
-    public Category_Item(ArrayList<String> dataList, ArrayList<Integer> imgIDList) {
-        this.dataList = dataList;
-        this.imgIDList = imgIDList;
+    public Category_Item(Context context, List<CategoryDTO> mListFood) {
+        this.context = context;
+        this.mListFood = mListFood;
     }
 
     @NonNull
@@ -37,36 +40,32 @@ public class Category_Item extends RecyclerView.Adapter<Category_Item.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bindData(dataList.get(position), imgIDList.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TextView tv = view.findViewById(R.id.title_product);
-                Toast.makeText(view.getContext(), "Danh mục " + tv.getText().toString(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        CategoryDTO food = mListFood.get(position);
+        if (food == null) {
+            return;
+        }
+        holder.imgFood.setImageResource(food.getImage());
+        holder.tvNameFood.setText(food.getTenDM());
     }
 
 
     @Override
     public int getItemCount() {
-        return dataList.size();
+        if (mListFood != null)
+            return mListFood.size();
+        return 0;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-        ImageView imageView;
+        private ImageView imgFood;
+        private TextView tvNameFood;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@androidx.annotation.NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.title_product);
-            imageView = itemView.findViewById(R.id.img_product);
-        }
+            imgFood = itemView.findViewById(R.id.img_food);
+            tvNameFood = itemView.findViewById(R.id.tv_name_food);
 
-        public void bindData(String data, int drw) {
-            textView.setText(data);
-            Bitmap bitmap = BitmapFactory.decodeResource(view.getResources(), drw);
-            imageView.setImageBitmap(bitmap);
+
         }
     }
 

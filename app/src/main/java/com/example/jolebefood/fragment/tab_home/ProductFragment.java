@@ -79,8 +79,8 @@ public class ProductFragment extends Fragment {
         dataList.add("Món bò");
         imgList.add(R.drawable.combo);
 
-        adapter = new Category_Item(dataList, imgList);
-        recyclerView.setAdapter(adapter);
+//        adapter = new Category_Item(dataList, imgList);
+//        recyclerView.setAdapter(adapter);
         return view;
     }
 }

@@ -88,26 +88,26 @@ public class RateFragment extends Fragment {
         EditText depr_text = view.findViewById(R.id.depr_text);
         Button nhapFoodBtn = view.findViewById(R.id.nhapFoodBtn);
 
-        CategoryDTO dm = new CategoryDTO("DM1", "Cơm Gà");
-        themDanhMuc(dm);
-        dm = new CategoryDTO("DM2", "Cơm Sường");
-        themDanhMuc(dm);
-        dm = new CategoryDTO("DM3", "Nước Uống");
-        themDanhMuc(dm);
-        dm = new CategoryDTO("DM4", "Lẫu");
-        themDanhMuc(dm);
-        dm = new CategoryDTO("DM5", "Mì Cay");
-        themDanhMuc(dm);
-        dm = new CategoryDTO("DM6", "Trẻ Em");
-        themDanhMuc(dm);
-        dm = new CategoryDTO("DM7", "Người Già");
-        themDanhMuc(dm);
-        dm = new CategoryDTO("DM8", "Tao Giỡn");
-        themDanhMuc(dm);
-        dm = new CategoryDTO("DM9", "Hủ Tiếu");
-        themDanhMuc(dm);
-        dm = new CategoryDTO("DM10", "Bún");
-        themDanhMuc(dm);
+//        CategoryDTO dm = new CategoryDTO("DM1", "Cơm Gà");
+//        themDanhMuc(dm);
+//        dm = new CategoryDTO("DM2", "Cơm Sường");
+//        themDanhMuc(dm);
+//        dm = new CategoryDTO("DM3", "Nước Uống");
+//        themDanhMuc(dm);
+//        dm = new CategoryDTO("DM4", "Lẫu");
+//        themDanhMuc(dm);
+//        dm = new CategoryDTO("DM5", "Mì Cay");
+//        themDanhMuc(dm);
+//        dm = new CategoryDTO("DM6", "Trẻ Em");
+//        themDanhMuc(dm);
+//        dm = new CategoryDTO("DM7", "Người Già");
+//        themDanhMuc(dm);
+//        dm = new CategoryDTO("DM8", "Tao Giỡn");
+//        themDanhMuc(dm);
+//        dm = new CategoryDTO("DM9", "Hủ Tiếu");
+//        themDanhMuc(dm);
+//        dm = new CategoryDTO("DM10", "Bún");
+//        themDanhMuc(dm);
         nhapCategoryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

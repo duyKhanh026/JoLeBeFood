@@ -6,13 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Category_Item;
+import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
+import java.util.List;
+
 public class CategoryFragment extends Fragment {
     View view;
     Category_Item adapter;
@@ -63,17 +67,26 @@ public class CategoryFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_category, container, false);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycleView);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext() , 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        List<CategoryDTO> dataList = new ArrayList<>();
+        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
+        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
+        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
+        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
+        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
+        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
+        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
+        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
+        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
+        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
+        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
+        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
+        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
+        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
 
-        ArrayList<String> dataList = new ArrayList<>();
-        ArrayList<Integer> imgList = new ArrayList<>();
-        dataList.add("Món gà");
-        imgList.add(R.drawable.comga);
-        dataList.add("Món bò");
-        imgList.add(R.drawable.combo);
-
-        adapter = new Category_Item(dataList, imgList);
+        adapter = new Category_Item(getContext(),dataList);
         recyclerView.setAdapter(adapter);
         return view;
     }
