@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Discount_Item;
+import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
@@ -25,6 +27,7 @@ public class DiscountFragment extends Fragment {
 
     View view;
     Discount_Item adapter;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,9 +69,8 @@ public class DiscountFragment extends Fragment {
         }
     }
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+
         view = inflater.inflate(R.layout.discount, container, false);
 
         Button btnnhap = (Button) view.findViewById(R.id.adddc_btn);
@@ -86,17 +88,23 @@ public class DiscountFragment extends Fragment {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        ArrayList<String> dataList = new ArrayList<>();
-        dataList.add("Giảm 10k");
-        dataList.add("Giảm 15k");
-        dataList.add("Giảm 25k");
-        dataList.add("Giảm 20k");
-        dataList.add("Giảm 30k");
-        dataList.add("Giảm 40k");
-        dataList.add("Giảm 50k");
+
+
+
+        ArrayList<DiscountDTO> dataList = new ArrayList<>();
+
+        dataList.add(new DiscountDTO("MaKM1", "Giảm 10k", 10000, "MOMO"));
+        dataList.add(new DiscountDTO("MaKM2", "Giảm 15k", 15000, "CASH"));
+        dataList.add(new DiscountDTO("MaKM3", "Giảm 20k", 20000, "MOMO"));
+        dataList.add(new DiscountDTO("MaKM4", "Giảm 25k", 25000, "CASH"));
+        dataList.add(new DiscountDTO("MaKM5", "Giảm 35k", 35000, "MOMO"));
+        dataList.add(new DiscountDTO("MaKM6", "Giảm 50k", 50000, "CASH"));
+
 
         adapter = new Discount_Item(dataList);
         recyclerView.setAdapter(adapter);
+
+
 
         return view;
     }

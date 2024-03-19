@@ -2,52 +2,51 @@ package com.example.jolebefood.DTO;
 
 public class DiscountDTO {
 
-    String MaKM;
-    String TenKM;
-    int GiatriKM;
-    String Phuongthuctt;
+    String makm;
+    String tenkm;
+    int giatrikm;
+    String phuongthuctt;
 
     public DiscountDTO(){
 
     }
 
-    public DiscountDTO(String maKM, String tenKM, int giatriKM, String phuongthuctt) {
-        MaKM = maKM;
-        TenKM = tenKM;
-        GiatriKM = giatriKM;
-        Phuongthuctt = phuongthuctt;
+    public DiscountDTO(String makm, String tenkm, int giatrikm, String phuongthuctt) {
+        this.makm = makm;
+        this.tenkm = tenkm;
+        this.giatrikm = giatrikm;
+        this.phuongthuctt = phuongthuctt;
     }
 
-    public String getMaKM() {
-        return MaKM;
+    public String getMakm() {
+        return makm;
     }
 
-    public void setMaKM(String maKM) {
-        MaKM = maKM;
+    public void setMakm(String makm) {
+        this.makm = makm;
     }
 
-    public String getTenKM() {
-        return TenKM;
+    public String getTenkm() {
+        return tenkm;
     }
 
-    public void setTenKM(String tenKM) {
-        TenKM = tenKM;
+    public void setTenkm(String tenkm) {
+        this.tenkm = tenkm;
     }
 
-    public int getGiatriKM() {
-        return GiatriKM;
+    public int getGiatrikm() {
+        return giatrikm;
     }
 
-    public void setGiatriKM(int giatriKM) {
-        GiatriKM = giatriKM;
+    public void setGiatrikm(int giatrikm) {
+        this.giatrikm = giatrikm;
     }
 
     public String getPhuongthuctt() {
-        return Phuongthuctt;
+        return phuongthuctt;
     }
 
     public void setPhuongthuctt(String phuongthuctt) {
-        Phuongthuctt = phuongthuctt;
+        this.phuongthuctt = phuongthuctt;
     }
-
 }
