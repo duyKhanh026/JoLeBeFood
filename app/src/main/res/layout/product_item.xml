@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginEnd="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="6dp">
 
@@ -11,34 +10,76 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/img_product"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
-            android:padding="5px"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-            android:src="@drawable/comga"
-            />
+            <ImageView
+                android:id="@+id/img_product"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:padding="5px"
+                android:scaleType="centerCrop"
+                android:src="@drawable/com_ga_xoi_mo" />
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
-                android:id="@+id/title_product"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/img_product"
-                android:textSize="12pt"
-                android:textColor="@color/black"
-                android:paddingLeft="10dp"
-                android:text="Cơm Gà"/>
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+                <TextView
+                    android:id="@+id/title_product"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12pt"
+                    android:textColor="@color/black"
+                    android:text="Cơm Gà abc"
+                    android:gravity="top"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/monety_product"
+                    android:text="40.000đ"
+                    android:textSize="12pt"
+                    android:textColor="@color/privateColor"
+                    android:gravity="bottom"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/monety_product"
+                    android:text="Đã bán 27"
+                    android:textSize="8pt"
+                    android:textColor="@color/gray"
+                    android:gravity="bottom"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linear_butadd"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|right"
+                >
+
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_add_product"
+                    android:src="@drawable/baseline_add_24"
+
+                    />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/black"/>
+
 
 
 </androidx.cardview.widget.CardView>
