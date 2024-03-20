@@ -4,6 +4,8 @@ import com.example.jolebefood.DTO.OrderDTO;
 import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.OrderDetails;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -19,7 +21,11 @@ public interface API_Order {
     Call<List<OrderDetailsDTO>> getOrderDetailsList(@Path("id") String id);
     @GET("Order.json")
         // Thay đổi đường dẫn tùy theo cấu trúc thư mục của bạn
-    Call<List<OrderDTO>> getOrder();
+    // Lý do phải duùng HashMap là do cách lưu trữ của firebase thì Order đang là 1 object chứ không phải 1 list nên không thể getlist mà phải dùng hashmap để lấy key và value
+    Call<HashMap<String,OrderDTO>> getOrder();
+
+
+
 
     @PUT("/Order/{new}.json")
     Call<OrderDTO> setData(@Path("new") String s1, @Body OrderDTO object);

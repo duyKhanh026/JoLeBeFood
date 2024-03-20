@@ -9,8 +9,9 @@ public class OrderDTO {
     private int TongTien;
     private Timestamp ThoiGianDat, ThoiGianHoanThanh;
 
+    private List<OrderDetailsDTO> listOrderDetails;
 
-    public OrderDTO(String maDH, String SDT, String maKM, String phuongThucThanhToan, int tongTien, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh) {
+    public OrderDTO(String maDH, String SDT, String maKM, String phuongThucThanhToan, int tongTien, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, List<OrderDetailsDTO> listOrderDetails) {
         MaDH = maDH;
         this.SDT = SDT;
         MaKM = maKM;
@@ -18,8 +19,19 @@ public class OrderDTO {
         TongTien = tongTien;
         ThoiGianDat = thoiGianDat;
         ThoiGianHoanThanh = thoiGianHoanThanh;
+        this.listOrderDetails = listOrderDetails;
     }
 
+    public OrderDTO(String maDH, String maKM, String phuongThucThanhToan, String SDT, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, int tongTien, List<OrderDetailsDTO> listOrderDetails) {
+        MaDH = maDH;
+        this.SDT = SDT;
+        MaKM = maKM;
+        PhuongThucThanhToan = phuongThucThanhToan;
+        TongTien = tongTien;
+        ThoiGianDat = thoiGianDat;
+        ThoiGianHoanThanh = thoiGianHoanThanh;
+        this.listOrderDetails = listOrderDetails;
+    }
 
     public OrderDTO() {
     }
@@ -48,6 +60,14 @@ public class OrderDTO {
         MaKM = maKM;
     }
 
+    public String getPhuongThucThanhToan() {
+        return PhuongThucThanhToan;
+    }
+
+    public void setPhuongThucThanhToan(String phuongThucThanhToan) {
+        PhuongThucThanhToan = phuongThucThanhToan;
+    }
+
     public int getTongTien() {
         return TongTien;
     }
@@ -72,5 +92,11 @@ public class OrderDTO {
         ThoiGianHoanThanh = thoiGianHoanThanh;
     }
 
+    public List<OrderDetailsDTO> getListOrderDetails() {
+        return listOrderDetails;
+    }
 
+    public void setListOrderDetails(List<OrderDetailsDTO> listOrderDetails) {
+        this.listOrderDetails = listOrderDetails;
+    }
 }
