@@ -39,9 +39,12 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        //holder.bindData(Integer.toString(dataList.get(position).getTongTien()));
+
         holder.txtID.setText(dataList.get(position).getMaDH());
         holder.txtTongTien.setText(Integer.toString(dataList.get(position).getTongTien()));
+        holder.txtSoSanPham.setText(Integer.toString(dataList.get(position).getListOrderDetails().size()) + " sản phẩm");
+        holder.txtSoLuong.setText("x" + Integer.toString(dataList.get(position).getListOrderDetails().get(0).getSL()));
+        holder.txtGia.setText(Integer.toString(dataList.get(position).getListOrderDetails().get(0).getThanhTien()));
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

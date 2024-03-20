@@ -92,5 +92,11 @@ public class OrderDTO {
         ThoiGianHoanThanh = thoiGianHoanThanh;
     }
 
+    public List<OrderDetailsDTO> getListOrderDetails() {
+        return listOrderDetails;
+    }
 
+    public void setListOrderDetails(List<OrderDetailsDTO> listOrderDetails) {
+        this.listOrderDetails = listOrderDetails;
+    }
 }
