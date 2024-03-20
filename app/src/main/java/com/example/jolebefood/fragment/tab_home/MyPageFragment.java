@@ -85,28 +85,10 @@ public class MyPageFragment extends Fragment {
         ArrayList<OrderDTO> dataList = new ArrayList<>();
 
 
-
-
-        // Tạo một thời gian hiện tại
-        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-
-        // Tạo và thêm 8 đối tượng OrderDTO vào danh sách dataList
-        for (int i = 0; i < 8; i++) {
-            String sdt = "012345678" + i; // Tạo số điện thoại khác nhau cho mỗi đối tượng
-            String maKM = (i % 2 == 0) ? "KM001" : "KM002"; // Chọn mã khuyến mãi là KM001 hoặc KM002
-
-            OrderDTO order = new OrderDTO("DH00" + (i + 1), sdt, maKM, "COD", 500000 + i * 10000, currentTimestamp, currentTimestamp);
-            dataList.add(order);
-            new OrderDAO().SetDataOrder(order, view.getContext());
-        }
-
-        adapter = new Purchase_History_Item(dataList);
-        recyclerView.setAdapter(adapter);
-
-//        new OrderDAO().getList(dataList, list -> {
-//            adapter = new Purchase_History_Item(dataList);
-//            recyclerView.setAdapter(adapter);
-//        });
+        new OrderDAO().getList(dataList, list -> {
+            adapter = new Purchase_History_Item(dataList);
+            recyclerView.setAdapter(adapter);
+        });
 
         return view;
     }

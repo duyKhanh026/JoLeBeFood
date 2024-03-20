@@ -8,7 +8,9 @@ import com.example.jolebefood.DTO.OrderDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,15 +40,16 @@ public class OrderDAO {
     }
 
     public void getList(ArrayList<OrderDTO> list, OnGetListOrderListener listener) {
-        Call<List<OrderDTO>> call = api.getOrder();
-        call.enqueue(new Callback<List<OrderDTO>>() {
+        Call<HashMap<String,OrderDTO>> call = api.getOrder();
+        call.enqueue(new Callback<HashMap<String,OrderDTO>>() {
             @Override
-            public void onResponse(Call<List<OrderDTO>> call, Response<List<OrderDTO>> response) {
+            public void onResponse(Call<HashMap<String,OrderDTO>> call, Response<HashMap<String,OrderDTO>> response) {
                 if (response.isSuccessful()) {
-                    List<OrderDTO> data = response.body();
-                    if (data != null && !data.isEmpty()) {
-                        for (int i = 1; i < data.size(); i++) {
-                            list.add(data.get(i));
+                    HashMap<String,OrderDTO> data = response.body();
+                    if (data != null) {
+                        for (Map.Entry<String, OrderDTO> entry : data.entrySet()) {
+                            OrderDTO order = entry.getValue();
+                            list.add(order);
                         }
                         listener.onGetListOrderSuccess(list);
                     } else {
@@ -57,7 +60,7 @@ public class OrderDAO {
                 }
             }
             @Override
-            public void onFailure(Call<List<OrderDTO>> call, Throwable t) {
+            public void onFailure(Call<HashMap<String,OrderDTO>> call, Throwable t) {
                 Log.e(TAG, "Error getting data: " + t.getMessage());
             }
         });
