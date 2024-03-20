@@ -4,34 +4,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragment.tab_home.ProductFragment">
+
     <RelativeLayout
         android:id="@+id/relativ"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/orange">
+        android:background="@color/privateColor">
 
         <TextView
+            android:id="@+id/title_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chọn Món"
+            android:text="Cơm gà"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:padding="21dp"/>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/search"
-            android:layout_alignParentRight="true"
-            android:padding="20dp"
-            android:background="@color/orange"/>
+            android:padding="15dp"/>
 
     </RelativeLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycleView"
+        android:id="@+id/recycleView_product"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/relativ">
+        android:layout_below="@+id/relativ"
+        android:layout_margin="10px">
 
 
     </androidx.recyclerview.widget.RecyclerView>

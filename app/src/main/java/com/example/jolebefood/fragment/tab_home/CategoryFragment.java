@@ -1,9 +1,12 @@
 package com.example.jolebefood.fragment.tab_home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Category_Item;
 import com.example.jolebefood.DTO.CategoryDTO;
+import com.example.jolebefood.Product;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
@@ -65,6 +69,18 @@ public class CategoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_category, container, false);
+
+        Button xemsp;
+
+        xemsp = view.findViewById(R.id.but_xemsp);
+        xemsp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "đã chạy", Toast.LENGTH_SHORT).show();
+                Intent it1 = new Intent(getActivity(), Product.class);
+                startActivity(it1);
+            }
+        });
 
         RecyclerView recyclerView = view.findViewById(R.id.recycleView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext() , 2);

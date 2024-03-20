@@ -21,6 +21,14 @@
             android:textSize="24sp"
             android:padding="21dp"/>
 
+        <Button
+            android:id="@+id/but_xemsp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="200px"
+            android:text="Xemsp" />
+
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

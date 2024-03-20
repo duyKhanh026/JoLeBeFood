@@ -34,8 +34,30 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bindData(dataList.get(position));
 
+//        holder.bindData(dataList.get(position));
+        holder.TenKM.setText(dataList.get(position).getTenkm());
+        holder.pttt.setText(dataList.get(position).getPhuongthuctt());
+        holder.img.setImageResource(R.drawable.momo_logo);
+
+        if (dataList.get(position).getPhuongthuctt().equals("MOMO")){
+            holder.img.setImageResource(R.drawable.momo_logo);
+           }else if (dataList.get(position).getPhuongthuctt().equals("CASH")){
+            holder.img.setImageResource(R.drawable.cash);
+           }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Lấy giá trị khuyến mãi từ DiscountDTO
+                DiscountDTO discount = dataList.get(position);
+                String maKM = discount.getMakm();
+                int giaTriKM = discount.getGiatrikm();
+                String pttt = discount.getPhuongthuctt();
+                Toast.makeText(view.getContext(), "Mã: " + maKM +", Giá trị " +giaTriKM + ", PTTT: " + pttt, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -54,33 +76,13 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
             TenKM = itemView.findViewById(R.id.discount_text);
             pttt = itemView.findViewById(R.id.method_payment);
             img = itemView.findViewById(R.id.imagemethod);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-
-                    int position = getAdapterPosition();
-
-                    // Lấy giá trị khuyến mãi từ DiscountDTO
-                    DiscountDTO discount = dataList.get(position);
-                    String maKM = discount.getMakm();
-                    int giaTriKM = discount.getGiatrikm();
-                    String pttt = discount.getPhuongthuctt();
-                    Toast.makeText(itemView.getContext(), "Mã: " + maKM +", Giá trị " +giaTriKM + ", PTTT: " + pttt, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-       public void bindData(DiscountDTO dto1) {
-
-           TenKM.setText(dto1.getTenkm());
-           pttt.setText("Use with " + dto1.getPhuongthuctt());
-           if (dto1.getPhuongthuctt().equals("MOMO")){
-               img.setImageResource(R.drawable.momo_logo);
-           }else if (dto1.getPhuongthuctt().equals("CASH")){
-               img.setImageResource(R.drawable.cash);
-           }
 
         }
+
+//       public void bindData(DiscountDTO dto1) {
+//
+//
+//        }
 
 
     }

@@ -7,13 +7,13 @@ public class ProductDTO {
     private int Gia, soLuomg;
     private Bitmap IMG;
 
-    public ProductDTO(String maMonAn, String tenMonAn, String moTa, int sl,int gia, Bitmap IMG) {
+    public ProductDTO(String maMonAn, String tenMonAn, String moTa, int sl,int gia) {
         MaMonAn = maMonAn;
         TenMonAn = tenMonAn;
         MoTa = moTa;
         soLuomg = sl;
         Gia = gia;
-        this.IMG = IMG;
+
     }
 
     public ProductDTO() {
