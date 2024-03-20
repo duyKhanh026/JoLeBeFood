@@ -14,11 +14,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Món gà"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:padding="10dp"
             android:textStyle="bold"
             android:textColor="@color/black"
-            android:id="@+id/txtDanhMuc_LS"/>
+            android:id="@+id/txtID_LS"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -164,6 +164,7 @@
             android:textColor="@color/white"
             android:layout_alignParentRight="true"
             android:textAllCaps="false"
+            android:id="@+id/btnMuaLai_LS"
             />
 
     </RelativeLayout>

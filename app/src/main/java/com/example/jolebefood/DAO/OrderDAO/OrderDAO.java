@@ -6,6 +6,7 @@ import android.util.Log;
 import com.example.jolebefood.DAO.CallRetrofit;
 import com.example.jolebefood.DTO.OrderDTO;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class OrderDAO {
     }
 
     public void getList(ArrayList<OrderDTO> list, OnGetListOrderListener listener) {
-        Call<List<OrderDTO>> call = api.getData();
+        Call<List<OrderDTO>> call = api.getOrder();
         call.enqueue(new Callback<List<OrderDTO>>() {
             @Override
             public void onResponse(Call<List<OrderDTO>> call, Response<List<OrderDTO>> response) {

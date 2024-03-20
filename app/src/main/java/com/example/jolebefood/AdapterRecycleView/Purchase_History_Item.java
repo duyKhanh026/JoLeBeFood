@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +39,10 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bindData(Integer.toString(dataList.get(position).getTongTien()));
+        //holder.bindData(Integer.toString(dataList.get(position).getTongTien()));
+        holder.txtID.setText(dataList.get(position).getMaDH());
+        holder.txtTongTien.setText(Integer.toString(dataList.get(position).getTongTien()));
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +50,7 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
                 // Lấy context từ view được bấm vào
                 Context context = view.getContext();
 
-                Toast.makeText(context, holder.textView.getText(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, holder.txtID.getText(), Toast.LENGTH_SHORT).show();
                 // Tạo Intent với context đã lấy
                 Intent intent = new Intent(context, OrderDetails.class);
                 // Start activity bằng context
@@ -62,16 +67,25 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        TextView txtID,txtTenMonAn,txtSoLuong,txtGia,txtSoSanPham, txtTongTien, txtTinhTrang;
+
+        ImageView imgItem;
+
+        Button btnMuaLai;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.txtTongTien_LS);
+            txtID = itemView.findViewById(R.id.txtID_LS);
+            imgItem = itemView.findViewById(R.id.imgMonAn_LS);
+            txtTenMonAn = itemView.findViewById(R.id.txtTenMonAn_LS);
+            txtSoLuong = itemView.findViewById(R.id.txtSoLuong_LS);
+            txtGia = itemView.findViewById(R.id.txtGia_LS);
+            txtSoSanPham = itemView.findViewById(R.id.txtSoSanPham_LS);
+            txtTongTien = itemView.findViewById(R.id.txtTongTien_LS);
+            txtTinhTrang = itemView.findViewById(R.id.txtTinhTrangDonHang);
+            btnMuaLai = itemView.findViewById(R.id.btnMuaLai_LS);
         }
 
-        public void bindData(String data) {
-            textView.setText(data);
-        }
     }
 
 }

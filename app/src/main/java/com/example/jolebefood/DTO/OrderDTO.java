@@ -9,9 +9,8 @@ public class OrderDTO {
     private int TongTien;
     private Timestamp ThoiGianDat, ThoiGianHoanThanh;
 
-    private List<OrderDetailsDTO> listOrderDetails;
 
-    public OrderDTO(String maDH, String SDT, String maKM, String phuongThucThanhToan, int tongTien, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, List<OrderDetailsDTO> listOrderDetails) {
+    public OrderDTO(String maDH, String SDT, String maKM, String phuongThucThanhToan, int tongTien, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh) {
         MaDH = maDH;
         this.SDT = SDT;
         MaKM = maKM;
@@ -19,8 +18,8 @@ public class OrderDTO {
         TongTien = tongTien;
         ThoiGianDat = thoiGianDat;
         ThoiGianHoanThanh = thoiGianHoanThanh;
-        this.listOrderDetails = listOrderDetails;
     }
+
 
     public OrderDTO() {
     }
@@ -47,14 +46,6 @@ public class OrderDTO {
 
     public void setMaKM(String maKM) {
         MaKM = maKM;
-    }
-
-    public String getPhuongThucThanhToan() {
-        return PhuongThucThanhToan;
-    }
-
-    public void setPhuongThucThanhToan(String phuongThucThanhToan) {
-        PhuongThucThanhToan = phuongThucThanhToan;
     }
 
     public int getTongTien() {

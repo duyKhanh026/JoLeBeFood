@@ -109,7 +109,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tổng tiền hàng"
+                        android:text="Thành tiền:"
                         android:id="@+id/labelTongTien_CTHD"
                         android:textSize="15sp"
                         android:padding="5dp"/>
@@ -118,7 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="đ242.000"
-                        android:id="@+id/txtTongTien_CTHD"
+                        android:id="@+id/txtThanhTien_CTHD"
                         android:layout_alignParentRight="true"
                         android:textSize="15sp"
                         android:padding="5dp"/>
@@ -140,12 +140,12 @@
                         android:layout_alignParentRight="true"
                         android:textSize="15sp"
                         android:padding="5dp"
-                        android:layout_below="@+id/txtTongTien_CTHD"/>
+                        android:layout_below="@+id/txtThanhTien_CTHD"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Thành tiền:"
+                        android:text="Tổng tiền:"
                         android:id="@+id/labelThanhtien_CTHD"
                         android:layout_below="@+id/labelGiamGia_CTHD"
                         android:textSize="15sp"
@@ -157,7 +157,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="đ192.000"
-                        android:id="@+id/txtThanhTien_CTHD"
+                        android:id="@+id/txtTongTien_CTHD"
                         android:layout_alignParentRight="true"
                         android:textSize="15sp"
                         android:padding="5dp"
@@ -260,8 +260,8 @@
                         android:text="Thanh toán hóa đơn"
                         android:textColor="@color/white"
                         android:textAllCaps="false"
-                        android:textSize="18sp"/>
-
+                        android:textSize="18sp"
+                        android:id="@+id/btnThanhToan_CTHD"/>
 
             </RelativeLayout>
 

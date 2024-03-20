@@ -3,6 +3,7 @@ package com.example.jolebefood.AdapterRecycleView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,7 +31,7 @@ public class Order_Details_Item extends RecyclerView.Adapter<Order_Details_Item.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.bindData(dataList.get(position));
+        holder.txtTenMonAn.setText(dataList.get(position));
 
     }
 
@@ -41,16 +42,18 @@ public class Order_Details_Item extends RecyclerView.Adapter<Order_Details_Item.
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textView;
+        TextView txtTenMonAn, txtSoLuong, txtThanhTien;
+
+        ImageView imgItem;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.txtTenMonAn_CTDH);
+            txtTenMonAn = itemView.findViewById(R.id.txtTenMonAn_CTDH);
+            imgItem = itemView.findViewById(R.id.imgMonAn_CTDH);
+            txtSoLuong = itemView.findViewById(R.id.txtSoLuong_CTDH);
+            txtThanhTien = itemView.findViewById(R.id.txtThanhTien_CTHD);
         }
 
-        public void bindData(String data) {
-            textView.setText(data);
-        }
     }
 
 

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
+import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.DTO.OrderDTO;
@@ -84,13 +85,7 @@ public class MyPageFragment extends Fragment {
         ArrayList<OrderDTO> dataList = new ArrayList<>();
 
 
-//        new CategoryDAO().getList(dataList, new OnGetListCategoryListener() {
-//            @Override
-//            public void onGetListDiscountSuccess(List<CategoryDTO> list) {
-//                adapter = new Purchase_History_Item(dataList);
-//                recyclerView.setAdapter(adapter);
-//            }
-//        });
+
 
         // Tạo một thời gian hiện tại
         Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
@@ -100,22 +95,18 @@ public class MyPageFragment extends Fragment {
             String sdt = "012345678" + i; // Tạo số điện thoại khác nhau cho mỗi đối tượng
             String maKM = (i % 2 == 0) ? "KM001" : "KM002"; // Chọn mã khuyến mãi là KM001 hoặc KM002
 
-            // Tạo list orderdetails
-            List<OrderDetailsDTO> listOrderDetails = new ArrayList<>();
-            listOrderDetails.add(new OrderDetailsDTO("SP001", "DH00" + (i + 1), 2, 100000));
-            listOrderDetails.add(new OrderDetailsDTO("SP002", "DH00" + (i + 1), 1, 150000));
-
-            OrderDTO order = new OrderDTO("DH00" + (i + 1), sdt, maKM, "COD", 500000 + i * 10000, currentTimestamp, currentTimestamp, listOrderDetails);
+            OrderDTO order = new OrderDTO("DH00" + (i + 1), sdt, maKM, "COD", 500000 + i * 10000, currentTimestamp, currentTimestamp);
             dataList.add(order);
-            //new OrderDAO().SetDataOrder(order, view.getContext());
+            new OrderDAO().SetDataOrder(order, view.getContext());
         }
-
-
-
 
         adapter = new Purchase_History_Item(dataList);
         recyclerView.setAdapter(adapter);
 
+//        new OrderDAO().getList(dataList, list -> {
+//            adapter = new Purchase_History_Item(dataList);
+//            recyclerView.setAdapter(adapter);
+//        });
 
         return view;
     }

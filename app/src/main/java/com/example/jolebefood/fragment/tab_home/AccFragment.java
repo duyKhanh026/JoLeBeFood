@@ -1,5 +1,6 @@
 package com.example.jolebefood.fragment.tab_home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.jolebefood.R;
+import com.example.jolebefood.SignIn_and_SignUp.Login_Gmail;
+import com.example.jolebefood.SignIn_and_SignUp.Login_Phone;
+import com.example.jolebefood.SignIn_and_SignUp.MainMenu;
+import com.example.jolebefood.SignIn_and_SignUp.Register;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +31,8 @@ public class AccFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    Button btnDN_Phone,btnDN_Email,btnDK;
 
     public AccFragment() {
         // Required empty public constructor
@@ -61,6 +69,36 @@ public class AccFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_acc, container, false);
+        View view =  inflater.inflate(R.layout.activity_main_menu, container, false);
+
+        btnDN_Email = (Button) view.findViewById(R.id.SignwithEmail);
+        btnDN_Phone = (Button) view.findViewById(R.id.SignwithPhone);
+        btnDK = (Button) view.findViewById(R.id.Signup);
+
+        btnDN_Phone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), Login_Phone.class);
+                startActivity(intent);
+            }
+        });
+
+        btnDN_Email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), Login_Gmail.class);
+                startActivity(intent);
+            }
+        });
+
+        btnDK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), Register.class);
+                startActivity(intent);
+            }
+        });
+
+        return view;
     }
 }
