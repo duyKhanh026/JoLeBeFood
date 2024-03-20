@@ -49,6 +49,14 @@
                     android:textSize="12pt"
                     android:textColor="@color/privateColor"
                     android:gravity="bottom"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/sale_count"
+                    android:text="Đã bán 27"
+                    android:textSize="8pt"
+                    android:textColor="@color/gray"
+                    android:gravity="bottom"/>
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/linear_butadd"
