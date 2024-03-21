@@ -84,6 +84,14 @@ public class MyPageFragment extends Fragment {
 
         ArrayList<OrderDTO> dataList = new ArrayList<>();
 
+        new OrderDAO().getList(dataList, new OnGetListOrderListener() {
+            @Override
+            public void onGetListOrderSuccess(List<OrderDTO> list) {
+                adapter = new Purchase_History_Item(dataList);
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
         new OrderDAO().getList(dataList, list -> {
             adapter = new Purchase_History_Item(dataList);
             recyclerView.setAdapter(adapter);
