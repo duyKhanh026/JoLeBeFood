@@ -10,7 +10,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
+import com.example.jolebefood.DAO.ProductDAO.ProductDAO;
 import com.example.jolebefood.DTO.DiscountDTO;
+import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +24,10 @@ public class ImportDisCount extends AppCompatActivity {
 
     String Ma_km, Ten_km, pttt_km;
     int gt_km;
+
+    String MaMonAn,TenMonAn,MoTa, MaDanhMuc;
+
+    int Gia, SoLuomg, Soluongdaban;
     FirebaseDatabase db;
     DatabaseReference reference;
     @Override
@@ -35,6 +42,7 @@ public class ImportDisCount extends AppCompatActivity {
         gtkm = findViewById(R.id.GT_text);
         pttt = findViewById(R.id.pttt_text);
         Button nhapkm = findViewById(R.id.nhapDCBtn);
+        Button nhappd = findViewById(R.id.nhapPDBtn);
 
         nhapkm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,26 +52,30 @@ public class ImportDisCount extends AppCompatActivity {
                 gt_km = Integer.parseInt(gtkm.getText().toString());
                 pttt_km = pttt.getText().toString();
 
+                new DiscountDAO().SetDataDiscount(new DiscountDTO(Ma_km,Ten_km,gt_km,pttt_km));
+            };
 
-                if (!Ma_km.isEmpty() && !Ten_km.isEmpty() && !pttt_km.isEmpty()){
-                    DiscountDTO dc = new DiscountDTO(Ma_km, Ten_km, gt_km, pttt_km);
+        });
 
-                    db = FirebaseDatabase.getInstance();
-
-                    reference = db.getReference("Discount");
-
-                    reference.child(Ma_km).setValue(dc).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            makm.setText("");
-                            tenkm.setText("");
-                            gtkm.setText("");
-                            pttt.setText("");
-                            Toast.makeText(ImportDisCount.this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-
-                        }
-                    });
-                }
+        EditText mapd, tenpd, gtpd, slpd, motapd, madanhmuc, soluong_daban;
+        mapd = findViewById(R.id.PD_text);
+        tenpd = findViewById(R.id.TenPD_text);
+        gtpd = findViewById(R.id.GiaPD_text);
+        slpd = findViewById(R.id.SLPD_text);
+        motapd = findViewById(R.id.Mota_text);
+        madanhmuc = findViewById(R.id.MaDM_text);
+        soluong_daban = findViewById(R.id.soluong_daban_text);
+        nhappd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MaMonAn = mapd.getText().toString();
+                TenMonAn = tenpd.getText().toString();
+                Gia = Integer.parseInt(gtpd.getText().toString());
+                SoLuomg = Integer.parseInt(slpd.getText().toString());
+                Soluongdaban = Integer.parseInt(soluong_daban.getText().toString());
+                MoTa = motapd.getText().toString();
+                MaDanhMuc = madanhmuc.getText().toString();
+                new ProductDAO().SetDataProduct(new ProductDTO(MaMonAn,TenMonAn,MoTa,SoLuomg,Gia,MaDanhMuc,Soluongdaban));
             };
 
         });

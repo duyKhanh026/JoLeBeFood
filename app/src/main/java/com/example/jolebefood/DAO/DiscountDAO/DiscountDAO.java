@@ -72,18 +72,18 @@ public class DiscountDAO {
         });
     }
 
-//    public void SetDataDiscount(DiscountDTO discountDTO, Context context){
-//        Call<DiscountDTO> call1 = api.setData(discountDTO.getMakm(), discountDTO);
-//        call1.enqueue(new Callback<DiscountDTO >() {
-//            @Override
-//            public void onResponse(Call<DiscountDTO > call, Response<DiscountDTO> response) {
-//                Log.e(TAG, "Test DIscount:"+discountDTO.getMakm());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<DiscountDTO > call, Throwable t) {
-//                Log.e(TAG, "Test DIscount thất bại:"+discountDTO.getMakm());
-//            }
-//        });
-//    }
+    public void SetDataDiscount(DiscountDTO discountDTO){
+        Call<DiscountDTO> call1 = api.setData(discountDTO.getMakm(), discountDTO);
+        call1.enqueue(new Callback<DiscountDTO >() {
+            @Override
+            public void onResponse(Call<DiscountDTO > call, Response<DiscountDTO> response) {
+                Log.e(TAG, "Test DIscount:"+discountDTO.getMakm());
+            }
+
+            @Override
+            public void onFailure(Call<DiscountDTO > call, Throwable t) {
+                Log.e(TAG, "Test DIscount thất bại:"+discountDTO.getMakm());
+            }
+        });
+    }
 }

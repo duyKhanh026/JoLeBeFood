@@ -3,17 +3,34 @@ package com.example.jolebefood.DTO;
 import android.graphics.Bitmap;
 
 public class ProductDTO {
-    private String MaMonAn,TenMonAn,MoTa;
-    private int Gia, soLuomg;
+    private String MaMonAn,TenMonAn,MoTa, MaDanhMuc;
+    private int Gia, soLuomg, Soluongdaban;
     private Bitmap IMG;
 
-    public ProductDTO(String maMonAn, String tenMonAn, String moTa, int sl,int gia) {
+    public ProductDTO(String maMonAn, String tenMonAn, String moTa, int sl,int gia, String maDanhMuc,int soluongdaban) {
         MaMonAn = maMonAn;
         TenMonAn = tenMonAn;
         MoTa = moTa;
         soLuomg = sl;
         Gia = gia;
+        MaDanhMuc = maDanhMuc;
+        Soluongdaban = soluongdaban;
+    }
 
+    public int getSoluongdaban() {
+        return Soluongdaban;
+    }
+
+    public void setSoluongdaban(int soluongdaban) {
+        Soluongdaban = soluongdaban;
+    }
+
+    public String getMaDanhMuc() {
+        return MaDanhMuc;
+    }
+
+    public void setMaDanhMuc(String maDanhMuc) {
+        MaDanhMuc = maDanhMuc;
     }
 
     public ProductDTO() {

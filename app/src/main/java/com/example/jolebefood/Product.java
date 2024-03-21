@@ -7,8 +7,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
 import com.example.jolebefood.AdapterRecycleView.Product_Item;
+import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
+import com.example.jolebefood.DAO.ProductDAO.ProductDAO;
 import com.example.jolebefood.DTO.ProductDTO;
 
 import java.util.ArrayList;
@@ -31,14 +34,19 @@ public class Product extends AppCompatActivity {
 //
         ArrayList<ProductDTO> dataList = new ArrayList<>();
 
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 50000));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 100000));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 70000));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 30000));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 40000));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 60000));
+        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 50000, "DM001",30));
+        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 100000, "DM001",25));
+        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 70000, "DM001",22));
+        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 30000, "DM001",45));
+        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 40000, "DM001",13));
+        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 60000, "DM001",5));
 
-        adapter = new Product_Item(dataList);
-        recyclerView.setAdapter(adapter);
+        new ProductDAO().getList(dataList, list -> {
+            adapter = new Product_Item(dataList);
+            recyclerView.setAdapter(adapter);
+        });
+
+//        adapter = new Product_Item(dataList);
+//        recyclerView.setAdapter(adapter);
     }
 }

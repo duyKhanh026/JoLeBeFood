@@ -42,6 +42,7 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
         int gia = dataList.get(position).getGia();
         holder.price_product.setText(String.valueOf(gia));
         holder.product_picture.setImageResource(R.drawable.com_ga_xoi_mo);
+        holder.quantity_sold.setText("Đã bán " + dataList.get(position).getSoluongdaban());
         holder.descripe.setText(dataList.get(position).getMoTa());
 
     }
@@ -52,7 +53,7 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name_product, price_product, descripe;
+        TextView name_product, price_product, descripe, quantity_sold;
         ImageView product_picture;
         ImageButton add_product;
 
@@ -64,6 +65,7 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
             product_picture = itemView.findViewById(R.id.img_product);
             add_product = itemView.findViewById(R.id.add_productbtn);
             descripe = itemView.findViewById(R.id.describe_txt);
+            quantity_sold = itemView.findViewById(R.id.sale_count);
         }
 
        public void bindData(ProductDTO dto1) {

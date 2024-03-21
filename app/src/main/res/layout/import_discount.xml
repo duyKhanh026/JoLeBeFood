@@ -102,6 +102,148 @@
             android:text="Nhập"
             />
 
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thêm Product"
+            android:paddingTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12pt"
+            />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableRow>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mã PD: "
+                    android:textColor="@color/white"
+                    android:textSize="10pt" />
+
+                <EditText
+                    android:id="@+id/PD_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Tên PD:"
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/TenPD_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Giá: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/GiaPD_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Số lượng: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/SLPD_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Đã bán: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/soluong_daban_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Mô tả: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/Mota_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Mã danh mục: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/MaDM_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+
+
+        </TableLayout>
+        <Button
+            android:id="@+id/nhapPDBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhập"
+            />
+
     </LinearLayout>
 
 </FrameLayout>

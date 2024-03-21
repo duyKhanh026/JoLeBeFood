@@ -96,20 +96,12 @@ public class DiscountFragment extends Fragment {
 
         ArrayList<DiscountDTO> dataList = new ArrayList<>();
 
-        dataList.add(new DiscountDTO("MaKM1", "Giảm 10k", 10000, "MOMO"));
-        dataList.add(new DiscountDTO("MaKM2", "Giảm 15k", 15000, "CASH"));
-        dataList.add(new DiscountDTO("MaKM3", "Giảm 20k", 20000, "MOMO"));
-        dataList.add(new DiscountDTO("MaKM4", "Giảm 25k", 25000, "CASH"));
-        dataList.add(new DiscountDTO("MaKM5", "Giảm 35k", 35000, "MOMO"));
-        dataList.add(new DiscountDTO("MaKM6", "Giảm 50k", 50000, "CASH"));
-
         new DiscountDAO().getList(dataList, list -> {
             adapter = new Discount_Item(dataList);
             recyclerView.setAdapter(adapter);
         });
 
-//        adapter = new Discount_Item(dataList);
-//        recyclerView.setAdapter(adapter);
+        new DiscountDAO().SetDataDiscount(new DiscountDTO("MAKM010", "KHUYEN MAI 100k", 50000, "CASH"));
 
 
 

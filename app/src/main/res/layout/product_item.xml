@@ -62,7 +62,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/describe_txt"
-                    android:text="Đã bán 27"
+                    android:text="Mô tả"
                     android:textSize="8pt"
                     android:textColor="@color/gray"
                     android:gravity="bottom"/>
