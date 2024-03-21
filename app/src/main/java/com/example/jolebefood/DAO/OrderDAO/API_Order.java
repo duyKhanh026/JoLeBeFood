@@ -19,13 +19,11 @@ public interface API_Order {
 
     @GET("OrderDetails/{id}.json")
     Call<List<OrderDetailsDTO>> getOrderDetailsList(@Path("id") String id);
+
     @GET("Order.json")
         // Thay đổi đường dẫn tùy theo cấu trúc thư mục của bạn
     // Lý do phải duùng HashMap là do cách lưu trữ của firebase thì Order đang là 1 object chứ không phải 1 list nên không thể getlist mà phải dùng hashmap để lấy key và value
     Call<HashMap<String,OrderDTO>> getOrder();
-
-
-
 
     @PUT("/Order/{new}.json")
     Call<OrderDTO> setData(@Path("new") String s1, @Body OrderDTO object);

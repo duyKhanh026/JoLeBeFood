@@ -69,35 +69,9 @@ public class AccFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.activity_main_menu, container, false);
+        View view =  inflater.inflate(R.layout.fragment_acc, container, false);
 
-        btnDN_Email = (Button) view.findViewById(R.id.SignwithEmail);
-        btnDN_Phone = (Button) view.findViewById(R.id.SignwithPhone);
-        btnDK = (Button) view.findViewById(R.id.Signup);
 
-        btnDN_Phone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), Login_Phone.class);
-                startActivity(intent);
-            }
-        });
-
-        btnDN_Email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), Login_Gmail.class);
-                startActivity(intent);
-            }
-        });
-
-        btnDK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(view.getContext(), Register.class);
-                startActivity(intent);
-            }
-        });
 
         return view;
     }

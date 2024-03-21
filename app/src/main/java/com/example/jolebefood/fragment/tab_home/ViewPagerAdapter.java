@@ -29,6 +29,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 6; // do có 6 tab
+        return 5; // do có 6 tab
     }
 }
