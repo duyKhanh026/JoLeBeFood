@@ -13,6 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Discount_Item;
+import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
+import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
+import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.R;
 
@@ -100,9 +103,13 @@ public class DiscountFragment extends Fragment {
         dataList.add(new DiscountDTO("MaKM5", "Giảm 35k", 35000, "MOMO"));
         dataList.add(new DiscountDTO("MaKM6", "Giảm 50k", 50000, "CASH"));
 
+        new DiscountDAO().getList(dataList, list -> {
+            adapter = new Discount_Item(dataList);
+            recyclerView.setAdapter(adapter);
+        });
 
-        adapter = new Discount_Item(dataList);
-        recyclerView.setAdapter(adapter);
+//        adapter = new Discount_Item(dataList);
+//        recyclerView.setAdapter(adapter);
 
 
 

@@ -6,12 +6,14 @@ import android.widget.Toast;
 
 import com.example.jolebefood.DAO.CallRetrofit;
 import com.example.jolebefood.DAO.OrderDAO.API_Order;
-import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
+import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
 import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.DTO.OrderDTO;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,18 +46,18 @@ public class DiscountDAO {
     }
 
     public void getList(ArrayList<DiscountDTO> list, OnGetListDiscountListener listener) {
-        Call<List<DiscountDTO>> call = api.getData();
-        call.enqueue(new Callback<List<DiscountDTO>>() {
+        Call<HashMap<String,DiscountDTO>> call = api.getdiscount();
+        call.enqueue(new Callback<HashMap<String,DiscountDTO>>() {
             @Override
-            public void onResponse(Call<List<DiscountDTO>> call, Response<List<DiscountDTO>> response) {
+            public void onResponse(Call<HashMap<String,DiscountDTO>> call, Response<HashMap<String,DiscountDTO>> response) {
                 if (response.isSuccessful()) {
-                    List<DiscountDTO> data = response.body();
-                    if (data != null && !data.isEmpty()) {
-                        for (int i = 1; i < data.size(); i++) {
-                            list.add(data.get(i));
+                    HashMap<String,DiscountDTO> data = response.body();
+                    if (data != null) {
+                        for (Map.Entry<String, DiscountDTO> entry : data.entrySet()) {
+                            DiscountDTO discountDTO = entry.getValue();
+                            list.add(discountDTO);
                         }
                         listener.onGetListDiscountSuccess(list);
-                        System.out.println("Đã lấy được");
                     } else {
                         Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
                     }
@@ -64,24 +66,24 @@ public class DiscountDAO {
                 }
             }
             @Override
-            public void onFailure(Call<List<DiscountDTO>> call, Throwable t) {
+            public void onFailure(Call<HashMap<String,DiscountDTO>> call, Throwable t) {
                 Log.e(TAG, "Error getting data: " + t.getMessage());
             }
         });
     }
 
-    public void SetDataDiscount(DiscountDTO discountDTO, Context context){
-        Call<DiscountDTO> call1 = api.setData(discountDTO.getMakm(), discountDTO);
-        call1.enqueue(new Callback<DiscountDTO >() {
-            @Override
-            public void onResponse(Call<DiscountDTO > call, Response<DiscountDTO> response) {
-                Log.e(TAG, "Test DIscount:"+discountDTO.getMakm());
-            }
-
-            @Override
-            public void onFailure(Call<DiscountDTO > call, Throwable t) {
-                Log.e(TAG, "Test DIscount thất bại:"+discountDTO.getMakm());
-            }
-        });
-    }
+//    public void SetDataDiscount(DiscountDTO discountDTO, Context context){
+//        Call<DiscountDTO> call1 = api.setData(discountDTO.getMakm(), discountDTO);
+//        call1.enqueue(new Callback<DiscountDTO >() {
+//            @Override
+//            public void onResponse(Call<DiscountDTO > call, Response<DiscountDTO> response) {
+//                Log.e(TAG, "Test DIscount:"+discountDTO.getMakm());
+//            }
+//
+//            @Override
+//            public void onFailure(Call<DiscountDTO > call, Throwable t) {
+//                Log.e(TAG, "Test DIscount thất bại:"+discountDTO.getMakm());
+//            }
+//        });
+//    }
 }

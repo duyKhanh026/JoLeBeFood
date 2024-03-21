@@ -21,7 +21,7 @@
         android:title="Giỏ hàng"/>
 
     <item android:id="@+id/tab_khuyenmai"
-        android:icon="@drawable/icons8_percent_64"
+        android:icon="@drawable/discount"
         android:title="Khuyến mãi"/>
 
 

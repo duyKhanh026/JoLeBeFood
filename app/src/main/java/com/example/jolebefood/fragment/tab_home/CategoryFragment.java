@@ -70,17 +70,7 @@ public class CategoryFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_category, container, false);
 
-        Button xemsp;
 
-        xemsp = view.findViewById(R.id.but_xemsp);
-        xemsp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(), "đã chạy", Toast.LENGTH_SHORT).show();
-                Intent it1 = new Intent(getActivity(), Product.class);
-                startActivity(it1);
-            }
-        });
 
         RecyclerView recyclerView = view.findViewById(R.id.recycleView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext() , 2);

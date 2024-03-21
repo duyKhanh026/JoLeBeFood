@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.DTO.CategoryDTO;
+import com.example.jolebefood.Product;
 import com.example.jolebefood.R;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
@@ -46,6 +47,15 @@ public class Category_Item extends RecyclerView.Adapter<Category_Item.MyViewHold
         }
         holder.imgFood.setImageResource(food.getImage());
         holder.tvNameFood.setText(food.getTenDM());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it1 = new Intent(context, Product.class);
+                context.startActivity(it1);
+            }
+        });
+
     }
 
 
