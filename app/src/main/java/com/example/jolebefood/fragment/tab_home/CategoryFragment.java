@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Category_Item;
+import com.example.jolebefood.AdapterRecycleView.Discount_Item;
+import com.example.jolebefood.DAO.CategoryDAO.CategoryDAO;
+import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.Product;
 import com.example.jolebefood.R;
@@ -70,30 +73,28 @@ public class CategoryFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_category, container, false);
 
-
+        Button btndm = view.findViewById(R.id.adddm_btn);
+        btndm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(getActivity(),importCategory.class);
+                startActivity(it);
+            }
+        });
 
         RecyclerView recyclerView = view.findViewById(R.id.recycleView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext() , 2);
         recyclerView.setLayoutManager(gridLayoutManager);
 
-        List<CategoryDTO> dataList = new ArrayList<>();
-        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
-        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
-        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
-        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
-        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
-        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
-        dataList.add(new CategoryDTO("DM1", "Cơm Gà", R.drawable.comga));
-        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
-        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
-        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
-        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
-        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
-        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
-        dataList.add(new CategoryDTO("DM2", "Cơm Bò", R.drawable.combo));
+        ArrayList<CategoryDTO> dataList = new ArrayList<>();
 
-        adapter = new Category_Item(getContext(),dataList);
-        recyclerView.setAdapter(adapter);
+        new CategoryDAO().getList(dataList, list -> {
+            adapter = new Category_Item(getContext(),dataList);
+            recyclerView.setAdapter(adapter);
+        });
+
+//        adapter = new Category_Item(getContext(),dataList);
+//        recyclerView.setAdapter(adapter);
         return view;
     }
 }

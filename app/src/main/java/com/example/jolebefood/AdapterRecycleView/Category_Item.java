@@ -24,10 +24,10 @@ import java.util.List;
 
 public class Category_Item extends RecyclerView.Adapter<Category_Item.MyViewHolder>{
     View view;
-    private List<CategoryDTO> mListFood;
+    private ArrayList<CategoryDTO> mListFood;
     Context context;
 
-    public Category_Item(Context context, List<CategoryDTO> mListFood) {
+    public Category_Item(Context context, ArrayList<CategoryDTO> mListFood) {
         this.context = context;
         this.mListFood = mListFood;
     }

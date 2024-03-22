@@ -92,8 +92,6 @@ public class DiscountFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-
-
         ArrayList<DiscountDTO> dataList = new ArrayList<>();
 
         new DiscountDAO().getList(dataList, list -> {

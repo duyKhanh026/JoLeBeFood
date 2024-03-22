@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tab_rate"
+    tools:context=".fragment.tab_home.RateFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thêm Category"
+            android:paddingTop="20dp"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="12pt"
+            />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Mã DM: "
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/MaDM_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:text="Tên KM:"
+                    android:textSize="10pt"
+                    />
+
+                <EditText
+                    android:id="@+id/TenDM_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_weight="1"
+                    android:textSize="8pt" />
+            </TableRow>
+        </TableLayout>
+        <Button
+            android:id="@+id/nhapDMBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nhập"
+            />
+
+    </LinearLayout>
+
+</FrameLayout>

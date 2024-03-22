@@ -41,6 +41,9 @@
         <activity
             android:name=".fragment.tab_home.ImportDisCount"
             android:exported="false" />
+        <activity
+            android:name=".fragment.tab_home.importCategory"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
