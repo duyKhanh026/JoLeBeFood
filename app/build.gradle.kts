@@ -72,4 +72,8 @@ dependencies {
 
     implementation ("androidx.browser:browser:1.8.0")
 
+    // Add the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-storage")
+
 }

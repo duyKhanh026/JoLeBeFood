@@ -1,5 +1,8 @@
 package com.example.jolebefood.AdapterRecycleView;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +13,13 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.DAO.CallFirebaseStrorage;
 import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -22,8 +29,13 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
 
     ArrayList<ProductDTO> dataList;
 
+    CallFirebaseStrorage callFirebaseStrorage;
+
     public Product_Item(ArrayList<ProductDTO> dataList) {
+
         this.dataList = dataList;
+
+        callFirebaseStrorage = new CallFirebaseStrorage();
     }
 
     @NonNull
@@ -41,9 +53,9 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
         holder.name_product.setText(dataList.get(position).getTenMonAn());
         int gia = dataList.get(position).getGia();
         holder.price_product.setText(String.valueOf(gia));
-        holder.product_picture.setImageResource(R.drawable.com_ga_xoi_mo);
         holder.quantity_sold.setText("Đã bán " + dataList.get(position).getSoluongdaban());
         holder.descripe.setText(dataList.get(position).getMoTa());
+        holder.SetIMG(callFirebaseStrorage,dataList.get(position).getIMG());
 
     }
 
@@ -71,6 +83,27 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
        public void bindData(ProductDTO dto1) {
 
 
+        }
+
+        public void SetIMG(CallFirebaseStrorage callFirebaseStrorage, String imgURL){
+            StorageReference mountainRef = callFirebaseStrorage.getStorageRef().child(imgURL);
+
+            final long ONE_MEGABYTE = 1024 * 1024;
+            mountainRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    // Convert bytes to Bitmap
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                    // Set the Bitmap to the ImageView
+                    product_picture.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@androidx.annotation.NonNull Exception exception) {
+                    Log.e("Kien Test ProductItem", "" + imgURL + " "+ exception.toString());
+                }
+            });
         }
 
 

@@ -1,14 +1,18 @@
 package com.example.jolebefood.DTO;
 
+import java.util.ArrayList;
+
 public class CategoryDTO {
     private String maDM,tenDM;
     private int image;
 
-    public CategoryDTO(String maDM, String tenDM,int img) {
+
+    public CategoryDTO(String maDM, String tenDM, int image) {
         this.maDM = maDM;
         this.tenDM = tenDM;
-        this.image = img;
+        this.image = image;
     }
+
     public CategoryDTO(String maDM, String tenDM) {
         this.maDM = maDM;
         this.tenDM = tenDM;
@@ -41,4 +45,5 @@ public class CategoryDTO {
     public void setTenDM(String tenDM) {
         tenDM = tenDM;
     }
+
 }

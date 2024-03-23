@@ -63,7 +63,7 @@ public class ProductDAO {
     }
 
     public void SetDataProduct(ProductDTO productDTO){
-        Call<ProductDTO> call1 = api.setData(productDTO.getMaMonAn(), productDTO);
+        Call<ProductDTO> call1 = api.setData(productDTO.getMaMonAn() ,productDTO);
         call1.enqueue(new Callback<ProductDTO >() {
             @Override
             public void onResponse(Call<ProductDTO > call, Response<ProductDTO> response) {

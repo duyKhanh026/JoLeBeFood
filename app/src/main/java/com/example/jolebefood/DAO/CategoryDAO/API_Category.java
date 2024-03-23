@@ -15,8 +15,7 @@ import retrofit2.http.Path;
 public interface API_Category {
 
     @GET("Category.json")
-    Call<HashMap<String, CategoryDTO>> getcategory();
-
+    Call<HashMap<String, CategoryDTO>> getcategorylist();
 
     @PUT("/Category/{new}.json")
     Call<CategoryDTO> setData(@Path("new") String s1, @Body CategoryDTO object);

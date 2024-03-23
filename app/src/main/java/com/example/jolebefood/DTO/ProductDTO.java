@@ -5,9 +5,13 @@ import android.graphics.Bitmap;
 public class ProductDTO {
     private String MaMonAn,TenMonAn,MoTa, MaDanhMuc;
     private int Gia, soLuomg, Soluongdaban;
-    private Bitmap IMG;
+    private String IMG;
 
-    public ProductDTO(String maMonAn, String tenMonAn, String moTa, int sl,int gia, String maDanhMuc,int soluongdaban) {
+    public ProductDTO() {
+    }
+
+
+    public ProductDTO(String maMonAn, String tenMonAn,String IMG, String moTa, int sl,int gia, String maDanhMuc,int soluongdaban) {
         MaMonAn = maMonAn;
         TenMonAn = tenMonAn;
         MoTa = moTa;
@@ -15,6 +19,7 @@ public class ProductDTO {
         Gia = gia;
         MaDanhMuc = maDanhMuc;
         Soluongdaban = soluongdaban;
+        this.IMG = IMG;
     }
 
     public int getSoluongdaban() {
@@ -31,9 +36,6 @@ public class ProductDTO {
 
     public void setMaDanhMuc(String maDanhMuc) {
         MaDanhMuc = maDanhMuc;
-    }
-
-    public ProductDTO() {
     }
 
     public int getSoLuomg() {
@@ -76,11 +78,11 @@ public class ProductDTO {
         Gia = gia;
     }
 
-    public Bitmap getIMG() {
+    public String getIMG() {
         return IMG;
     }
 
-    public void setIMG(Bitmap IMG) {
+    public void setIMG(String IMG) {
         this.IMG = IMG;
     }
 }

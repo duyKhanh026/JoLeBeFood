@@ -35,7 +35,7 @@ public class CategoryDAO {
     }
 
     public void getList(ArrayList<CategoryDTO> list, OnGetListCategoryListener listener) {
-        Call<HashMap<String,CategoryDTO>> call = api.getcategory();
+        Call<HashMap<String,CategoryDTO>> call = api.getcategorylist();
         call.enqueue(new Callback<HashMap<String,CategoryDTO>>() {
             @Override
             public void onResponse(Call<HashMap<String,CategoryDTO>> call, Response<HashMap<String,CategoryDTO>> response) {

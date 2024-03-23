@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.ProductDAO.ProductDAO;
+import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.R;
@@ -19,6 +20,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import org.checkerframework.checker.units.qual.C;
 
 public class ImportDisCount extends AppCompatActivity {
 
@@ -75,7 +78,10 @@ public class ImportDisCount extends AppCompatActivity {
                 Soluongdaban = Integer.parseInt(soluong_daban.getText().toString());
                 MoTa = motapd.getText().toString();
                 MaDanhMuc = madanhmuc.getText().toString();
-                new ProductDAO().SetDataProduct(new ProductDTO(MaMonAn,TenMonAn,MoTa,SoLuomg,Gia,MaDanhMuc,Soluongdaban));
+
+                String imgURL = "/"+MaMonAn+".jpg";
+
+                new ProductDAO().SetDataProduct(new ProductDTO(MaMonAn,TenMonAn,imgURL,MoTa,SoLuomg,Gia,MaDanhMuc,Soluongdaban));
             };
 
         });

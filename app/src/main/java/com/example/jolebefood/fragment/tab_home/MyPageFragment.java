@@ -92,11 +92,6 @@ public class MyPageFragment extends Fragment {
             }
         });
 
-        new OrderDAO().getList(dataList, list -> {
-            adapter = new Purchase_History_Item(dataList);
-            recyclerView.setAdapter(adapter);
-        });
-
         return view;
     }
 }

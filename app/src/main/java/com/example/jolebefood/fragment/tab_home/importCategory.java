@@ -10,7 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.jolebefood.DAO.CategoryDAO.CategoryDAO;
 import com.example.jolebefood.DTO.CategoryDTO;
+import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.R;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class importCategory extends AppCompatActivity {
     String Ma_dm, Ten_dm;

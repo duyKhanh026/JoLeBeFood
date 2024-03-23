@@ -34,12 +34,12 @@ public class Product extends AppCompatActivity {
 //
         ArrayList<ProductDTO> dataList = new ArrayList<>();
 
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 50000, "DM001",30));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 100000, "DM001",25));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 70000, "DM001",22));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 30000, "DM001",45));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 40000, "DM001",13));
-        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ", "CƠM THƠM NGON", 5, 60000, "DM001",5));
+//        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ","", "CƠM THƠM NGON", 5, 50000, "DM001",30));
+//        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ","", "CƠM THƠM NGON", 5, 100000, "DM001",25));
+//        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ","", "CƠM THƠM NGON", 5, 70000, "DM001",22));
+//        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ","", "CƠM THƠM NGON", 5, 30000, "DM001",45));
+//        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ","", "CƠM THƠM NGON", 5, 40000, "DM001",13));
+//        dataList.add(new ProductDTO("SP001", "CƠM GÀ XỐI MỠ","", "CƠM THƠM NGON", 5, 60000, "DM001",5));
 
         new ProductDAO().getList(dataList, list -> {
             adapter = new Product_Item(dataList);
