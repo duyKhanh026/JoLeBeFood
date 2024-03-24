@@ -1,24 +1,26 @@
 package com.example.jolebefood.DTO;
 
 public class CartDTO {
-    private String SDT, MaMonAn;
-    private int SL;
+    private String TenMonAn, MaMonAn, Image;
+    private int SL, TongTien;
 
-    public CartDTO(String SDT, String maMonAn, int SL) {
-        this.SDT = SDT;
-        MaMonAn = maMonAn;
+    public CartDTO(String TenMonAn, String MaMonAn, int SL, String Image, int TongTien) {
+        this.TenMonAn = TenMonAn;
+        this.MaMonAn = MaMonAn;
         this.SL = SL;
+        this.Image = Image;
+        this.TongTien = TongTien;
     }
 
     public CartDTO() {
     }
 
-    public String getSDT() {
-        return SDT;
+    public String getTenMonAn() {
+        return TenMonAn;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
+    public void setTenMonAn(String tenMonAn) {
+        TenMonAn = tenMonAn;
     }
 
     public String getMaMonAn() {
@@ -36,4 +38,21 @@ public class CartDTO {
     public void setSL(int SL) {
         this.SL = SL;
     }
+
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
+    public int getTongTien() {
+        return TongTien;
+    }
+
+    public void setTongTien(int tongTien) {
+        TongTien = tongTien;
+    }
+
 }
