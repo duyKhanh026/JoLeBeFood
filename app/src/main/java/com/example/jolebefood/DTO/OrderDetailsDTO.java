@@ -1,12 +1,13 @@
 package com.example.jolebefood.DTO;
 
 public class OrderDetailsDTO {
-    private String MaMonAn, MaDH;
+    private String MaMonAn, MaDH, TenMonAn;
     private int SL, ThanhTien;
 
-    public OrderDetailsDTO(String maMonAn, String maDH, int SL, int thanhTien) {
+    public OrderDetailsDTO(String maMonAn, String maDH, String tenMonAn, int SL, int thanhTien) {
         MaMonAn = maMonAn;
         MaDH = maDH;
+        TenMonAn = tenMonAn;
         this.SL = SL;
         ThanhTien = thanhTien;
     }
@@ -44,5 +45,13 @@ public class OrderDetailsDTO {
 
     public void setThanhTien(int thanhTien) {
         ThanhTien = thanhTien;
+    }
+
+    public String getTenMonAn() {
+        return TenMonAn;
+    }
+
+    public void setTenMonAn(String tenMonAn) {
+        TenMonAn = tenMonAn;
     }
 }

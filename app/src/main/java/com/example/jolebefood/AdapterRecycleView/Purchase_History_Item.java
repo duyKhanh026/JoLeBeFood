@@ -2,6 +2,9 @@ package com.example.jolebefood.AdapterRecycleView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,22 +15,35 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.DAO.CallFirebaseStrorage;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.DTO.OrderDTO;
 import com.example.jolebefood.OrderDetails;
 import com.example.jolebefood.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History_Item.MyViewHolder>{
 
     private List<OrderDTO> dataList;
 
+    CallFirebaseStrorage callFirebaseStrorage;
+
+    long pastTimeMillis = 0; // Ví dụ: 01/01/1900 00:00:00 UTC
+    Timestamp pastTimestamp = new Timestamp(pastTimeMillis);
+
     public Purchase_History_Item(List<OrderDTO> dataList) {
         this.dataList = dataList;
+
+        callFirebaseStrorage = new CallFirebaseStrorage();
+
     }
 
     @NonNull
@@ -45,7 +61,13 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
         holder.txtSoSanPham.setText(Integer.toString(dataList.get(position).getListOrderDetails().size()) + " sản phẩm");
         holder.txtSoLuong.setText("x" + Integer.toString(dataList.get(position).getListOrderDetails().get(0).getSL()));
         holder.txtGia.setText(Integer.toString(dataList.get(position).getListOrderDetails().get(0).getThanhTien()));
-
+        holder.SetIMG(callFirebaseStrorage,dataList.get(position).getListOrderDetails().get(0).getMaMonAn());
+        holder.txtTenMonAn.setText(dataList.get(position).getListOrderDetails().get(0).getTenMonAn());
+        if (dataList.get(position).getThoiGianHoanThanh().getTime() == pastTimestamp.getTime()){
+            holder.txtTinhTrang.setText("Đơn hàng chưa hoàn tất");
+        }else{
+            holder.txtTinhTrang.setText("Đơn hàng được giao thành công");
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +92,7 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtID,txtTenMonAn,txtSoLuong,txtGia,txtSoSanPham, txtTongTien, txtTinhTrang;
+        TextView txtID, txtTenMonAn, txtSoLuong, txtGia, txtSoSanPham, txtTongTien, txtTinhTrang;
 
         ImageView imgItem;
 
@@ -89,6 +111,26 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
             btnMuaLai = itemView.findViewById(R.id.btnMuaLai_LS);
         }
 
+        public void SetIMG(CallFirebaseStrorage callFirebaseStrorage, String id) {
+            StorageReference mountainRef = callFirebaseStrorage.getStorageRef().child("/" + id + ".jpg");
+
+            final long ONE_MEGABYTE = 1024 * 1024;
+            mountainRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    // Convert bytes to Bitmap
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                    // Set the Bitmap to the ImageView
+                    imgItem.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@androidx.annotation.NonNull Exception exception) {
+                    Log.e("Kien Test ProductItem", "" + id + " " + exception.toString());
+                }
+            });
+        }
     }
 
 }

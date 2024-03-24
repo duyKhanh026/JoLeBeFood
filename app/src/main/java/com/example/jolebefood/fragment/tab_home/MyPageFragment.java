@@ -12,12 +12,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
 import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
-import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.DTO.OrderDTO;
 import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.R;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +83,12 @@ public class MyPageFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ArrayList<OrderDTO> dataList = new ArrayList<>();
+
+
+
+
+
+
 
         new OrderDAO().getList(dataList, new OnGetListOrderListener() {
             @Override
