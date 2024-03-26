@@ -1,7 +1,7 @@
 {
   "project_info": {
     "project_number": "559740643373",
-    "firebase_url":"https://jolebefood-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "firebase_url": "https://jolebefood-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "jolebefood",
     "storage_bucket": "jolebefood.appspot.com"
   },
@@ -13,7 +13,20 @@
           "package_name": "com.example.jolebefood"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "559740643373-m3n8qbuv0kpkj3bdi4u2ekm8ppf3al0f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.jolebefood",
+            "certificate_hash": "9cbb66e9ad6ee0a2ed7656be8d952d225ee891d9"
+          }
+        },
+        {
+          "client_id": "559740643373-5abct1cpg4v5tiou8vedad1jl5qg1mjq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCVu2bXx6WSdwPXLeT9eqRLdDw0OI1jeA0"
@@ -21,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559740643373-5abct1cpg4v5tiou8vedad1jl5qg1mjq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

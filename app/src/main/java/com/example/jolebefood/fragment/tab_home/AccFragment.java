@@ -32,7 +32,7 @@ public class AccFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Button btnDN_Phone,btnDN_Email,btnDK;
+    Button btnDN_Phone,btnDN_Email,btnDK,btnGoogle;
 
     public AccFragment() {
         // Required empty public constructor
@@ -73,6 +73,10 @@ public class AccFragment extends Fragment {
 
 
 
+
+
+
         return view;
     }
+
 }

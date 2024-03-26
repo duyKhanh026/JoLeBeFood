@@ -50,4 +50,18 @@ public class Register_DAO {
             }
         });
     }
+    public void SetDataUser2(String useridd ,UserDTO userDTO){
+        Call<UserDTO> call1 = api.setData(useridd, userDTO);
+        call1.enqueue(new Callback<UserDTO>() {
+            @Override
+            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                Log.e(TAG, "Nam test add order:"+userDTO.getName());
+            }
+
+            @Override
+            public void onFailure(Call<UserDTO > call, Throwable t) {
+                Log.e(TAG, "Nam test add order thất bại:"+userDTO.getName());
+            }
+        });
+    }
 }

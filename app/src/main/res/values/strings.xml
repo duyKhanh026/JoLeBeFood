@@ -8,6 +8,7 @@
     <string name="title_activity_login_phone">Login_Phone</string>
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
+    <string name="default_web_client_id">559740643373-5abct1cpg4v5tiou8vedad1jl5qg1mjq.apps.googleusercontent.com</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
