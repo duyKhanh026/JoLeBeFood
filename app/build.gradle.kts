@@ -72,6 +72,7 @@ dependencies {
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0") // Sử dụng Gson Converter
 
     implementation ("androidx.browser:browser:1.8.0")
+    implementation ("androidx.fragment:fragment:1.6.2")
 
     // Add the dependency for the Cloud Storage library
     // When using the BoM, you don't specify versions in Firebase library dependencies

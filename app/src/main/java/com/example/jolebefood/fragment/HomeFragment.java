@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment {
         viewPager = view.findViewById(R.id.view_pager);
         bottomNavigationView = view.findViewById(R.id.bottom_navigation);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter( viewPager,getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdapter);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

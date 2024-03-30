@@ -4,12 +4,22 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.jolebefood.Discount;
+import com.example.jolebefood.EditAccount;
+import com.example.jolebefood.OrderDetails;
+import com.example.jolebefood.OrderHistory;
 import com.example.jolebefood.R;
 import com.example.jolebefood.SignIn_and_SignUp.Login_Gmail;
 import com.example.jolebefood.SignIn_and_SignUp.Login_Phone;
@@ -32,10 +42,13 @@ public class AccFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    Button btnDN_Phone,btnDN_Email,btnDK,btnGoogle;
+    TextView KM,LSMH,GH,TTMH,Setting,CSTK;
+    ViewPager vpadater;
+    public AccFragment(ViewPager vpadater) {
+        this.vpadater = vpadater;
+    }
 
     public AccFragment() {
-        // Required empty public constructor
     }
 
     /**
@@ -70,13 +83,57 @@ public class AccFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_acc, container, false);
+        KM = view.findViewById(R.id.UDCT);
+        LSMH = view.findViewById(R.id.LSMH);
+        GH = view.findViewById(R.id.GH);
+        TTMH = view.findViewById(R.id.TTMH);
+        Setting = view.findViewById(R.id.Setting);
+        CSTK = view.findViewById(R.id.CSTK);
 
+        KM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vpadater.setCurrentItem(4);
+            }
+        });
+        LSMH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vpadater.setCurrentItem(1);
+            }
+        });
+        GH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vpadater.setCurrentItem(3);
+            }
+        });
+        TTMH.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vpadater.setCurrentItem(0);
+            }
+        });
+        Setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-
-
+            }
+        });
+        CSTK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), EditAccount.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
+    }
+
+    private void openDiscountFragment() {
+        // Tạo FragmentB mới
+
     }
 
 }

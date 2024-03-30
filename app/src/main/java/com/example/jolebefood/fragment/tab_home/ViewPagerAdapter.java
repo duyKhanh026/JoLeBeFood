@@ -4,10 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior) {
+    ViewPager vp;
+    public ViewPagerAdapter(ViewPager vp, @NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
+        this.vp = vp;
     }
 
     @NonNull
@@ -17,7 +20,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new MyPageFragment();
             case 2:
-                return new AccFragment();
+                return new AccFragment(this.vp);
             case 3:
                 return new CartFragment();
             case 4:

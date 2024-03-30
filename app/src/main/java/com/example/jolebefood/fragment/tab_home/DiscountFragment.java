@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,9 +42,7 @@ public class DiscountFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public DiscountFragment() {
-        // Required empty public constructor
-    }
+
 
     /**
      * Use this factory method to create a new instance of
