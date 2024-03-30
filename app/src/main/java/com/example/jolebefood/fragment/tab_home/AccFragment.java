@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jolebefood.ChangePassword;
 import com.example.jolebefood.Discount;
 import com.example.jolebefood.EditAccount;
 import com.example.jolebefood.OrderDetails;
@@ -25,6 +26,8 @@ import com.example.jolebefood.SignIn_and_SignUp.Login_Gmail;
 import com.example.jolebefood.SignIn_and_SignUp.Login_Phone;
 import com.example.jolebefood.SignIn_and_SignUp.MainMenu;
 import com.example.jolebefood.SignIn_and_SignUp.Register;
+
+import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -124,6 +127,13 @@ public class AccFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), EditAccount.class);
+                startActivity(intent);
+            }
+        });
+        Setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ChangePassword.class);
                 startActivity(intent);
             }
         });

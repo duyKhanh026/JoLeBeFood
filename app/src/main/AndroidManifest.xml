@@ -20,6 +20,9 @@
         android:theme="@style/Theme.JoLeBeFood"
         tools:targetApi="31">
         <activity
+            android:name=".ChangePassword"
+            android:exported="false" />
+        <activity
             android:name=".EditAccount"
             android:exported="false" />
         <activity
@@ -39,6 +42,12 @@
             android:exported="false" />
         <activity
             android:name=".SignIn_and_SignUp.MainMenu"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn_and_SignUp.GoogleSignIn"
+            android:exported="false" />
+        <activity
+            android:name=".SignIn_and_SignUp.FacebookSignIn"
             android:exported="false" />
         <activity
             android:name=".fragment.tab_home.ImportDisCount"
@@ -67,6 +76,8 @@
         <activity
             android:name=".Product"
             android:exported="false" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
     </application>
 
 </manifest>
