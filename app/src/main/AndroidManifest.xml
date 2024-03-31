@@ -53,7 +53,7 @@
             android:name=".fragment.tab_home.ImportDisCount"
             android:exported="false" />
         <activity
-            android:name=".SignIn_and_SignUp.Intro"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -71,10 +71,13 @@
             android:name=".Discount"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SignIn_and_SignUp.Intro"
             android:exported="false" />
         <activity
             android:name=".Product"
+            android:exported="false" />
+        <activity
+            android:name=".fragment.tab_home.importCategory"
             android:exported="false" />
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
         <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>

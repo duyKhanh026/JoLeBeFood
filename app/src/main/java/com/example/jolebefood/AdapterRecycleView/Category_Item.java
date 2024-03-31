@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,14 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.DAO.CallFirebaseStrorage;
 import com.example.jolebefood.DTO.CategoryDTO;
+import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.Product;
 import com.example.jolebefood.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -26,10 +32,13 @@ public class Category_Item extends RecyclerView.Adapter<Category_Item.MyViewHold
     View view;
     private ArrayList<CategoryDTO> mListFood;
     Context context;
+    CallFirebaseStrorage callFirebaseStrorage;
 
     public Category_Item(Context context, ArrayList<CategoryDTO> mListFood) {
         this.context = context;
         this.mListFood = mListFood;
+
+        callFirebaseStrorage = new CallFirebaseStrorage();
     }
 
     @NonNull
@@ -41,17 +50,19 @@ public class Category_Item extends RecyclerView.Adapter<Category_Item.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        CategoryDTO food = mListFood.get(position);
-        if (food == null) {
-            return;
-        }
-        holder.imgFood.setImageResource(food.getImage());
-        holder.tvNameFood.setText(food.getTenDM());
+
+        holder.bindData(mListFood.get(position));
+//        holder.imgFood.setImageResource(mListFood.get(position).getImage());
+        holder.tvNameFood.setText(mListFood.get(position).getTenDM());
+
+        holder.SetIMG(callFirebaseStrorage,mListFood.get(position).getIMG());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent it1 = new Intent(context, Product.class);
+                it1.putExtra("category_code", mListFood.get(position).getMaDM());
+                it1.putExtra("category_name", mListFood.get(position).getTenDM());
                 context.startActivity(it1);
             }
         });
@@ -74,8 +85,28 @@ public class Category_Item extends RecyclerView.Adapter<Category_Item.MyViewHold
             super(itemView);
             imgFood = itemView.findViewById(R.id.img_food);
             tvNameFood = itemView.findViewById(R.id.tv_name_food);
+        }
+        public void bindData(CategoryDTO dto1) {
+        }
+        public void SetIMG(CallFirebaseStrorage callFirebaseStrorage, String imgURL) {
+            StorageReference mountainRef = callFirebaseStrorage.getStorageRef().child(imgURL);
 
+            final long ONE_MEGABYTE = 1024 * 1024;
+            mountainRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    // Convert bytes to Bitmap
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
+                    // Set the Bitmap to the ImageView
+                    imgFood.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@androidx.annotation.NonNull Exception exception) {
+                    Log.e("Kien Test ProductItem", "" + imgURL + " " + exception.toString());
+                }
+            });
         }
     }
 

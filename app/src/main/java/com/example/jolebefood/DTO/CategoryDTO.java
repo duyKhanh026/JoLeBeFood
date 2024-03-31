@@ -1,33 +1,24 @@
 package com.example.jolebefood.DTO;
 
-import java.util.ArrayList;
-
 public class CategoryDTO {
     private String maDM,tenDM;
-    private int image;
+    private String IMG;
 
-
-    public CategoryDTO(String maDM, String tenDM, int image) {
+    public CategoryDTO(String maDM, String tenDM, String IMG) {
         this.maDM = maDM;
         this.tenDM = tenDM;
-        this.image = image;
-    }
-
-    public CategoryDTO(String maDM, String tenDM) {
-        this.maDM = maDM;
-        this.tenDM = tenDM;
-        this.image = 0;
+        this.IMG = IMG;
     }
 
     public CategoryDTO() {
     }
 
-    public int getImage() {
-        return image;
+    public String getIMG() {
+        return IMG;
     }
 
-    public void setImage(int image) {
-        this.image = image;
+    public void setIMG(String IMG) {
+        this.IMG = IMG;
     }
 
     public String getMaDM() {
@@ -45,5 +36,4 @@ public class CategoryDTO {
     public void setTenDM(String tenDM) {
         tenDM = tenDM;
     }
-
 }

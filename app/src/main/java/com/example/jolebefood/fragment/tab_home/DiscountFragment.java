@@ -86,6 +86,8 @@ public class DiscountFragment extends Fragment {
             }
         });
 
+
+
         RecyclerView recyclerView = view.findViewById(R.id.RecycleView_KhuyenMai);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

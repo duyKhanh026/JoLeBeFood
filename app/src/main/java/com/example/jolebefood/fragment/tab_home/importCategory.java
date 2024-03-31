@@ -20,7 +20,7 @@ import java.util.List;
 
 public class importCategory extends AppCompatActivity {
     String Ma_dm, Ten_dm;
-    int img;
+    String img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +33,7 @@ public class importCategory extends AppCompatActivity {
         madm = findViewById(R.id.MaDM_text);
         tendm = findViewById(R.id.TenDM_text);
 
-
-
+        img_ = findViewById(R.id.IMGDM_text);
 
         Button nhapdm = findViewById(R.id.nhapDMBtn);
 
@@ -43,8 +42,9 @@ public class importCategory extends AppCompatActivity {
             public void onClick(View view) {
                 Ma_dm = madm.getText().toString();
                 Ten_dm = tendm.getText().toString();
+                String imgURL = "/"+Ma_dm+".jpg";
 
-                new CategoryDAO().SetDataCategory(new CategoryDTO(Ma_dm, Ten_dm,R.drawable.comga));
+                new CategoryDAO().SetDataCategory(new CategoryDTO(Ma_dm, Ten_dm,imgURL));
             }
         });
     }

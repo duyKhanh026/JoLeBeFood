@@ -57,6 +57,14 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
         holder.descripe.setText(dataList.get(position).getMoTa());
         holder.SetIMG(callFirebaseStrorage,dataList.get(position).getIMG());
 
+        holder.add_product.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), dataList.get(position).getTenMonAn(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
     }
 
     @Override
