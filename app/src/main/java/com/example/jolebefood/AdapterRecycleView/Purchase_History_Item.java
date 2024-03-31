@@ -1,5 +1,6 @@
 package com.example.jolebefood.AdapterRecycleView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,9 +17,13 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.DAO.CallFirebaseStrorage;
+import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
+import com.example.jolebefood.DTO.CartDTO;
 import com.example.jolebefood.DTO.CategoryDTO;
 import com.example.jolebefood.DTO.OrderDTO;
+import com.example.jolebefood.DTO.OrderDetailsDTO;
+import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.OrderDetails;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -54,7 +59,7 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.txtID.setText(dataList.get(position).getMaDH());
         holder.txtTongTien.setText(Integer.toString(dataList.get(position).getTongTien()));
@@ -80,6 +85,21 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
                 Intent intent = new Intent(context, OrderDetails.class);
                 // Start activity bằng context
                 context.startActivity(intent);
+
+            }
+        });
+
+        holder.btnMuaLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(view.getContext(), "Thêm sản phẩm của đơn "+dataList.get(position).getMaDH()+" thành công",Toast.LENGTH_SHORT).show();
+
+                CartDAO cartDAO = new CartDAO();
+
+                for (OrderDetailsDTO orderDetails : dataList.get(position).getListOrderDetails()){
+                    CartDTO cartDTO = new CartDTO(orderDetails.getMaMonAn(), orderDetails.getTenMonAn(), orderDetails.getSL(), "", orderDetails.getThanhTien());
+                    cartDAO.AddItem(cartDTO, dataList.get(position).getSDT());
+                }
 
             }
         });

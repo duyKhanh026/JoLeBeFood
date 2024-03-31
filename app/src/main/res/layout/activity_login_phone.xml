@@ -21,7 +21,7 @@
     <LinearLayout
         android:id="@+id/linearlayout_dk"
         android:layout_width="275dp"
-        android:layout_height="420dp"
+        android:layout_height="520dp"
         android:background="@drawable/background_shape"
         android:orientation="vertical"
         android:padding="10dp"

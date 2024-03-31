@@ -1,6 +1,8 @@
 package com.example.jolebefood;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.jolebefood.fragment.HomeFragment;
 
 public class MainActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +28,10 @@ public class MainActivity extends AppCompatActivity {
         // Bắt đầu một FragmentTransaction
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
+        HomeFragment fragment = new HomeFragment();
+
         // Thêm một Fragment vào FragmentContainerView hoặc FrameLayout với một id duy nhất và thực thi ngay lập tức
-        transaction.replace(R.id.fragment_container, new HomeFragment()).commitNow();
+        transaction.replace(R.id.fragment_container, fragment).commitNow();
     }
+
 }

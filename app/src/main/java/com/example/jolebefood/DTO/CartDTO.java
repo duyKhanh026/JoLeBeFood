@@ -4,7 +4,7 @@ public class CartDTO {
     private String TenMonAn, MaMonAn, Image;
     private int SL, TongTien;
 
-    public CartDTO(String TenMonAn, String MaMonAn, int SL, String Image, int TongTien) {
+    public CartDTO(String MaMonAn, String TenMonAn, int SL, String Image, int TongTien) {
         this.TenMonAn = TenMonAn;
         this.MaMonAn = MaMonAn;
         this.SL = SL;

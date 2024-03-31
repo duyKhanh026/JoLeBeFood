@@ -18,6 +18,9 @@ public interface API_Cart {
     @PUT("/Cart/{new}.json")
     Call<CartDTO> setData(@Path("new") String s1, @Body CartDTO object);
 
+    @PUT("/Cart/{id}/{news}.json")
+    Call<CartDTO> addItem(@Path("id") String s1, @Path("news") String s2, @Body CartDTO object);
+
     @DELETE("/Cart/{id}.json")
     Call<Void> deleteData(@Path("id") String maGH);
 }
