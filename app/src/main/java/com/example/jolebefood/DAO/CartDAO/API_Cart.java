@@ -15,12 +15,10 @@ public interface API_Cart {
     @GET("Cart.json")
     Call<HashMap<String, CartDTO>> getcart();
 
-    @PUT("/Cart/{new}.json")
-    Call<CartDTO> setData(@Path("new") String s1, @Body CartDTO object);
 
     @PUT("/Cart/{id}/{news}.json")
-    Call<CartDTO> addItem(@Path("id") String s1, @Path("news") String s2, @Body CartDTO object);
+    Call<CartDTO> setData(@Path("id") String s1, @Path("news") String s2, @Body CartDTO object);
 
-    @DELETE("/Cart/{id}.json")
-    Call<Void> deleteData(@Path("id") String maGH);
+    @DELETE("/Cart/{id}/{news}.json")
+    Call<Void> deleteData(@Path("id") String s1, @Path("news") String s2, @Body CartDTO object);
 }

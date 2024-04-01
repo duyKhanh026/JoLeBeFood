@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,8 +23,10 @@ public class HomeFragment extends Fragment {
     private BottomNavigationView bottomNavigationView;
     private View view;
 
-    public HomeFragment() {
-        // Required empty public constructor
+    private String uid;
+
+    public HomeFragment(String uid) {
+        this.uid = uid;
     }
 
 
@@ -46,7 +49,7 @@ public class HomeFragment extends Fragment {
         viewPager = view.findViewById(R.id.view_pager);
         bottomNavigationView = view.findViewById(R.id.bottom_navigation);
 
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter( viewPager,getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(uid,viewPager,getChildFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(viewPagerAdapter);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

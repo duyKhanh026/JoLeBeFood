@@ -63,8 +63,8 @@ public class CartDAO {
         });
     }
 
-    public void SetDataCategory(CartDTO cart){
-        Call<CartDTO> call1 = api.setData(cart.getMaMonAn(), cart);
+    public void SetData(CartDTO cart, String id){
+        Call<CartDTO> call1 = api.setData(id,cart.getMaMonAn(), cart);
         call1.enqueue(new Callback<CartDTO >() {
             @Override
             public void onResponse(Call<CartDTO > call, Response<CartDTO> response) {
@@ -78,27 +78,5 @@ public class CartDAO {
         });
     }
 
-    public void AddItem(CartDTO cart,String id){
-        Call<CartDTO> call1 = api.addItem(id,cart.getMaMonAn(), cart);
-        call1.enqueue(new Callback<CartDTO>() {
-            @Override
-            public void onResponse(Call<CartDTO > call, Response<CartDTO> response) {
-                if (response.isSuccessful()) {
-                    CartDTO addedCart = response.body();
-                    if (addedCart != null) {
-                        Log.e(TAG, "AddItem onResponse: Success - MaMonAn: " + addedCart.getMaMonAn());
-                    } else {
-                        Log.e(TAG, "AddItem onResponse: Success - Null body returned");
-                    }
-                } else {
-                    Log.e(TAG, "AddItem onResponse: Unsuccessful - " + response.message());
-                }
-            }
 
-            @Override
-            public void onFailure(Call<CartDTO > call, Throwable t) {
-                Log.e(TAG, "Test Cart thất bại:"+cart.getMaMonAn());
-            }
-        });
-    }
 }

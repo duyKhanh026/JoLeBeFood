@@ -97,8 +97,8 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
                 CartDAO cartDAO = new CartDAO();
 
                 for (OrderDetailsDTO orderDetails : dataList.get(position).getListOrderDetails()){
-                    CartDTO cartDTO = new CartDTO(orderDetails.getMaMonAn(), orderDetails.getTenMonAn(), orderDetails.getSL(), "", orderDetails.getThanhTien());
-                    cartDAO.AddItem(cartDTO, dataList.get(position).getSDT());
+                    CartDTO cartDTO = new CartDTO(orderDetails.getMaMonAn(), orderDetails.getTenMonAn(), orderDetails.getSL(), "/"+orderDetails.getMaMonAn()+".jpg", orderDetails.getThanhTien());
+                    cartDAO.SetData(cartDTO, dataList.get(position).getMaKH());
                 }
 
             }

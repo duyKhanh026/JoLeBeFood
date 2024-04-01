@@ -5,15 +5,15 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public class OrderDTO {
-    private String MaDH, SDT, MaKM, PhuongThucThanhToan;
+    private String MaDH, MaKH, MaKM, PhuongThucThanhToan;
     private int TongTien;
     private Timestamp ThoiGianDat, ThoiGianHoanThanh;
 
     private List<OrderDetailsDTO> listOrderDetails;
 
-    public OrderDTO(String maDH, String SDT, String maKM, String phuongThucThanhToan, int tongTien, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, List<OrderDetailsDTO> listOrderDetails) {
+    public OrderDTO(String maDH, String MaKH, String maKM, String phuongThucThanhToan, int tongTien, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, List<OrderDetailsDTO> listOrderDetails) {
         MaDH = maDH;
-        this.SDT = SDT;
+        this.MaKH = MaKH;
         MaKM = maKM;
         PhuongThucThanhToan = phuongThucThanhToan;
         TongTien = tongTien;
@@ -22,9 +22,9 @@ public class OrderDTO {
         this.listOrderDetails = listOrderDetails;
     }
 
-    public OrderDTO(String maDH, String maKM, String phuongThucThanhToan, String SDT, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, int tongTien, List<OrderDetailsDTO> listOrderDetails) {
+    public OrderDTO(String maDH, String maKM, String phuongThucThanhToan, String MaKH, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, int tongTien, List<OrderDetailsDTO> listOrderDetails) {
         MaDH = maDH;
-        this.SDT = SDT;
+        this.MaKH = MaKH;
         MaKM = maKM;
         PhuongThucThanhToan = phuongThucThanhToan;
         TongTien = tongTien;
@@ -44,12 +44,12 @@ public class OrderDTO {
         MaDH = maDH;
     }
 
-    public String getSDT() {
-        return SDT;
+    public String getMaKH() {
+        return MaKH;
     }
 
-    public void setSDT(String SDT) {
-        this.SDT = SDT;
+    public void setMaKH(String MaKH) {
+        this.MaKH = MaKH;
     }
 
     public String getMaKM() {

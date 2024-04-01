@@ -21,9 +21,9 @@ import com.example.jolebefood.MainActivity;
 import com.example.jolebefood.R;
 
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MyPageFragment extends Fragment {
 
@@ -33,8 +33,10 @@ public class MyPageFragment extends Fragment {
 
     MainActivity mainActivity;
 
-    public MyPageFragment() {
+    String uid;
 
+    public MyPageFragment(String uid) {
+        this.uid = uid;
     }
 
     @Override
@@ -45,17 +47,13 @@ public class MyPageFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.RecycleView_LichSu);
 
-        EditText find = view.findViewById(com.hbb20.R.id.editText_search);
-
-
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ArrayList<OrderDTO> dataList = new ArrayList<>();
 
-
-        new OrderDAO().getList(dataList, new OnGetListOrderListener() {
+        new OrderDAO().getList(uid, dataList, new OnGetListOrderListener() {
             @Override
-            public void onGetListOrderSuccess(List<OrderDTO> list) {
+            public void onGetListOrderSuccess() {
                 adapter = new Purchase_History_Item(dataList);
                 recyclerView.setAdapter(adapter);
             }

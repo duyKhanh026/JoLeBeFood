@@ -6,5 +6,5 @@ import com.example.jolebefood.DTO.OrderDTO;
 import java.util.List;
 
 public interface OnGetListOrderListener {
-    void onGetListOrderSuccess(List<OrderDTO> list);
+    void onGetListOrderSuccess();
 }

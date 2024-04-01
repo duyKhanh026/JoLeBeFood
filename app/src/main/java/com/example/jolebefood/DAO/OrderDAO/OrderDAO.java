@@ -39,8 +39,8 @@ public class OrderDAO {
         }
     }
 
-    public void getList(ArrayList<OrderDTO> list, OnGetListOrderListener listener) {
-        Call<HashMap<String,OrderDTO>> call = api.getOrder();
+    public void getList(String id, ArrayList<OrderDTO> list, OnGetListOrderListener listener) {
+        Call<HashMap<String,OrderDTO>> call = api.getOrder(id);
         call.enqueue(new Callback<HashMap<String,OrderDTO>>() {
             @Override
             public void onResponse(Call<HashMap<String,OrderDTO>> call, Response<HashMap<String,OrderDTO>> response) {
@@ -51,7 +51,7 @@ public class OrderDAO {
                             OrderDTO order = entry.getValue();
                             list.add(order);
                         }
-                        listener.onGetListOrderSuccess(list);
+                        listener.onGetListOrderSuccess();
                     } else {
                         Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
                     }
@@ -66,8 +66,8 @@ public class OrderDAO {
         });
     }
 
-    public void SetDataOrder(OrderDTO orderDTO, Context context){
-        Call<OrderDTO> call1 = api.setData(orderDTO.getMaDH(), orderDTO);
+    public void SetDataOrder(String id, OrderDTO orderDTO, Context context){
+        Call<OrderDTO> call1 = api.setData(id,orderDTO.getMaDH(), orderDTO);
         call1.enqueue(new Callback<OrderDTO >() {
             @Override
             public void onResponse(Call<OrderDTO > call, Response<OrderDTO> response) {
@@ -80,30 +80,4 @@ public class OrderDAO {
             }
         });
     }
-
-    public void DeleteOrder(String id){
-        // Gọi phương thức deleteData() với orderId cụ thể
-        Call<Void> call = api.deleteData(id);
-
-        // Thực hiện cuộc gọi bất đồng bộ
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    // Xóa thành công
-                    Log.d(TAG, "Deleted successfully");
-                } else {
-                    // Xóa không thành công, xử lý lỗi
-                    Log.e(TAG, "Delete failed with error code: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                // Xảy ra lỗi trong quá trình thực hiện cuộc gọi
-                Log.e(TAG, "Failed to delete", t);
-            }
-        });
-    }
-
 }

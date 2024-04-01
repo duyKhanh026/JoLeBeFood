@@ -1,5 +1,7 @@
 package com.example.jolebefood.fragment.tab_home;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -9,9 +11,17 @@ import androidx.viewpager.widget.ViewPager;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     ViewPager vp;
-    public ViewPagerAdapter(ViewPager vp, @NonNull FragmentManager fm, int behavior) {
+
+    private String uid;
+
+    private MyPageFragment myPageFragment;
+
+
+    public ViewPagerAdapter(String uid,ViewPager vp, @NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
         this.vp = vp;
+        this.uid = uid;
+        myPageFragment = new MyPageFragment(uid);
     }
 
     @NonNull
@@ -19,7 +29,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 1:
-                return new MyPageFragment();
+                return myPageFragment;
             case 2:
                 return new AccFragment(this.vp);
             case 3:

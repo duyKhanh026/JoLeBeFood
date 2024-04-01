@@ -1,5 +1,6 @@
 package com.example.jolebefood.AdapterRecycleView;
 
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -47,7 +48,7 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.bindData(dataList.get(position));
         holder.name_product.setText(dataList.get(position).getTenMonAn());

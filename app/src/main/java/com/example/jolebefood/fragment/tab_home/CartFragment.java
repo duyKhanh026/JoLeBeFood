@@ -51,10 +51,10 @@ public class CartFragment extends Fragment {
 
         ArrayList<CartDTO> datalist = new ArrayList<>();
 
-        new CartDAO().getList(datalist, list -> {
-            adapter = new Cart_Item(datalist);
-            recyclerView.setAdapter(adapter);
-        });
+//        new CartDAO().getList(datalist, list -> {
+//            adapter = new Cart_Item(datalist);
+//            recyclerView.setAdapter(adapter);
+//        });
 
 
         return view;

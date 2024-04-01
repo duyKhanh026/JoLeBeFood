@@ -27,29 +27,12 @@
             android:background="@color/privateColor"/>
 
     </RelativeLayout>
-    
-    <EditText
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:hint="Nhập từ khóa tìm kiếm..."
-        android:padding="10dp"
-        android:singleLine="true"
-        android:visibility="visible"
-        android:textSize="18sp"/>
-
-
-
-
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         android:id="@+id/RecycleView_LichSu">
 
     </androidx.recyclerview.widget.RecyclerView>
