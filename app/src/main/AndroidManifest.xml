@@ -8,6 +8,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
     <application
         android:allowBackup="true"
@@ -19,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.JoLeBeFood"
         tools:targetApi="31">
+        <activity
+            android:name=".SignIn_and_SignUp.Fingerprint"
+            android:exported="false" />
         <activity
             android:name=".ChangePassword"
             android:exported="false" />
@@ -45,9 +49,6 @@
             android:exported="false" />
         <activity
             android:name=".SignIn_and_SignUp.GoogleSignIn"
-            android:exported="false" />
-        <activity
-            android:name=".SignIn_and_SignUp.FacebookSignIn"
             android:exported="false" />
         <activity
             android:name=".fragment.tab_home.ImportDisCount"
@@ -79,8 +80,13 @@
         <activity
             android:name=".fragment.tab_home.importCategory"
             android:exported="false" />
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <meta-data
+            android:name="com.facebook.sdk.ClientToken"
+            android:value="@string/facebook_client_token" />
     </application>
 
 </manifest>
