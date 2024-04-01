@@ -4,9 +4,14 @@ import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Discount_Item;
+import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
+import com.example.jolebefood.DTO.DiscountDTO;
+
+import java.util.ArrayList;
 
 public class Discount extends AppCompatActivity {
 
@@ -18,12 +23,19 @@ public class Discount extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         EdgeToEdge.enable(this);
-        setContentView(R.layout.discount);
+        setContentView(R.layout.discount_activity);
 
-    }
-
-    public void AnhXa(){
         recyclerView = findViewById(R.id.RecycleView_KhuyenMai);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+        ArrayList<DiscountDTO> dataList = new ArrayList<>();
+
+        new DiscountDAO().getList(dataList, list -> {
+            adapter = new Discount_Item(dataList);
+            recyclerView.setAdapter(adapter);
+        });
     }
 
 

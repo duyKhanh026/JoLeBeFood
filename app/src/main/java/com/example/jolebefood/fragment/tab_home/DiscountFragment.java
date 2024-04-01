@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +20,7 @@ import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DTO.DiscountDTO;
+import com.example.jolebefood.Discount;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
@@ -75,6 +78,7 @@ public class DiscountFragment extends Fragment {
 
         view = inflater.inflate(R.layout.discount, container, false);
 
+        TextView view_list_dc = view.findViewById(R.id.text_list_discount);
         Button btnnhap = (Button) view.findViewById(R.id.adddc_btn);
         btnnhap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,21 +90,31 @@ public class DiscountFragment extends Fragment {
             }
         });
 
-
-
-        RecyclerView recyclerView = view.findViewById(R.id.RecycleView_KhuyenMai);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-        ArrayList<DiscountDTO> dataList = new ArrayList<>();
-
-        new DiscountDAO().getList(dataList, list -> {
-            adapter = new Discount_Item(dataList);
-            recyclerView.setAdapter(adapter);
+        ImageButton btnview = view.findViewById(R.id.view_discount);
+        btnview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(view.getContext(), "Đã nhấn", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), Discount.class);
+                startActivity(intent);
+            }
         });
 
-        new DiscountDAO().SetDataDiscount(new DiscountDTO("MAKM010", "KHUYEN MAI 100k", 50000, "CASH"));
+
+
+//        RecyclerView recyclerView = view.findViewById(R.id.RecycleView_KhuyenMai);
+//
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//
+//
+//        ArrayList<DiscountDTO> dataList = new ArrayList<>();
+//
+//        new DiscountDAO().getList(dataList, list -> {
+//            adapter = new Discount_Item(dataList);
+//            recyclerView.setAdapter(adapter);
+//        });
+//
+//        new DiscountDAO().SetDataDiscount(new DiscountDTO("MAKM010", "KHUYEN MAI 100k", 50000, "CASH"));
 
 
 
