@@ -8,17 +8,19 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.R;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Order_Details_Item extends RecyclerView.Adapter<Order_Details_Item.MyViewHolder>{
 
-    private ArrayList<String> dataList;
+    private List<OrderDetailsDTO> dataList;
 
-    public Order_Details_Item(ArrayList<String> dataList) {
+    public Order_Details_Item(List<OrderDetailsDTO> dataList) {
         this.dataList = dataList;
     }
 
@@ -31,7 +33,7 @@ public class Order_Details_Item extends RecyclerView.Adapter<Order_Details_Item.
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.txtTenMonAn.setText(dataList.get(position));
+        holder.txtTenMonAn.setText(dataList.get(position).getTenMonAn());
 
     }
 

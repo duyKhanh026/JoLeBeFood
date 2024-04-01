@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -80,9 +82,18 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
                 // Lấy context từ view được bấm vào
                 Context context = view.getContext();
 
-                Toast.makeText(context, holder.txtID.getText(), Toast.LENGTH_SHORT).show();
                 // Tạo Intent với context đã lấy
                 Intent intent = new Intent(context, OrderDetails.class);
+
+                // Tạo Bundle để đính kèm dữ liệu
+                Bundle bundle = new Bundle();
+
+                bundle.putSerializable("Object", (Serializable) dataList.get(position));
+
+                bundle.putString("Type","LichSu");
+
+                intent.putExtra("Data",bundle);
+
                 // Start activity bằng context
                 context.startActivity(intent);
 

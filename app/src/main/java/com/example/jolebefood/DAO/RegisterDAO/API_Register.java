@@ -15,6 +15,8 @@ public interface API_Register {
     @GET("Register.json")
         // Thay đổi đường dẫn tùy theo cấu trúc thư mục của bạn
     Call<List<UserDTO>> getData();
+
+
     @PUT("/User/{new}.json")
     Call<UserDTO> setData(@Path("new") String s1, @Body UserDTO object);
 }
