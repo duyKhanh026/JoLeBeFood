@@ -77,5 +77,5 @@ dependencies {
     // Add the dependency for the Cloud Storage library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-storage")
-    implementation("com.facebook.android:facebook-android-sdk:[8,9)")
+    implementation("androidx.biometric:biometric:1.1.0")
 }
