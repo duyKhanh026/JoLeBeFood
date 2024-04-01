@@ -94,7 +94,6 @@ public class DiscountFragment extends Fragment {
         btnview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(view.getContext(), "Đã nhấn", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), Discount.class);
                 startActivity(intent);
             }

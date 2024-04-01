@@ -15,6 +15,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     private String uid;
 
     private MyPageFragment myPageFragment;
+    private CategoryFragment categoryFragment;
+    private DiscountFragment discountFragment;
 
 
     public ViewPagerAdapter(String uid,ViewPager vp, @NonNull FragmentManager fm, int behavior) {
@@ -22,6 +24,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         this.vp = vp;
         this.uid = uid;
         myPageFragment = new MyPageFragment(uid);
+        categoryFragment = new CategoryFragment();
+        discountFragment = new DiscountFragment();
     }
 
     @NonNull
@@ -35,9 +39,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             case 3:
                 return new CartFragment();
             case 4:
-                return new DiscountFragment();
+                return discountFragment;
             default: // 0
-                return new CategoryFragment();
+                return categoryFragment;
         }
     }
 
