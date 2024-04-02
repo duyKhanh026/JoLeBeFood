@@ -39,7 +39,13 @@ public class Product extends AppCompatActivity {
         TextView title_product = findViewById(R.id.title_product);
         title_product.setText(categoryName);
 
-
+        ImageButton butback = findViewById(R.id.button_back);
+        butback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         recyclerView = findViewById(R.id.recycleView_product);
         recyclerView.setLayoutManager(new LinearLayoutManager(Product.this));
