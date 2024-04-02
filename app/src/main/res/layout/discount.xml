@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:motion="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/grey">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20px"
         android:background="@color/privateColor"
         android:padding="10dp"
         >
@@ -39,27 +39,64 @@
         android:layout_height="match_parent"
         android:backgroundTint="@color/white"
         android:orientation="vertical"
-        android:padding="10dp"
+
         >
-        <TextView
-            android:id="@+id/text_list_discount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Danh sách các khuyến mãi ở đây"
-            android:textSize="28dp"
-            android:textColor="@color/black"
-            android:layout_margin="15px"
+        <ImageView
+            android:id="@+id/image_discount_qc"
+            android:layout_width="match_parent"
+            android:layout_height="570px"
+            android:src="@drawable/picture_discount"
+            android:layout_alignParentLeft="true"
             />
-        <ImageButton
-            android:id="@+id/view_discount"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:background="@drawable/button_add_product"
-            android:src="@drawable/baseline_add_24"
-            android:layout_below="@id/text_list_discount"/>
+
+        <FrameLayout
+            android:id="@+id/layout_to_discount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/background_radius"
+            android:layout_below="@+id/image_discount_qc">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_discount"
+                    android:layout_width="130px"
+                    android:layout_height="130px"
+                    android:src="@drawable/discount"
+                    android:layout_alignParentLeft="true"
+                    android:layout_margin="30px"/>
+
+                <TextView
+                    android:id="@+id/text_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bạn có 10 khuyến mãi"
+                    android:textSize="17dp"
+                    android:layout_toRightOf="@id/image_discount"
+                    android:layout_centerVertical="true"
+                    android:textColor="#000000"
+                    android:textStyle="bold"/>
+
+                <ImageButton
+                    android:id="@+id/button_view_discount"
+                    android:layout_width="100px"
+                    android:layout_height="100px"
+                    android:background="@drawable/button_add_product"
+                    android:src="@drawable/baseline_add_24"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30px"/>
+
+            </RelativeLayout>
+
+
+        </FrameLayout>
 
     </RelativeLayout>
+
+
 
 
 </LinearLayout>

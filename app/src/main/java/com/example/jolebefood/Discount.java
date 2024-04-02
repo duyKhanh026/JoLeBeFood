@@ -1,6 +1,9 @@
 package com.example.jolebefood;
 
+import android.media.Image;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,10 +30,17 @@ public class Discount extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.discount_activity);
 
+        ImageButton butback = findViewById(R.id.button_back);
+        butback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         recyclerView = findViewById(R.id.RecycleView_KhuyenMai);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
 
         ArrayList<DiscountDTO> dataList = new ArrayList<>();
 

@@ -6,6 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -18,6 +22,7 @@ import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.DAO.CategoryDAO.CategoryDAO;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DTO.CategoryDTO;
+import com.example.jolebefood.Discount;
 import com.example.jolebefood.Product;
 import com.example.jolebefood.R;
 
@@ -73,12 +78,26 @@ public class CategoryFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_category, container, false);
 
+
+        ImageView image_discount = view.findViewById(R.id.image_discount);
+        TextView text_dc = view.findViewById(R.id.text_discount);
+        ImageButton button_view_discount = view.findViewById(R.id.button_view_discount);
+        FrameLayout layout_to_discount = view.findViewById(R.id.layout_to_discount);
+
         Button btndm = view.findViewById(R.id.adddm_btn);
         btndm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent it = new Intent(getActivity(),importCategory.class);
                 startActivity(it);
+            }
+        });
+
+        layout_to_discount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Discount.class);
+                startActivity(intent);
             }
         });
 

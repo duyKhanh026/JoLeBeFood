@@ -35,9 +35,63 @@
             android:text="Thêm"
             android:layout_alignParentRight="true"
             android:layout_marginRight="200px"
+            android:visibility="invisible"
             />
 
     </RelativeLayout>
+    <ImageView
+        android:id="@+id/image_discount_qc"
+        android:layout_width="match_parent"
+        android:layout_height="570px"
+        android:src="@drawable/picture_category"
+        android:layout_alignParentLeft="true"
+        />
+    <FrameLayout
+        android:id="@+id/layout_to_discount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_radius"
+        android:layout_below="@+id/image_discount_qc"
+        android:layout_margin="20px">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/image_discount"
+                android:layout_width="130px"
+                android:layout_height="130px"
+                android:src="@drawable/discount"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="30px"/>
+
+            <TextView
+                android:id="@+id/text_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bạn có 10 khuyến mãi"
+                android:textSize="17dp"
+                android:layout_toRightOf="@id/image_discount"
+                android:layout_centerVertical="true"
+                android:textColor="#000000"
+                android:textStyle="bold"/>
+
+            <ImageButton
+                android:id="@+id/button_view_discount"
+                android:layout_width="80px"
+                android:layout_height="80px"
+                android:background="@drawable/button_add_product"
+                android:src="@drawable/baseline_arrow_forward_24"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="30px"/>
+
+        </RelativeLayout>
+
+
+    </FrameLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleView"
         android:layout_width="match_parent"

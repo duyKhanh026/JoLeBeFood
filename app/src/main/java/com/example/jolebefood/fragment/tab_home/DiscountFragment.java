@@ -2,11 +2,14 @@ package com.example.jolebefood.fragment.tab_home;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -78,8 +81,28 @@ public class DiscountFragment extends Fragment {
 
         view = inflater.inflate(R.layout.discount, container, false);
 
-        TextView view_list_dc = view.findViewById(R.id.text_list_discount);
+
+
+
+
+        ImageView discount_qc = view.findViewById(R.id.image_discount_qc);
+
+        ImageView image_discount = view.findViewById(R.id.image_discount);
+        TextView text_dc = view.findViewById(R.id.text_discount);
+        ImageButton button_view_discount = view.findViewById(R.id.button_view_discount);
+        FrameLayout layout_to_discount = view.findViewById(R.id.layout_to_discount);
+
         Button btnnhap = (Button) view.findViewById(R.id.adddc_btn);
+
+
+        layout_to_discount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Discount.class);
+                startActivity(intent);
+            }
+        });
+
         btnnhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,33 +112,21 @@ public class DiscountFragment extends Fragment {
 
             }
         });
+        discount_qc.setImageResource(R.drawable.picture_discount); // Đặt hình ảnh ban đầu
 
-        ImageButton btnview = view.findViewById(R.id.view_discount);
-        btnview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), Discount.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-//        RecyclerView recyclerView = view.findViewById(R.id.RecycleView_KhuyenMai);
+//        final Handler handler = new Handler();
+//        final Runnable runnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                // Thay đổi hình ảnh của ImageView
+//                discount_qc.setImageResource(R.drawable.picture_category);
 //
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                // Lặp lại sau 5 giây
+//                handler.postDelayed(this, 3000);
+//            }
+//        };
 //
-//
-//        ArrayList<DiscountDTO> dataList = new ArrayList<>();
-//
-//        new DiscountDAO().getList(dataList, list -> {
-//            adapter = new Discount_Item(dataList);
-//            recyclerView.setAdapter(adapter);
-//        });
-//
-//        new DiscountDAO().SetDataDiscount(new DiscountDTO("MAKM010", "KHUYEN MAI 100k", 50000, "CASH"));
-
-
+//        handler.post(runnable); // Bắt đầu chuyển đổi tự động sau khi đặt hình ảnh ban đầu
 
         return view;
     }

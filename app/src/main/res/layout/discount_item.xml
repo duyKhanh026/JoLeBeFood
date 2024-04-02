@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_margin="10px"
+    android:layout_margin="15px"
     android:padding="20px"
     android:background="@drawable/background_radius"
     android:elevation="5dp">
@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Giảm 20k món ăn"
-                android:textSize="60px"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 />
@@ -68,7 +68,6 @@
             android:layout_height="wrap_content"
             android:text="- Áp dụng tại một số cửa hàng"
             android:textSize="40px"
-
             android:textColor="@color/black"
             />
 
