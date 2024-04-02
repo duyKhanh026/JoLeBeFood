@@ -31,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
         // Bắt đầu một FragmentTransaction
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
+
+
 //        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 //        String userId = user.getUid();
 

@@ -1,5 +1,8 @@
 package com.example.jolebefood.AdapterRecycleView;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,20 +11,39 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.DAO.CallFirebaseStrorage;
 import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.StorageReference;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 public class Order_Details_Item extends RecyclerView.Adapter<Order_Details_Item.MyViewHolder>{
 
     private List<OrderDetailsDTO> dataList;
 
+    // Lấy đơn vị tiền tệ dựa trên quốc gia (ở đây là Việt Nam)
+    Currency currency = Currency.getInstance(new Locale("vi", "VN"));
+
+    // Tạo một đối tượng NumberFormat với định dạng tiền tệ và quốc gia
+    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
+    CallFirebaseStrorage callFirebaseStrorage;
+
     public Order_Details_Item(List<OrderDetailsDTO> dataList) {
         this.dataList = dataList;
+        // Đặt đơn vị tiền tệ cho đối tượng định dạng
+        currencyFormat.setCurrency(currency);
+
+        callFirebaseStrorage = new CallFirebaseStrorage();
     }
 
     @NonNull
@@ -34,6 +56,10 @@ public class Order_Details_Item extends RecyclerView.Adapter<Order_Details_Item.
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.txtTenMonAn.setText(dataList.get(position).getTenMonAn());
+        holder.txtThanhTien.setText(currencyFormat.format(dataList.get(position).getThanhTien()));
+        holder.txtSoLuong.setText("x"+dataList.get(position).getSL());
+        holder.SetIMG(callFirebaseStrorage, dataList.get(position).getMaMonAn());
+
 
     }
 
@@ -53,7 +79,28 @@ public class Order_Details_Item extends RecyclerView.Adapter<Order_Details_Item.
             txtTenMonAn = itemView.findViewById(R.id.txtTenMonAn_CTDH);
             imgItem = itemView.findViewById(R.id.imgMonAn_CTDH);
             txtSoLuong = itemView.findViewById(R.id.txtSoLuong_CTDH);
-            txtThanhTien = itemView.findViewById(R.id.txtThanhTien_CTHD);
+            txtThanhTien = itemView.findViewById(R.id.txtGia_CTDH);
+        }
+
+        public void SetIMG(CallFirebaseStrorage callFirebaseStrorage, String id) {
+            StorageReference mountainRef = callFirebaseStrorage.getStorageRef().child("/" + id + ".jpg");
+
+            final long ONE_MEGABYTE = 1024 * 1024;
+            mountainRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    // Convert bytes to Bitmap
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                    // Set the Bitmap to the ImageView
+                    imgItem.setImageBitmap(bitmap);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@androidx.annotation.NonNull Exception exception) {
+                    Log.e("Kien Test ProductItem", "" + id + " " + exception.toString());
+                }
+            });
         }
 
     }

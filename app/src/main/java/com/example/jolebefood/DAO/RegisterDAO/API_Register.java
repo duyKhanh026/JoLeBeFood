@@ -12,9 +12,9 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface API_Register {
-    @GET("Register.json")
+    @GET("/User/{id}.json")
         // Thay đổi đường dẫn tùy theo cấu trúc thư mục của bạn
-    Call<List<UserDTO>> getData();
+    Call<UserDTO> getData(@Path("id") String s1);
 
 
     @PUT("/User/{new}.json")

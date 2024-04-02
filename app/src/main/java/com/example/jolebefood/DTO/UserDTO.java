@@ -13,6 +13,10 @@ public class UserDTO {
         Phone = phone;
     }
 
+    public UserDTO() {
+
+    }
+
     public String getPassword() {
         return Password;
     }

@@ -66,6 +66,39 @@ public class OrderDAO {
         });
     }
 
+    public void getOrderObject(String id, String MaDH, OrderDTO orderDTO, OnGetListOrderListener listener) {
+        Call<OrderDTO> call = api.getOrderObject(id,MaDH);
+        call.enqueue(new Callback<OrderDTO>() {
+            @Override
+            public void onResponse(Call<OrderDTO> call, Response<OrderDTO> response) {
+                if (response.isSuccessful()) {
+                    OrderDTO data = response.body();
+                    if (data != null) {
+                        Log.e(TAG, "sai"+orderDTO.getMaDH());
+                        orderDTO.setMaDH(data.getMaDH());
+                        orderDTO.setMaKM(data.getMaKM());
+                        orderDTO.setMaKH(data.getMaKH());
+                        orderDTO.setThoiGianHoanThanh(data.getThoiGianHoanThanh());
+                        orderDTO.setThoiGianDat(data.getThoiGianDat());
+                        orderDTO.setListOrderDetails(data.getListOrderDetails());
+                        orderDTO.setTongTien(data.getTongTien());
+                        orderDTO.setPhuongThucThanhToan(data.getPhuongThucThanhToan());
+                        listener.onGetObjectSuccess();
+                    } else {
+                        Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
+                    }
+                } else {
+                    Log.e(TAG, "Failed to get data. Code: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<OrderDTO> call, Throwable t) {
+                Log.e(TAG, "Error getting data: " + t.getMessage());
+            }
+        });
+    }
+
+
     public void SetDataOrder(String id, OrderDTO orderDTO, Context context){
         Call<OrderDTO> call1 = api.setData(id,orderDTO.getMaDH(), orderDTO);
         call1.enqueue(new Callback<OrderDTO >() {

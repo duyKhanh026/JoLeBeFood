@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.example.jolebefood.DAO.CallRetrofit;
 import com.example.jolebefood.DAO.OrderDAO.API_Order;
+import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
 import com.example.jolebefood.DTO.OrderDTO;
 import com.example.jolebefood.DTO.UserDTO;
 
@@ -61,6 +62,34 @@ public class Register_DAO {
             @Override
             public void onFailure(Call<UserDTO > call, Throwable t) {
                 Log.e(TAG, "Nam test add order thất bại:"+userDTO.getName());
+            }
+        });
+    }
+
+    public void getUserObject(String id, UserDTO userDTO, OnGetRegiterListener listener) {
+        Call<UserDTO> call = api.getData(id);
+        call.enqueue(new Callback<UserDTO>() {
+            @Override
+            public void onResponse(Call<UserDTO> call, Response<UserDTO> response) {
+                if (response.isSuccessful()) {
+                    UserDTO data = response.body();
+                    if (data != null) {
+                        userDTO.setName(data.getName());
+                        userDTO.setAddress(data.getAddress());
+                        userDTO.setEmail(data.getEmail());
+                        userDTO.setPhone(data.getPhone());
+                        userDTO.setPassword(data.getPassword());
+                        listener.GetUserSuccess();
+                    } else {
+                        Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
+                    }
+                } else {
+                    Log.e(TAG, "Failed to get data. Code: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<UserDTO> call, Throwable t) {
+                Log.e(TAG, "Error getting data: " + t.getMessage());
             }
         });
     }

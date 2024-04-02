@@ -44,5 +44,5 @@
             android:textColor="#F44336"
             android:padding="5dp"
             android:layout_marginBottom="10dp"
-            android:id="@+id/txtGia_LS"/>
+            android:id="@+id/txtGia_CTDH"/>
 </RelativeLayout>

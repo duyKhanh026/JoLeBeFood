@@ -57,6 +57,11 @@ public class MyPageFragment extends Fragment {
                 adapter = new Purchase_History_Item(dataList);
                 recyclerView.setAdapter(adapter);
             }
+
+            @Override
+            public void onGetObjectSuccess() {
+
+            }
         });
 
         return view;

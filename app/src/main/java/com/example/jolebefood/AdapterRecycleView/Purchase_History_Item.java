@@ -82,20 +82,18 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
                 // Lấy context từ view được bấm vào
                 Context context = view.getContext();
 
+
                 // Tạo Intent với context đã lấy
                 Intent intent = new Intent(context, OrderDetails.class);
 
-                // Tạo Bundle để đính kèm dữ liệu
-                Bundle bundle = new Bundle();
+                intent.putExtra("ID",dataList.get(position).getMaDH());
 
-                bundle.putSerializable("Object", (Serializable) dataList.get(position));
+                intent.putExtra("Type","LichSu");
 
-                bundle.putString("Type","LichSu");
+                intent.putExtra("UID",dataList.get(position).getMaKH());
 
-                intent.putExtra("Data",bundle);
-
-                // Start activity bằng context
                 context.startActivity(intent);
+
 
             }
         });

@@ -1,10 +1,11 @@
 package com.example.jolebefood.DTO;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class OrderDTO {
+public class OrderDTO implements Serializable {
     private String MaDH, MaKH, MaKM, PhuongThucThanhToan;
     private int TongTien;
     private Timestamp ThoiGianDat, ThoiGianHoanThanh;

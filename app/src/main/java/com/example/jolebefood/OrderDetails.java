@@ -5,17 +5,31 @@ import static android.app.PendingIntent.getActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
+import com.example.jolebefood.DAO.CartDAO.CartDAO;
+import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
+import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
+import com.example.jolebefood.DAO.RegisterDAO.OnGetRegiterListener;
+import com.example.jolebefood.DAO.RegisterDAO.Register_DAO;
+import com.example.jolebefood.DTO.CartDTO;
 import com.example.jolebefood.DTO.OrderDTO;
+import com.example.jolebefood.DTO.OrderDetailsDTO;
+import com.example.jolebefood.DTO.UserDTO;
 
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Currency;
+import java.util.Locale;
 
 public class OrderDetails extends AppCompatActivity {
 
@@ -29,39 +43,75 @@ public class OrderDetails extends AppCompatActivity {
 
     private OrderDTO orderDTO;
 
+    private UserDTO userDTO;
+
+    private String Type, ID, UID;
+
+    private OrderDAO orderDAO;
+
+    // Tạo một đối tượng SimpleDateFormat với định dạng mong muốn
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+
+    // Lấy đơn vị tiền tệ dựa trên quốc gia (ở đây là Việt Nam)
+    Currency currency = Currency.getInstance(new Locale("vi", "VN"));
+
+    // Tạo một đối tượng NumberFormat với định dạng tiền tệ và quốc gia
+    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
+
+        orderDAO = new OrderDAO();
+
+        orderDTO = new OrderDTO();
+
+        userDTO = new UserDTO();
+
+        // Đặt đơn vị tiền tệ cho đối tượng định dạng
+        currencyFormat.setCurrency(currency);
+
+        // Nhận Intent mà đã gửi từ Activity trước
+        Intent intent = getIntent();
+
+        Type = intent.getStringExtra("Type");
+
+        ID = intent.getStringExtra("ID");
+
+        UID = intent.getStringExtra("UID");
 
         AnhXa();
 
 
 
 
-        // Nhận Intent mà đã gửi từ Activity trước
-        Intent intent = getIntent();
 
-        // Trích xuất Bundle từ Intent
-        Bundle receivedBundle = intent.getBundleExtra("Data");
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Type.equals("LichSu")){
 
-        // Kiểm tra xem Bundle có tồn tại hay không
-        if (receivedBundle != null) {
-            // Trích xuất đối tượng từ Bundle
-            orderDTO = (OrderDTO) receivedBundle.getSerializable("Object");
+                    Toast.makeText(view.getContext(), "Thêm sản phẩm của đơn "+orderDTO.getMaDH()+" thành công",Toast.LENGTH_SHORT).show();
 
-            // Trích xuất chuỗi từ Bundle
-            String type = receivedBundle.getString("Type");
+                    CartDAO cartDAO = new CartDAO();
 
-
-            if (orderDTO == null) {
-                Log.e("Kien test details","Object null");
-
+                    for (OrderDetailsDTO orderDetails : orderDTO.getListOrderDetails()){
+                        CartDTO cartDTO = new CartDTO(orderDetails.getMaMonAn(), orderDetails.getTenMonAn(), orderDetails.getSL(), "/"+orderDetails.getMaMonAn()+".jpg", orderDetails.getThanhTien());
+                        cartDAO.SetData(cartDTO, orderDTO.getMaKH());
+                    }
+                } else {
+                    Toast.makeText(OrderDetails.this,"Thanh toán",Toast.LENGTH_SHORT).show();
+                }
             }
-            if (type != null) {
-                Log.e("Kien test details","String null");
-            }
-        }
+        });
+
+        SetData();
+
+
     }
 
     public void AnhXa(){
@@ -76,11 +126,52 @@ public class OrderDetails extends AppCompatActivity {
         txtThoiGianDat = findViewById(R.id.txtThoiGianDat_CTHD);
         txtThoiGianHT = findViewById(R.id.txtThoiGianHT_CTHD);
         btnThanhToan = findViewById(R.id.btnThanhToan_CTHD);
+
+        if (Type.equals("LichSu")){
+            btnThanhToan.setText("Mua lại");
+        } else {
+            btnThanhToan.setText("Thanh toán");
+        }
     }
 
-    public void SetData(OrderDTO orderDTO){
-        recyclerView.setLayoutManager(new LinearLayoutManager(OrderDetails.this));
-        adapter = new Order_Details_Item(orderDTO.getListOrderDetails());
-        recyclerView.setAdapter(adapter);
+    public void SetData(){
+        orderDAO.getOrderObject(UID, ID, orderDTO, new OnGetListOrderListener() {
+            @Override
+            public void onGetListOrderSuccess() {
+
+            }
+
+            @Override
+            public void onGetObjectSuccess(){
+
+                recyclerView.setLayoutManager(new LinearLayoutManager(OrderDetails.this));
+
+                adapter = new Order_Details_Item(orderDTO.getListOrderDetails());
+
+
+                recyclerView.setAdapter(adapter);
+
+                txtPhuongThuc.setText(orderDTO.getPhuongThucThanhToan());
+                txtThoiGianDat.setText(sdf.format(orderDTO.getThoiGianDat()));
+                txtThoiGianHT.setText(sdf.format(orderDTO.getThoiGianHoanThanh()));
+                txtTongTien.setText(currencyFormat.format(orderDTO.getTongTien()));
+
+                new Register_DAO().getUserObject(orderDTO.getMaKH(), userDTO, new OnGetRegiterListener() {
+                    @Override
+                    public void OnSentGmail() {
+                    }
+
+                    @Override
+                    public void GetUserSuccess() {
+                        txtDiaChi.setText(userDTO.getAddress());
+                        txtName.setText(userDTO.getName());
+                        txtPhone.setText(userDTO.getPhone());
+                    }
+                });
+
+
+            }
+        });
+
     }
 }

@@ -134,6 +134,10 @@ public class Register extends AppCompatActivity {
                                         }
                                     });
                                 }
+
+                                @Override
+                                public void GetUserSuccess() {
+                                }
                             });
 
 //                            databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
