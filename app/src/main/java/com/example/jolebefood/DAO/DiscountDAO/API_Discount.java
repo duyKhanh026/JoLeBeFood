@@ -19,6 +19,9 @@ public interface API_Discount {
     @GET("Discount.json")
     Call<HashMap<String, DiscountDTO>> getdiscount();
 
+    @GET("/Discount/{id}.json")
+    Call<DiscountDTO> getdiscountobject(@Path("id") String id);
+
 
     @PUT("/Discount/{new}.json")
     Call<DiscountDTO> setData(@Path("new") String s1, @Body DiscountDTO object);

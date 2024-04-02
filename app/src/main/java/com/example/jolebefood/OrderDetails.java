@@ -16,11 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
+import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
+import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
 import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DAO.RegisterDAO.OnGetRegiterListener;
 import com.example.jolebefood.DAO.RegisterDAO.Register_DAO;
 import com.example.jolebefood.DTO.CartDTO;
+import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.DTO.OrderDTO;
 import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.DTO.UserDTO;
@@ -29,6 +32,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Currency;
+import java.util.List;
 import java.util.Locale;
 
 public class OrderDetails extends AppCompatActivity {
@@ -44,6 +48,8 @@ public class OrderDetails extends AppCompatActivity {
     private OrderDTO orderDTO;
 
     private UserDTO userDTO;
+
+    private DiscountDTO discountDTO;
 
     private String Type, ID, UID;
 
@@ -71,6 +77,8 @@ public class OrderDetails extends AppCompatActivity {
         orderDTO = new OrderDTO();
 
         userDTO = new UserDTO();
+
+        discountDTO = new DiscountDTO();
 
         // Đặt đơn vị tiền tệ cho đối tượng định dạng
         currencyFormat.setCurrency(currency);
@@ -168,6 +176,21 @@ public class OrderDetails extends AppCompatActivity {
                         txtPhone.setText(userDTO.getPhone());
                     }
                 });
+
+                new DiscountDAO().getDiscountObject(orderDTO.getMaKM(), discountDTO, new OnGetListDiscountListener() {
+                    @Override
+                    public void onGetListDiscountSuccess(List<DiscountDTO> list) {
+
+                    }
+
+                    @Override
+                    public void onGetObjectSuccess() {
+                        txtGiamGia.setText("-"+currencyFormat.format(discountDTO.getGiatrikm()));
+                        txtThanhTien.setText(currencyFormat.format(orderDTO.getTongTien() - discountDTO.getGiatrikm()));
+                    }
+                });
+
+
 
 
             }

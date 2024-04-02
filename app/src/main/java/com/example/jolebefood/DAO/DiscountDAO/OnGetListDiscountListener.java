@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface OnGetListDiscountListener {
     void onGetListDiscountSuccess(List<DiscountDTO> list);
+
+    void onGetObjectSuccess();
 }

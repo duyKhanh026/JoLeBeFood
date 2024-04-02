@@ -7,8 +7,10 @@ import android.widget.Toast;
 import com.example.jolebefood.DAO.CallRetrofit;
 import com.example.jolebefood.DAO.OrderDAO.API_Order;
 import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
+import com.example.jolebefood.DAO.RegisterDAO.OnGetRegiterListener;
 import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.DTO.OrderDTO;
+import com.example.jolebefood.DTO.UserDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,6 +85,34 @@ public class DiscountDAO {
             @Override
             public void onFailure(Call<DiscountDTO > call, Throwable t) {
                 Log.e(TAG, "Test DIscount thất bại:"+discountDTO.getMakm());
+            }
+        });
+    }
+
+    public void getDiscountObject(String id, DiscountDTO discountDTO, OnGetListDiscountListener listener) {
+        Call<DiscountDTO> call = api.getdiscountobject(id);
+        call.enqueue(new Callback<DiscountDTO>() {
+            @Override
+            public void onResponse(Call<DiscountDTO> call, Response<DiscountDTO> response) {
+                if (response.isSuccessful()) {
+                    DiscountDTO data = response.body();
+                    if (data != null) {
+                        discountDTO.setMakm(data.getMakm());
+                        discountDTO.setTenkm(data.getTenkm());
+                        discountDTO.setGiatrikm(data.getGiatrikm());
+                        discountDTO.setPhuongthuctt(data.getPhuongthuctt());
+                        listener.onGetObjectSuccess();
+                    } else {
+                        Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
+                    }
+                } else {
+                    Log.e(TAG, "Failed to get data. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DiscountDTO> call, Throwable t) {
+                Log.e(TAG, "Error getting data: " + t.getMessage());
             }
         });
     }

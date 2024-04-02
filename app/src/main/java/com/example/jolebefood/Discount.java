@@ -9,9 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
+import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
 import com.example.jolebefood.DTO.DiscountDTO;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Discount extends AppCompatActivity {
 
@@ -32,10 +34,19 @@ public class Discount extends AppCompatActivity {
 
         ArrayList<DiscountDTO> dataList = new ArrayList<>();
 
-        new DiscountDAO().getList(dataList, list -> {
-            adapter = new Discount_Item(dataList);
-            recyclerView.setAdapter(adapter);
+        new DiscountDAO().getList(dataList, new OnGetListDiscountListener() {
+            @Override
+            public void onGetListDiscountSuccess(List<DiscountDTO> list) {
+                adapter = new Discount_Item(dataList);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onGetObjectSuccess() {
+
+            }
         });
+
     }
 
 
