@@ -84,14 +84,14 @@ public class CategoryFragment extends Fragment {
         ImageButton button_view_discount = view.findViewById(R.id.button_view_discount);
         FrameLayout layout_to_discount = view.findViewById(R.id.layout_to_discount);
 
-        Button btndm = view.findViewById(R.id.adddm_btn);
-        btndm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent it = new Intent(getActivity(),importCategory.class);
-                startActivity(it);
-            }
-        });
+//        Button btndm = view.findViewById(R.id.adddm_btn);
+//        btndm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent it = new Intent(getActivity(),importCategory.class);
+//                startActivity(it);
+//            }
+//        });
 
         layout_to_discount.setOnClickListener(new View.OnClickListener() {
             @Override

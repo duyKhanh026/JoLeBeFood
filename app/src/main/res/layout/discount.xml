@@ -72,7 +72,7 @@
                     android:id="@+id/text_discount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bạn có 10 khuyến mãi"
+                    android:text="Khuyến mãi của bạn ở ây"
                     android:textSize="17dp"
                     android:layout_toRightOf="@id/image_discount"
                     android:layout_centerVertical="true"
