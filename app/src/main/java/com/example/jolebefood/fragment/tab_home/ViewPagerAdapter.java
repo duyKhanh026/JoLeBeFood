@@ -28,7 +28,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         this.vp = vp;
         this.uid = uid;
         myPageFragment = new MyPageFragment(uid);
-        cartFragment = new CartFragment();
+        cartFragment = new CartFragment(uid);
         categoryFragment = new CategoryFragment();
         discountFragment = new DiscountFragment();
         accFragment = new AccFragment(this.vp);

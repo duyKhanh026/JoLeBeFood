@@ -12,13 +12,15 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface API_Cart {
-    @GET("Cart.json")
-    Call<HashMap<String, CartDTO>> getcart();
-
+    @GET("/Cart/{id}.json")
+    Call<HashMap<String, CartDTO>> getCart(@Path("id") String id);
 
     @PUT("/Cart/{id}/{news}.json")
     Call<CartDTO> setData(@Path("id") String s1, @Path("news") String s2, @Body CartDTO object);
 
-    @DELETE("/Cart/{id}/{news}.json")
-    Call<Void> deleteData(@Path("id") String s1, @Path("news") String s2, @Body CartDTO object);
+    @DELETE("/Cart/{id}/{MaMonAn}.json")
+    Call<Void> deleteData(@Path("id") String id, @Path("MaMonAn") String MaMonAn);
+
+    @GET("/Cart/{id}/{news}.json")
+    Call<CartDTO> getCartObject(@Path("id") String id, @Path("MaMonAn") String MaMonAn);
 }

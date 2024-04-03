@@ -29,15 +29,14 @@ public class CartDAO {
     public CartDAO(){
         retrofit = new CallRetrofit();
         if (retrofit != null) {
-            this.api = retrofit.getRetrofit().create(API_Cart.class); // Sử dụng giao diện
+            this.api = retrofit.getRetrofit().create(API_Cart.class);
         } else {
-            // Xử lý trường hợp Retrofit instance bị null
             Log.e(TAG, "Retrofit instance is null");
         }
     }
 
-    public void getList(ArrayList<CartDTO> list, OnGetListCartListener listener) {
-        Call<HashMap<String,CartDTO>> call = api.getcart();
+    public void getList(String id, ArrayList<CartDTO> list, OnGetListCartListener listener) {
+        Call<HashMap<String,CartDTO>> call = api.getCart(id);
         call.enqueue(new Callback<HashMap<String,CartDTO>>() {
             @Override
             public void onResponse(Call<HashMap<String,CartDTO>> call, Response<HashMap<String,CartDTO>> response) {
@@ -48,7 +47,7 @@ public class CartDAO {
                             CartDTO cart = entry.getValue();
                             list.add(cart);
                         }
-                        listener.onGetListCartSuccess(list);
+                        listener.onGetListCartSuccess();
                     } else {
                         Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
                     }
@@ -77,6 +76,55 @@ public class CartDAO {
             }
         });
     }
+
+    public void deleteData(CartDTO cart, String id) {
+        Call<Void> call = api.deleteData(id, cart.getMaMonAn());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Item deleted successfully");
+                } else {
+                    Log.e(TAG, "Failed to delete item. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Error deleting item: " + t.getMessage());
+            }
+        });
+    }
+
+    public void getCartObject(String id, String MaMonAn, CartDTO cartDTO, OnGetListCartListener listener) {
+        Call<CartDTO> call = api.getCartObject(id,MaMonAn);
+        call.enqueue(new Callback<CartDTO>() {
+            @Override
+            public void onResponse(Call<CartDTO> call, Response<CartDTO> response) {
+                if (response.isSuccessful()) {
+                    CartDTO data = response.body();
+                    if (data != null) {
+                        Log.e(TAG, "sai"+cartDTO.getMaMonAn());
+                        cartDTO.setMaMonAn(data.getMaMonAn());
+                        cartDTO.setImage(data.getImage());
+                        cartDTO.setSL(data.getSL());
+                        cartDTO.setTenMonAn(data.getTenMonAn());
+                        cartDTO.setTongTien(data.getTongTien());
+                        listener.onGetObjectSuccess();
+                    } else {
+                        Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
+                    }
+                } else {
+                    Log.e(TAG, "Failed to get data. Code: " + response.code());
+                }
+            }
+            @Override
+            public void onFailure(Call<CartDTO> call, Throwable t) {
+                Log.e(TAG, "Error getting data: " + t.getMessage());
+            }
+        });
+    }
+
 
 
 }

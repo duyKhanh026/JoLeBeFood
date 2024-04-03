@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
 
 import com.example.jolebefood.DAO.CallFirebaseStrorage;
+import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DTO.CartDTO;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -26,7 +27,6 @@ import java.util.List;
 public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     View view;
     private ArrayList<CartDTO> datalist;
-
     CallFirebaseStrorage callFirebaseStrorage;
 
     public Cart_Item(ArrayList<CartDTO> datalist) {
@@ -48,16 +48,13 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
 
         holder.ProductName.setText(cartItem.getTenMonAn());
         holder.Quantity.setText(String.valueOf(cartItem.getSL()));
-        //holder.ProductPrice.setText(String.valueOf(cartItem.getTongTien()));
-        holder.ProductPrice.setText(String.valueOf(calculateTotalPrice(cartItem)));
-        //holder.imageProduct.setImageResource(cartItem.getImage());
+        holder.ProductPrice.setText(String.valueOf(cartItem.getTongTien()));
         holder.SetIMG(callFirebaseStrorage,cartItem.getImage());
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                datalist.remove(holder.getAdapterPosition());
-                notifyDataSetChanged();
+                deleteCartItem(cartItem, position);
             }
         });
 
@@ -86,11 +83,21 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
         });
     }
 
-    private double calculateTotalPrice(CartDTO cartItem) {
-        double pricePerItem = cartItem.getTongTien();
+    private int calculateTotalPrice(CartDTO cartItem) {
+        int pricePerItem = cartItem.getTongTien();
         int quantity = cartItem.getSL();
         return pricePerItem * quantity;
     }
+
+    private void deleteCartItem(CartDTO cartItem, int position) {
+        CartDAO cartDAO = new CartDAO();
+        cartDAO.deleteData(cartItem,  cartItem.getMaMonAn()  );
+        datalist.remove(position);
+        notifyItemRemoved(position);
+    }
+
+
+
 
 
 
