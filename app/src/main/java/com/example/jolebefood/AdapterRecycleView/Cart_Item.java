@@ -19,6 +19,8 @@ import com.example.jolebefood.DTO.CartDTO;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
@@ -28,10 +30,18 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     View view;
     private ArrayList<CartDTO> datalist;
     CallFirebaseStrorage callFirebaseStrorage;
+    private String userId;
 
     public Cart_Item(ArrayList<CartDTO> datalist) {
         this.datalist = datalist;
         callFirebaseStrorage = new CallFirebaseStrorage();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            userId = user.getUid();
+        } else {
+            // Xử lý trường hợp không có người dùng đăng nhập
+        }
     }
 
     @NonNull
@@ -91,7 +101,7 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
 
     private void deleteCartItem(CartDTO cartItem, int position) {
         CartDAO cartDAO = new CartDAO();
-        cartDAO.deleteData(cartItem,  cartItem.getMaMonAn()  );
+        cartDAO.deleteData(cartItem, userId);
         datalist.remove(position);
         notifyItemRemoved(position);
     }
