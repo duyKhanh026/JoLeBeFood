@@ -26,7 +26,7 @@ import org.checkerframework.checker.units.qual.C;
 public class ImportDisCount extends AppCompatActivity {
 
     String Ma_km, Ten_km, pttt_km;
-    int gt_km;
+    int gt_km, soluong;
 
     String MaMonAn,TenMonAn,MoTa, MaDanhMuc;
 
@@ -39,11 +39,12 @@ public class ImportDisCount extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.import_discount);
 
-        EditText makm, tenkm, gtkm, pttt;
+        EditText makm, tenkm, gtkm, pttt, sl;
         makm = findViewById(R.id.KM_text);
         tenkm = findViewById(R.id.TenKM_text);
         gtkm = findViewById(R.id.GT_text);
         pttt = findViewById(R.id.pttt_text);
+        sl = findViewById(R.id.soluong_text);
         Button nhapkm = findViewById(R.id.nhapDCBtn);
         Button nhappd = findViewById(R.id.nhapPDBtn);
 
@@ -54,8 +55,8 @@ public class ImportDisCount extends AppCompatActivity {
                 Ten_km = tenkm.getText().toString();
                 gt_km = Integer.parseInt(gtkm.getText().toString());
                 pttt_km = pttt.getText().toString();
-
-                new DiscountDAO().SetDataDiscount(new DiscountDTO(Ma_km,Ten_km,gt_km,pttt_km));
+                soluong = Integer.parseInt(sl.getText().toString());
+                new DiscountDAO().SetDataDiscount(new DiscountDTO(Ma_km,Ten_km,gt_km,pttt_km,soluong));
             };
 
         });
@@ -81,7 +82,7 @@ public class ImportDisCount extends AppCompatActivity {
 
                 String imgURL = "/"+MaMonAn+".jpg";
 
-                new ProductDAO().SetDataProduct(new ProductDTO(MaMonAn,TenMonAn,imgURL,MoTa,SoLuomg,Gia,MaDanhMuc,Soluongdaban));
+                new ProductDAO().SetDataProduct(new ProductDTO(MaMonAn,TenMonAn,imgURL,MoTa,Gia,MaDanhMuc,Soluongdaban));
             };
 
         });

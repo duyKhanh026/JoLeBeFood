@@ -7,15 +7,26 @@ public class DiscountDTO {
     int giatrikm;
     String phuongthuctt;
 
+    int soluong;
+
     public DiscountDTO(){
 
     }
 
-    public DiscountDTO(String makm, String tenkm, int giatrikm, String phuongthuctt) {
+    public DiscountDTO(String makm, String tenkm, int giatrikm, String phuongthuctt, int soluong) {
         this.makm = makm;
         this.tenkm = tenkm;
         this.giatrikm = giatrikm;
         this.phuongthuctt = phuongthuctt;
+        this.soluong = soluong;
+    }
+
+    public int getSoluong() {
+        return soluong;
+    }
+
+    public void setSoluong(int soluong) {
+        this.soluong = soluong;
     }
 
     public String getMakm() {

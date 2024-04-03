@@ -4,18 +4,17 @@ import android.graphics.Bitmap;
 
 public class ProductDTO {
     private String MaMonAn,TenMonAn,MoTa, MaDanhMuc;
-    private int Gia, soLuomg, Soluongdaban;
+    private int Gia, Soluongdaban;
     private String IMG;
 
     public ProductDTO() {
     }
 
 
-    public ProductDTO(String maMonAn, String tenMonAn,String IMG, String moTa, int sl,int gia, String maDanhMuc,int soluongdaban) {
+    public ProductDTO(String maMonAn, String tenMonAn,String IMG, String moTa,int gia, String maDanhMuc,int soluongdaban) {
         MaMonAn = maMonAn;
         TenMonAn = tenMonAn;
         MoTa = moTa;
-        soLuomg = sl;
         Gia = gia;
         MaDanhMuc = maDanhMuc;
         Soluongdaban = soluongdaban;
@@ -36,14 +35,6 @@ public class ProductDTO {
 
     public void setMaDanhMuc(String maDanhMuc) {
         MaDanhMuc = maDanhMuc;
-    }
-
-    public int getSoLuomg() {
-        return soLuomg;
-    }
-
-    public void setSoLuomg(int soLuomg) {
-        this.soLuomg = soLuomg;
     }
 
     public String getMaMonAn() {
