@@ -39,7 +39,7 @@ public class OrderDetails extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    private TextView txtName,txtPhone,txtDiaChi,txtTongTien,txtGiamGia,txtThanhTien,txtPhuongThuc,txtThoiGianDat,txtThoiGianHT;
+    private TextView txtName,txtPhone,txtDiaChi,txtTongTien,txtGiamGia,txtThanhTien,txtPhuongThuc,txtThoiGianDat,txtThoiGianHT,txtDiscount;
 
     private Button btnThanhToan;
 
@@ -95,9 +95,6 @@ public class OrderDetails extends AppCompatActivity {
         AnhXa();
 
 
-
-
-
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,7 +114,27 @@ public class OrderDetails extends AppCompatActivity {
             }
         });
 
-        SetData();
+        txtPhuongThuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Type.equals("ThanhToan")){
+                    Toast.makeText(OrderDetails.this,"Chọn đi",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        txtDiscount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Type.equals("ThanhToan")){
+                    Intent intent1 = new Intent(OrderDetails.this,Discount.class);
+                    startActivity(intent1);
+                }
+            }
+        });
+
+        // Set nội dung cho giao diện theo đơn hàng đã đặt
+        SetDataLichSu();
 
 
     }
@@ -134,6 +151,7 @@ public class OrderDetails extends AppCompatActivity {
         txtThoiGianDat = findViewById(R.id.txtThoiGianDat_CTHD);
         txtThoiGianHT = findViewById(R.id.txtThoiGianHT_CTHD);
         btnThanhToan = findViewById(R.id.btnThanhToan_CTHD);
+        txtDiscount = findViewById(R.id.txtDiscount_CTHD);
 
         if (Type.equals("LichSu")){
             btnThanhToan.setText("Mua lại");
@@ -142,7 +160,7 @@ public class OrderDetails extends AppCompatActivity {
         }
     }
 
-    public void SetData(){
+    public void SetDataLichSu(){
         orderDAO.getOrderObject(UID, ID, orderDTO, new OnGetListOrderListener() {
             @Override
             public void onGetListOrderSuccess() {
@@ -177,18 +195,29 @@ public class OrderDetails extends AppCompatActivity {
                     }
                 });
 
-                new DiscountDAO().getDiscountObject(orderDTO.getMaKM(), discountDTO, new OnGetListDiscountListener() {
-                    @Override
-                    public void onGetListDiscountSuccess(List<DiscountDTO> list) {
+                if (orderDTO.getMaKM().equals("Không")){
+                    Log.e("Kien Order Details",orderDTO.getMaKM());
+                    txtGiamGia.setText("-"+currencyFormat.format(0));
+                    txtThanhTien.setText(currencyFormat.format(orderDTO.getTongTien() - 0));
+                    txtDiscount.setText(orderDTO.getMaKM());
+                }
+                else{
+                    new DiscountDAO().getDiscountObject(orderDTO.getMaKM(), discountDTO, new OnGetListDiscountListener() {
+                        @Override
+                        public void onGetListDiscountSuccess(List<DiscountDTO> list) {
 
-                    }
+                        }
 
-                    @Override
-                    public void onGetObjectSuccess() {
-                        txtGiamGia.setText("-"+currencyFormat.format(discountDTO.getGiatrikm()));
-                        txtThanhTien.setText(currencyFormat.format(orderDTO.getTongTien() - discountDTO.getGiatrikm()));
-                    }
-                });
+                        @Override
+                        public void onGetObjectSuccess() {
+                            txtGiamGia.setText("-"+currencyFormat.format(discountDTO.getGiatrikm()));
+                            txtThanhTien.setText(currencyFormat.format(orderDTO.getTongTien() - discountDTO.getGiatrikm()));
+                            txtDiscount.setText(discountDTO.getTenkm());
+                        }
+                    });
+                }
+
+
 
 
 

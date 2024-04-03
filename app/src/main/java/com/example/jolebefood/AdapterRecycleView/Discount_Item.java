@@ -1,5 +1,6 @@
 package com.example.jolebefood.AdapterRecycleView;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
 //        holder.bindData(dataList.get(position));
         holder.TenKM.setText(dataList.get(position).getTenkm());

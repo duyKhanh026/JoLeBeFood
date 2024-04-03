@@ -10,21 +10,29 @@
         android:layout_height="wrap_content"
         android:background="@color/privateColor">
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/order_history"
+            android:background="@color/privateColor"
+            android:id="@+id/iconLS"
+            android:paddingTop="21dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Lịch sử mua hàng"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:padding="21dp"/>
+            android:paddingTop="21dp"
+            android:paddingBottom="21dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/iconLS"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/search"
-            android:layout_alignParentRight="true"
-            android:padding="20dp"
-            android:background="@color/privateColor"/>
+
 
     </RelativeLayout>
 

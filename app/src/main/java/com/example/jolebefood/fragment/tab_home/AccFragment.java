@@ -102,7 +102,9 @@ public class AccFragment extends Fragment {
         LSMH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vpadater.setCurrentItem(1);
+                Intent intent = new Intent(getActivity(), OrderHistory.class);
+                startActivity(intent);
+//                vpadater.setCurrentItem(1);
             }
         });
         GH.setOnClickListener(new View.OnClickListener() {

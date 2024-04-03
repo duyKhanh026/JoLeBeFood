@@ -35,7 +35,10 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History_Item.MyViewHolder>{
 
@@ -46,10 +49,20 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
     long pastTimeMillis = 0; // Ví dụ: 01/01/1900 00:00:00 UTC
     Timestamp pastTimestamp = new Timestamp(pastTimeMillis);
 
+
+
+    NumberFormat currencyFormat;
+
+
+
     public Purchase_History_Item(List<OrderDTO> dataList) {
         this.dataList = dataList;
 
         callFirebaseStrorage = new CallFirebaseStrorage();
+
+        // Tạo một đối tượng NumberFormat với định dạng tiền tệ và quốc gia
+        currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
 
     }
 
@@ -64,10 +77,10 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.txtID.setText(dataList.get(position).getMaDH());
-        holder.txtTongTien.setText(Integer.toString(dataList.get(position).getTongTien()));
+        holder.txtTongTien.setText(currencyFormat.format(dataList.get(position).getTongTien()));
         holder.txtSoSanPham.setText(Integer.toString(dataList.get(position).getListOrderDetails().size()) + " sản phẩm");
         holder.txtSoLuong.setText("x" + Integer.toString(dataList.get(position).getListOrderDetails().get(0).getSL()));
-        holder.txtGia.setText(Integer.toString(dataList.get(position).getListOrderDetails().get(0).getThanhTien()));
+        holder.txtGia.setText(currencyFormat.format(dataList.get(position).getListOrderDetails().get(0).getThanhTien()));
         holder.SetIMG(callFirebaseStrorage,dataList.get(position).getListOrderDetails().get(0).getMaMonAn());
         holder.txtTenMonAn.setText(dataList.get(position).getListOrderDetails().get(0).getTenMonAn());
         if (dataList.get(position).getThoiGianHoanThanh().getTime() == pastTimestamp.getTime()){
@@ -88,7 +101,7 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
 
                 intent.putExtra("ID",dataList.get(position).getMaDH());
 
-                intent.putExtra("Type","LichSu");
+                intent.putExtra("Type","ThanhToan");
 
                 intent.putExtra("UID",dataList.get(position).getMaKH());
 
