@@ -1,14 +1,21 @@
 package com.example.jolebefood.AdapterRecycleView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +35,7 @@ import java.util.ArrayList;
 
 public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder> {
 
+    Context context;
     ArrayList<ProductDTO> dataList;
 
     CallFirebaseStrorage callFirebaseStrorage;
@@ -62,7 +70,7 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
             @Override
             public void onClick(View v) {
                 Toast.makeText(v.getContext(), dataList.get(position).getTenMonAn(), Toast.LENGTH_SHORT).show();
-
+//                showDialog();
             }
         });
 
@@ -114,10 +122,26 @@ public class Product_Item extends RecyclerView.Adapter<Product_Item.MyViewHolder
                 }
             });
         }
-
-
     }
 
+    private void showDialog(){
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottomsheetlayout);
 
+        LinearLayout layout_choose = dialog.findViewById(R.id.layout_choose);
 
+        layout_choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(),"layoutchosse",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialoAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+    }
 }
