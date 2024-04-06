@@ -52,13 +52,30 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/image_discount_qc"
-            android:layout_width="match_parent"
-            android:layout_height="565px"
-            android:src="@drawable/picture_category"
-            android:layout_alignParentLeft="true"
-            />
+            <ViewFlipper
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:autoStart="true"
+                android:flipInterval="3000"
+                android:inAnimation="@android:anim/slide_in_left"
+                android:outAnimation="@android:anim/slide_out_right">
+
+                <ImageView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="565px"
+                    android:src="@drawable/picture_category"
+                    android:layout_alignParentLeft="true"
+                    />
+                <ImageView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="565px"
+                    android:src="@drawable/picture_discount"
+                    android:layout_alignParentLeft="true"
+                    />
+            </ViewFlipper>
+
         <FrameLayout
             android:id="@+id/layout_to_discount"
             android:layout_width="match_parent"

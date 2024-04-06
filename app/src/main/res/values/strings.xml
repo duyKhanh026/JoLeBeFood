@@ -20,5 +20,8 @@
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">56789</string>
 
+        <string name="channel_name">Thông báo Ứng dụng Jolebefood</string>
+        <string name="channel_description">Nhận tin tức và cập nhật từ Jolebefood.</string>
+
 
 </resources>

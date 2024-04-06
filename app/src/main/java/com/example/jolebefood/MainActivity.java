@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -18,8 +19,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.jolebefood.SignIn_and_SignUp.Intro;
 import com.example.jolebefood.fragment.HomeFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -46,6 +50,20 @@ public class MainActivity extends AppCompatActivity {
 
         // Thêm một Fragment vào FragmentContainerView hoặc FrameLayout với một id duy nhất và thực thi ngay lập tức
         transaction.replace(R.id.fragment_container, fragment).commitNow();
+
+
+//        FirebaseMessaging.getInstance().subscribeToTopic("News")
+//                .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<Void> task) {
+//                        String msq = "Done";
+//                        if (!task.isSuccessful()){
+//                            msq = "Failed";
+//                        }
+//                    }
+//                });
+
+
     }
 
     @SuppressLint("MissingSuperCall")
