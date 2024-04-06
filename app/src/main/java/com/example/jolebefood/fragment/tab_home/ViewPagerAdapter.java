@@ -16,9 +16,6 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     private MyPageFragment myPageFragment;
     private CategoryFragment categoryFragment;
-    private DiscountFragment discountFragment;
-
-    private CartFragment cartFragment;
 
     private AccFragment accFragment;
 
@@ -28,9 +25,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         this.vp = vp;
         this.uid = uid;
         myPageFragment = new MyPageFragment(uid);
-        cartFragment = new CartFragment(uid);
         categoryFragment = new CategoryFragment();
-        discountFragment = new DiscountFragment();
         accFragment = new AccFragment(this.vp);
 
     }
@@ -40,13 +35,9 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 1:
-                return myPageFragment;
-            case 2:
                 return accFragment;
-            case 3:
-                return cartFragment;
-            case 4:
-                return discountFragment;
+            case 2:
+                return myPageFragment;
             default: // 0
                 return categoryFragment;
         }
@@ -54,7 +45,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 5; // do có 6 tab
+        return 3; // do có 6 tab
     }
 
 

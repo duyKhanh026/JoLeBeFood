@@ -70,7 +70,7 @@ public class Product extends AppCompatActivity {
         butcart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                new CartFragment();
+                //new CartFragment();
             }
         });
 

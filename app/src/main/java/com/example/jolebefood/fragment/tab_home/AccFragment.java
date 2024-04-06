@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.jolebefood.Cart;
 import com.example.jolebefood.ChangePassword;
 import com.example.jolebefood.Discount;
 import com.example.jolebefood.EditAccount;
@@ -96,21 +97,21 @@ public class AccFragment extends Fragment {
         KM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vpadater.setCurrentItem(4);
+                Intent intent = new Intent(getActivity(),Discount.class);
+                startActivity(intent);
             }
         });
         LSMH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), OrderHistory.class);
-                startActivity(intent);
-//                vpadater.setCurrentItem(1);
+                vpadater.setCurrentItem(2);
             }
         });
         GH.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                vpadater.setCurrentItem(3);
+                Intent intent = new Intent(getActivity(), Cart.class);
+                startActivity(intent);
             }
         });
         TTMH.setOnClickListener(new View.OnClickListener() {
@@ -128,8 +129,7 @@ public class AccFragment extends Fragment {
         CSTK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), EditAccount.class);
-                startActivity(intent);
+
             }
         });
         Setting.setOnClickListener(new View.OnClickListener() {

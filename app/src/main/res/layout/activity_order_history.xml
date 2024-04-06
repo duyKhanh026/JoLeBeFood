@@ -16,9 +16,9 @@
             android:src="@drawable/order_history"
             android:background="@color/privateColor"
             android:id="@+id/iconLS"
-            android:paddingTop="21dp"
-            android:paddingLeft="10dp"
-            android:layout_marginTop="10dp"/>
+            android:paddingTop="5dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -26,10 +26,8 @@
             android:text="Lịch sử mua hàng"
             android:textColor="@color/white"
             android:textSize="24sp"
-            android:paddingTop="21dp"
-            android:paddingBottom="21dp"
+            android:paddingTop="5dp"
             android:paddingLeft="10dp"
-            android:layout_marginTop="10dp"
             android:layout_toRightOf="@id/iconLS"/>
 
 
@@ -40,7 +38,6 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
         android:id="@+id/RecycleView_LichSu">
 
     </androidx.recyclerview.widget.RecyclerView>
