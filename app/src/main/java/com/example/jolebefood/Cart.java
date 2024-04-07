@@ -17,7 +17,9 @@ import com.example.jolebefood.DTO.CartDTO;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Cart extends AppCompatActivity {
 
@@ -28,6 +30,8 @@ public class Cart extends AppCompatActivity {
     private ImageButton back_button;
     private String userId;
 
+    NumberFormat currencyFormat;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,9 @@ public class Cart extends AppCompatActivity {
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
+
+        // Tạo một đối tượng NumberFormat với định dạng tiền tệ và quốc gia
+        currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
         recyclerView = findViewById(R.id.cardView);
         back_button = findViewById(R.id.button_back);
@@ -61,13 +68,13 @@ public class Cart extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
 
                 int totalAmount = calculateTotalAmount(datalist);
-                total.setText(String.valueOf(totalAmount));
+                total.setText(currencyFormat.format(totalAmount));
 
                 int deliveryFee = 10000;
-                delivery.setText(String.valueOf(deliveryFee));
+                delivery.setText(currencyFormat.format(deliveryFee));
 
                 int totalPayAmount = totalAmount + deliveryFee;
-                total_pay.setText(String.valueOf(totalPayAmount));
+                total_pay.setText(currencyFormat.format(totalPayAmount));
             }
             @Override
             public void onGetObjectSuccess() {

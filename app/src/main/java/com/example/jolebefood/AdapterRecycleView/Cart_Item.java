@@ -81,7 +81,7 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
                     cartItem.setTongTien(totalPrice);
                     holder.Quantity.setText(String.valueOf(currentQuantity));
                     holder.ProductPrice.setText(currencyFormat.format(totalPrice));
-                    updateCartItem(cartItem);
+                    updateCartItem(v.getContext(),cartItem);
                 }
             }
         });
@@ -96,7 +96,7 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
                 cartItem.setTongTien(totalPrice);
                 holder.Quantity.setText(String.valueOf(currentQuantity));
                 holder.ProductPrice.setText(currencyFormat.format(totalPrice));
-                updateCartItem(cartItem);
+                updateCartItem(v.getContext(),cartItem);
             }
         });
     }
@@ -124,9 +124,9 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
         notifyItemRemoved(position);
     }
 
-    private void updateCartItem(CartDTO cartItem) {
+    private void updateCartItem(Context context,CartDTO cartItem) {
         CartDAO cartDAO = new CartDAO();
-        cartDAO.SetData(cartItem, userId);
+        cartDAO.SetData(context,cartItem, userId);
     }
 
 

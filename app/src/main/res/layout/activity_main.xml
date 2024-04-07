@@ -31,7 +31,8 @@
             android:paddingRight="15dp"
             android:paddingBottom="15dp"
             android:layout_marginRight="5dp"
-            android:src="@drawable/cart"/>
+            android:src="@drawable/cart"
+            android:id="@+id/btnMain_To_Cart"/>
 
 
 
