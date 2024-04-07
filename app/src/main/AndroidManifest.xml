@@ -53,6 +53,7 @@
         <activity
             android:name=".fragment.tab_home.ImportDisCount"
             android:exported="false" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -80,6 +81,9 @@
         <activity
             android:name=".fragment.tab_home.importCategory"
             android:exported="false" />
+        <activity
+            android:name=".Cart"
+            android:exported="false"/>
         
         <service android:name=".MyFirebaseMessagingService"
             android:exported="false">

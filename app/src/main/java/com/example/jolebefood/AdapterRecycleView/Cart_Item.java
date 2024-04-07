@@ -1,5 +1,6 @@
 package com.example.jolebefood.AdapterRecycleView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,25 +24,26 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
+import java.util.Locale;
 
 public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     View view;
     private ArrayList<CartDTO> datalist;
     CallFirebaseStrorage callFirebaseStrorage;
     private String userId;
+    Currency currency = Currency.getInstance(new Locale("vi", "VN"));
+    NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
     public Cart_Item(ArrayList<CartDTO> datalist) {
         this.datalist = datalist;
         callFirebaseStrorage = new CallFirebaseStrorage();
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null) {
-            userId = user.getUid();
-        } else {
-            // Xử lý trường hợp không có người dùng đăng nhập
-        }
+        userId = user.getUid();
+        currencyFormat.setCurrency(currency);
     }
 
     @NonNull
@@ -52,13 +54,13 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         CartDTO cartItem = datalist.get(position);
 
         holder.ProductName.setText(cartItem.getTenMonAn());
         holder.Quantity.setText(String.valueOf(cartItem.getSL()));
-        holder.ProductPrice.setText(String.valueOf(cartItem.getTongTien()));
+        holder.ProductPrice.setText(currencyFormat.format(cartItem.getTongTien()));
         holder.SetIMG(callFirebaseStrorage,cartItem.getImage());
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
@@ -75,8 +77,11 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
                 if (currentQuantity > 1) {
                     currentQuantity--;
                     cartItem.setSL(currentQuantity);
+                    int totalPrice = calculateTotalPrice1(cartItem);
+                    cartItem.setTongTien(totalPrice);
                     holder.Quantity.setText(String.valueOf(currentQuantity));
-                    holder.ProductPrice.setText(String.valueOf(calculateTotalPrice(cartItem)));
+                    holder.ProductPrice.setText(currencyFormat.format(totalPrice));
+                    updateCartItem(cartItem);
                 }
             }
         });
@@ -87,8 +92,11 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
                 int currentQuantity = cartItem.getSL();
                 currentQuantity++;
                 cartItem.setSL(currentQuantity);
+                int totalPrice = calculateTotalPrice(cartItem);
+                cartItem.setTongTien(totalPrice);
                 holder.Quantity.setText(String.valueOf(currentQuantity));
-                holder.ProductPrice.setText(String.valueOf(calculateTotalPrice(cartItem)));
+                holder.ProductPrice.setText(currencyFormat.format(totalPrice));
+                updateCartItem(cartItem);
             }
         });
     }
@@ -96,7 +104,17 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     private int calculateTotalPrice(CartDTO cartItem) {
         int pricePerItem = cartItem.getTongTien();
         int quantity = cartItem.getSL();
-        return pricePerItem * quantity;
+        if(quantity == 2) {
+            return pricePerItem * quantity;
+        } else {
+            return pricePerItem / (quantity - 1) * quantity;
+        }
+    }
+
+    private int calculateTotalPrice1(CartDTO cartItem) {
+        int pricePerItem = cartItem.getTongTien();
+        int quantity = cartItem.getSL();
+        return pricePerItem / (quantity + 1) * quantity;
     }
 
     private void deleteCartItem(CartDTO cartItem, int position) {
@@ -106,9 +124,10 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
         notifyItemRemoved(position);
     }
 
-
-
-
+    private void updateCartItem(CartDTO cartItem) {
+        CartDAO cartDAO = new CartDAO();
+        cartDAO.SetData(cartItem, userId);
+    }
 
 
 
