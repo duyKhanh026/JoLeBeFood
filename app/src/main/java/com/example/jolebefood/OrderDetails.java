@@ -106,7 +106,7 @@ public class OrderDetails extends AppCompatActivity {
 
                     for (OrderDetailsDTO orderDetails : orderDTO.getListOrderDetails()){
                         CartDTO cartDTO = new CartDTO(orderDetails.getMaMonAn(), orderDetails.getTenMonAn(), orderDetails.getSL(), "/"+orderDetails.getMaMonAn()+".jpg", orderDetails.getThanhTien());
-                        cartDAO.SetData(cartDTO, orderDTO.getMaKH());
+                        cartDAO.SetData(view.getContext(),cartDTO, orderDTO.getMaKH());
                     }
                 } else {
                     Toast.makeText(OrderDetails.this,"Thanh toán",Toast.LENGTH_SHORT).show();

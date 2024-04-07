@@ -114,13 +114,10 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
         holder.btnMuaLai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Thêm sản phẩm của đơn "+dataList.get(position).getMaDH()+" thành công",Toast.LENGTH_SHORT).show();
-
                 CartDAO cartDAO = new CartDAO();
-
                 for (OrderDetailsDTO orderDetails : dataList.get(position).getListOrderDetails()){
                     CartDTO cartDTO = new CartDTO(orderDetails.getMaMonAn(), orderDetails.getTenMonAn(), orderDetails.getSL(), "/"+orderDetails.getMaMonAn()+".jpg", orderDetails.getThanhTien());
-                    cartDAO.SetData(cartDTO, dataList.get(position).getMaKH());
+                    cartDAO.SetData(view.getContext(),cartDTO, dataList.get(position).getMaKH());
                 }
 
             }

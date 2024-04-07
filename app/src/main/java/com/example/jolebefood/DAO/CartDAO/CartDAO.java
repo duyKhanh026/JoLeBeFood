@@ -1,6 +1,8 @@
 package com.example.jolebefood.DAO.CartDAO;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.jolebefood.DAO.CallRetrofit;
 import com.example.jolebefood.DAO.CartDAO.API_Cart;
@@ -62,17 +64,17 @@ public class CartDAO {
         });
     }
 
-    public void SetData(CartDTO cart, String id){
+    public void SetData(Context context, CartDTO cart, String id){
         Call<CartDTO> call1 = api.setData(id,cart.getMaMonAn(), cart);
         call1.enqueue(new Callback<CartDTO >() {
             @Override
             public void onResponse(Call<CartDTO > call, Response<CartDTO> response) {
-                Log.e(TAG, "Test Cart:"+cart.getMaMonAn());
+                Toast.makeText(context, "Thêm sản phẩm vào giỏ thành công", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<CartDTO > call, Throwable t) {
-                Log.e(TAG, "Test Cart thất bại:"+cart.getMaMonAn());
+                Toast.makeText(context, "Thêm sản phẩm vào giỏ thất bại", Toast.LENGTH_SHORT).show();
             }
         });
     }
