@@ -55,25 +55,25 @@
                     android:textSize="15sp"
                     android:layout_below="@id/txtDiaChi_title_CT"
                     android:paddingLeft="40dp"
-                    android:id="@+id/txtName_CT"/>
+                    android:id="@+id/txtName_CT_pay"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0931261009"
                     android:textSize="15sp"
-                    android:layout_below="@id/txtName_CT"
+                    android:layout_below="@id/txtName_CT_pay"
                     android:paddingLeft="40dp"
-                    android:id="@+id/txtPhone_CT"/>
+                    android:id="@+id/txtPhone_CT_pay"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="712/345/34R Lê Văn Thọ, phường 15, quận Gò Vấp, TP. Hồ Chí Minh"
                     android:textSize="15sp"
-                    android:layout_below="@id/txtPhone_CT"
+                    android:layout_below="@id/txtPhone_CT_pay"
                     android:paddingLeft="40dp"
-                    android:id="@+id/txtDiaChi_CT"
+                    android:id="@+id/txtDiaChi_CT_pay"
                     android:layout_marginBottom="10dp"/>
             </RelativeLayout>
 
@@ -82,22 +82,22 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp">
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Danh sách sản phẩm"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:padding="10dp"
-                        android:id="@+id/labelDanhSach_CTHD"
-                        android:textColor="@color/black"
-                        android:background="@color/white"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Danh sách sản phẩm"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:id="@+id/labelDanhSach_CTHD_pay"
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/listSP_CTDH"
-                        android:layout_below="@+id/labelDanhSach_CTHD"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/listSP_CTDH_pay"
+                    android:layout_below="@+id/labelDanhSach_CTHD_pay"/>
             </RelativeLayout>
 
 
@@ -107,32 +107,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@color/white">
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/checkbook"
-                        android:paddingTop="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:id="@+id/iconPayment_CTHD"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Phương thức thanh toán"
-                        android:textSize="18sp"
-                        android:padding="10dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:layout_toRightOf="@+id/iconPayment_CTHD"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/checkbook"
+                    android:paddingTop="10dp"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/iconPayment_CTHD_pay"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phương thức thanh toán"
+                    android:textSize="18sp"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@+id/iconPayment_CTHD_pay"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thanh toán khi nhận hàng"
-                        android:textSize="16sp"
-                        android:layout_below="@+id/iconPayment_CTHD"
-                        android:layout_marginLeft="50dp"
-                        android:padding="10dp"
-                        android:id="@+id/txtPhuongThuc_CTHD"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chọn phương thức thanh toán"
+                    android:textSize="16sp"
+                    android:layout_below="@+id/iconPayment_CTHD_pay"
+                    android:layout_marginLeft="50dp"
+                    android:padding="10dp"
+                    android:id="@+id/txtPhuongThuc_CTHD_pay"/>
 
             </RelativeLayout>
 
@@ -148,7 +148,7 @@
                     android:src="@drawable/order_details_discount"
                     android:paddingTop="10dp"
                     android:layout_marginLeft="5dp"
-                    android:id="@+id/iconDiscount_CTHD"/>
+                    android:id="@+id/iconDiscount_CTHD_pay"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -158,17 +158,17 @@
                     android:padding="10dp"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:layout_toRightOf="@+id/iconDiscount_CTHD"/>
+                    android:layout_toRightOf="@+id/iconDiscount_CTHD_pay"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chọn khuyến mãi"
                     android:textSize="16sp"
-                    android:layout_below="@+id/iconDiscount_CTHD"
+                    android:layout_below="@+id/iconDiscount_CTHD_pay"
                     android:layout_marginLeft="50dp"
                     android:padding="10dp"
-                    android:id="@+id/txtDiscount_CTHD"/>
+                    android:id="@+id/txtDiscount_CTHD_pay"/>
 
             </RelativeLayout>
 
@@ -183,7 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thành tiền:"
-                    android:id="@+id/labelTongTien_CTHD"
+                    android:id="@+id/labelTongTien_CTHD_pay"
                     android:textSize="15sp"
                     android:padding="5dp"/>
 
@@ -191,7 +191,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="đ242.000"
-                    android:id="@+id/txtThanhTien_CTHD"
+                    android:id="@+id/txtThanhTien_CTHD_pay"
                     android:layout_alignParentRight="true"
                     android:textSize="15sp"
                     android:padding="5dp"/>
@@ -200,8 +200,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Giảm giá:"
-                    android:id="@+id/labelGiamGia_CTHD"
-                    android:layout_below="@+id/labelTongTien_CTHD"
+                    android:id="@+id/labelGiamGia_CTHD_pay"
+                    android:layout_below="@+id/labelTongTien_CTHD_pay"
                     android:textSize="15sp"
                     android:padding="5dp"/>
 
@@ -209,18 +209,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="-đ19.000"
-                    android:id="@+id/txtGiamGia_CTHD"
+                    android:id="@+id/txtGiamGia_CTHD_pay"
                     android:layout_alignParentRight="true"
                     android:textSize="15sp"
                     android:padding="5dp"
-                    android:layout_below="@+id/txtThanhTien_CTHD"/>
+                    android:layout_below="@+id/txtThanhTien_CTHD_pay"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tổng tiền:"
-                    android:id="@+id/labelThanhtien_CTHD"
-                    android:layout_below="@+id/labelGiamGia_CTHD"
+                    android:id="@+id/labelThanhtien_CTHD_pay"
+                    android:layout_below="@+id/labelGiamGia_CTHD_pay"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/black"
@@ -230,11 +230,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="đ192.000"
-                    android:id="@+id/txtTongTien_CTHD"
+                    android:id="@+id/txtTongTien_CTHD_pay"
                     android:layout_alignParentRight="true"
                     android:textSize="15sp"
                     android:padding="5dp"
-                    android:layout_below="@+id/txtGiamGia_CTHD"
+                    android:layout_below="@+id/txtGiamGia_CTHD_pay"
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
             </RelativeLayout>
@@ -246,44 +246,22 @@
                 android:background="@color/white"
                 android:layout_marginTop="10dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thời gian đặt hàng"
-                        android:textSize="15sp"
-                        android:id="@+id/labelThoiGianDat_CTHD"
-                        android:padding="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Thời gian đặt hàng"
+                    android:textSize="15sp"
+                    android:id="@+id/labelThoiGianDat_CTHD_pay"
+                    android:padding="10dp"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="03-03-2024 18:56"
-                        android:id="@+id/txtThoiGianDat_CTHD"
-                        android:layout_alignParentRight="true"
-                        android:textSize="15sp"
-                        android:padding="10dp"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thời gian hoàn thành"
-                        android:textSize="15sp"
-                        android:id="@+id/labelThoiGianHT_CTHD"
-                        android:padding="10dp"
-                        android:layout_below="@+id/labelThoiGianDat_CTHD"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="03-03-2024 21:56"
-                        android:id="@+id/txtThoiGianHT_CTHD"
-                        android:layout_alignParentRight="true"
-                        android:layout_below="@+id/txtThoiGianDat_CTHD"
-                        android:textSize="15sp"
-                        android:padding="10dp"/>
-
-
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="03-03-2024 18:56"
+                    android:id="@+id/txtThoiGianDat_CTHD_pay"
+                    android:layout_alignParentRight="true"
+                    android:textSize="15sp"
+                    android:padding="10dp"/>
 
             </RelativeLayout>
 
@@ -292,16 +270,16 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:layout_marginTop="10dp">
-                    <Button
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/custom_button_mualai"
-                        android:text="Mua lại"
-                        android:textColor="@color/white"
-                        android:textAllCaps="false"
-                        android:textSize="18sp"
-                        android:id="@+id/btnThanhToan_CTHD"/>
+                <Button
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/custom_button_mualai"
+                    android:text="Thanh toán đơn hàng"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    android:textSize="18sp"
+                    android:id="@+id/btnThanhToan_CTHD_pay"/>
 
             </RelativeLayout>
 

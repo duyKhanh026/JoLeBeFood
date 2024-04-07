@@ -101,8 +101,6 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
 
                 intent.putExtra("ID",dataList.get(position).getMaDH());
 
-                intent.putExtra("Type","ThanhToan");
-
                 intent.putExtra("UID",dataList.get(position).getMaKH());
 
                 context.startActivity(intent);

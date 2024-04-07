@@ -1,5 +1,6 @@
 package com.example.jolebefood;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -78,6 +79,15 @@ public class Cart extends AppCompatActivity {
             }
             @Override
             public void onGetObjectSuccess() {
+            }
+        });
+
+        payBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Cart.this,ActivityForPay.class);
+                intent.putExtra("UID",userId);
+                startActivity(intent);
             }
         });
 

@@ -79,6 +79,7 @@ public class Register_DAO {
                         userDTO.setEmail(data.getEmail());
                         userDTO.setPhone(data.getPhone());
                         userDTO.setPassword(data.getPassword());
+                        Log.e(TAG,userDTO.getName());
                         listener.GetUserSuccess();
                     } else {
                         Log.e(TAG, "Data rỗng hoặc không hợp lệ.");

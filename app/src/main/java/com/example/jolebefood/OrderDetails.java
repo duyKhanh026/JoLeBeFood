@@ -86,7 +86,6 @@ public class OrderDetails extends AppCompatActivity {
         // Nhận Intent mà đã gửi từ Activity trước
         Intent intent = getIntent();
 
-        Type = intent.getStringExtra("Type");
 
         ID = intent.getStringExtra("ID");
 
@@ -98,7 +97,6 @@ public class OrderDetails extends AppCompatActivity {
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Type.equals("LichSu")){
 
                     Toast.makeText(view.getContext(), "Thêm sản phẩm của đơn "+orderDTO.getMaDH()+" thành công",Toast.LENGTH_SHORT).show();
 
@@ -108,30 +106,9 @@ public class OrderDetails extends AppCompatActivity {
                         CartDTO cartDTO = new CartDTO(orderDetails.getMaMonAn(), orderDetails.getTenMonAn(), orderDetails.getSL(), "/"+orderDetails.getMaMonAn()+".jpg", orderDetails.getThanhTien());
                         cartDAO.SetData(view.getContext(),cartDTO, orderDTO.getMaKH());
                     }
-                } else {
-                    Toast.makeText(OrderDetails.this,"Thanh toán",Toast.LENGTH_SHORT).show();
-                }
             }
         });
 
-        txtPhuongThuc.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Type.equals("ThanhToan")){
-                    Toast.makeText(OrderDetails.this,"Chọn đi",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        txtDiscount.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (Type.equals("ThanhToan")){
-                    Intent intent1 = new Intent(OrderDetails.this,Discount.class);
-                    startActivity(intent1);
-                }
-            }
-        });
 
         // Set nội dung cho giao diện theo đơn hàng đã đặt
         SetDataLichSu();
@@ -153,11 +130,6 @@ public class OrderDetails extends AppCompatActivity {
         btnThanhToan = findViewById(R.id.btnThanhToan_CTHD);
         txtDiscount = findViewById(R.id.txtDiscount_CTHD);
 
-        if (Type.equals("LichSu")){
-            btnThanhToan.setText("Mua lại");
-        } else {
-            btnThanhToan.setText("Thanh toán");
-        }
     }
 
     public void SetDataLichSu(){
@@ -216,12 +188,6 @@ public class OrderDetails extends AppCompatActivity {
                         }
                     });
                 }
-
-
-
-
-
-
             }
         });
 
