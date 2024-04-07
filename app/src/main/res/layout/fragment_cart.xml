@@ -22,6 +22,16 @@
                 android:layout_height="50dp"
                 android:background="@color/privateColor">
 
+                <ImageButton
+                    android:id="@+id/button_back"
+                    android:layout_width="100px"
+                    android:layout_height="100px"
+                    android:background="@color/privateColor"
+                    android:src="@drawable/baseline_arrow_back_24"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30px"
+                    android:layout_marginLeft="10px"/>
+
                 <TextView
                     android:id="@+id/Title_cart"
                     android:layout_width="match_parent"
