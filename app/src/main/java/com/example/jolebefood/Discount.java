@@ -14,6 +14,7 @@ import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
 import com.example.jolebefood.DTO.DiscountDTO;
+import com.example.jolebefood.DTO.ProductDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +46,18 @@ public class Discount extends AppCompatActivity {
         ArrayList<DiscountDTO> dataList = new ArrayList<>();
 
         new DiscountDAO().getList(dataList, new OnGetListDiscountListener() {
+            ArrayList<DiscountDTO> filteredList = new ArrayList<>();
             @Override
             public void onGetListDiscountSuccess(List<DiscountDTO> list) {
-                adapter = new Discount_Item(dataList);
+
+                for (DiscountDTO discountDTO : list){
+                    if (discountDTO.getSoluong() != 0){
+                        filteredList.add(discountDTO);
+                    }
+                }
+
+                adapter = new Discount_Item(filteredList);
+
                 recyclerView.setAdapter(adapter);
             }
 
