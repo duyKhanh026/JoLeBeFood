@@ -120,16 +120,11 @@ public class AccFragment extends Fragment {
                 vpadater.setCurrentItem(0);
             }
         });
-        Setting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         CSTK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), EditAccount.class);
+                startActivity(intent);
             }
         });
         Setting.setOnClickListener(new View.OnClickListener() {

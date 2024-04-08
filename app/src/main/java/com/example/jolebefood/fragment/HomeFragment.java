@@ -59,9 +59,9 @@ public class HomeFragment extends Fragment {
                 if (itemId == R.id.tab_rate) {
                     viewPager.setCurrentItem(0);
                 } else if (itemId == R.id.tab_my_page) {
-                    viewPager.setCurrentItem(1);
-                } else if (itemId == R.id.tab_acc) {
                     viewPager.setCurrentItem(2);
+                } else if (itemId == R.id.tab_acc) {
+                    viewPager.setCurrentItem(1);
                 }
                 return true;
             }
