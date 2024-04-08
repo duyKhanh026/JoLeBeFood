@@ -1,11 +1,26 @@
 package com.example.jolebefood;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -27,6 +42,7 @@ import com.example.jolebefood.DAO.RegisterDAO.OnGetRegiterListener;
 import com.example.jolebefood.DAO.RegisterDAO.Register_DAO;
 import com.example.jolebefood.DTO.CartDTO;
 import com.example.jolebefood.DTO.DiscountDTO;
+import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.DTO.UserDTO;
 
 import java.sql.Timestamp;
@@ -90,6 +106,14 @@ public class ActivityForPay extends AppCompatActivity {
                 txtThoiGianDat.setText(dateFormat.format(currentTimestamp));
             }
         }, 0, 1, TimeUnit.SECONDS); // Lặp lại mỗi giây
+
+
+        txtPhuongThuc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowDialog(ActivityForPay.this);
+            }
+        });
 
 
 
@@ -165,5 +189,39 @@ public class ActivityForPay extends AppCompatActivity {
             totalAmount += item.getTongTien();
         }
         return totalAmount;
+    }
+
+    private void ShowDialog(Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bottom_sheet_choose_pay);
+
+        Log.e("Kien 1","kkisdfsdf");
+
+        RelativeLayout Item_Momo = dialog.findViewById(R.id.Item_MoMo_Choose_pay);
+        RelativeLayout Item_Bth = dialog.findViewById(R.id.Item_Bth_Choose_pay);
+
+        Item_Bth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtPhuongThuc.setText("Thanh toán khi nhận hàng");
+                dialog.dismiss();
+            }
+        });
+
+        Item_Momo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtPhuongThuc.setText("Thanh toán bằng MoMo");
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        dialog.getWindow().setGravity(Gravity.BOTTOM);
+
     }
 }

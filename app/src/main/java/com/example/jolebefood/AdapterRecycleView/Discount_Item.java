@@ -53,10 +53,8 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
 
                 // Lấy giá trị khuyến mãi từ DiscountDTO
                 DiscountDTO discount = dataList.get(position);
-                String maKM = discount.getMakm();
-                int giaTriKM = discount.getGiatrikm();
-                String pttt = discount.getPhuongthuctt();
-                Toast.makeText(view.getContext(), "Mã: " + maKM +", Giá trị " +giaTriKM + ", PTTT: " + pttt, Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
