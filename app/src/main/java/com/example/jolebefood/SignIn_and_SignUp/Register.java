@@ -47,7 +47,6 @@ public class Register extends AppCompatActivity {
         address = findViewById(R.id.ET_Address);
         btn_signup = findViewById(R.id.btn_Signup);
         SignIn = findViewById(R.id.TV_SignIn);
-        Cpp = (CountryCodePicker)findViewById(R.id.countrycode);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         auth = FirebaseAuth.getInstance();
@@ -140,41 +139,6 @@ public class Register extends AppCompatActivity {
                                 }
                             });
 
-//                            databaseReference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//                                        auth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                            @Override
-//                                            public void onComplete(@NonNull Task<Void> task) {
-//                                                if (task.isSuccessful()) {
-//                                                    AlertDialog.Builder builder = new AlertDialog.Builder(Register.this);
-//                                                    builder.setMessage("Bạn đã đăng ký thành công! Đảm bảo xác minh email của bạn ");
-//                                                    builder.setCancelable(false);
-//                                                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-//                                                        @Override
-//                                                        public void onClick(DialogInterface dialog, int which) {
-//
-//                                                            dialog.dismiss();
-//
-//                                                            String phonenumber = Cpp.getSelectedCountryCodeWithPlus() + userPhone;
-//
-////                                                                        Intent b = new Intent(Register.this,VerifyPhone.class);
-////                                                                        b.putExtra("phonenumber",phonenumber);
-////                                                                        startActivity(b);
-//                                                            Toast.makeText(Register.this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-//                                                            startActivity(new Intent(Register.this, Login_Gmail.class));
-//
-//                                                        }
-//                                                    });
-//                                                    AlertDialog Alert = builder.create();
-//                                                    Alert.show();
-//                                                } else {
-//                                                    ReusableCodeForAll.ShowAlert(Register.this, "Error", task.getException().getMessage());
-//                                                }
-//                                            }
-//                                        });
-//                                    }
-//                            });
                         }else{
                             Toast.makeText(Register.this,"Đăng ký thất bại!"+task.getException(), Toast.LENGTH_SHORT).show();
                         }

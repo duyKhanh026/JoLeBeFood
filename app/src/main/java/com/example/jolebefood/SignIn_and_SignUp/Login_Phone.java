@@ -42,7 +42,6 @@ public class Login_Phone extends AppCompatActivity {
 
         PhoneNumber = (EditText)findViewById(R.id.number);
         btn_sendotp = (Button)findViewById(R.id.btnSendOTP);
-        cpp=(CountryCodePicker)findViewById(R.id.countrycode);
         signinemail=(Button)findViewById(R.id.btnEmail_LGPhone);
         signup = (TextView)findViewById(R.id.SignUp_LGPhone);
         btn_verifyotp = (Button)findViewById(R.id.btnVerifyOTP);
@@ -61,10 +60,7 @@ public class Login_Phone extends AppCompatActivity {
                         if (sendNumber.startsWith("0")) {
                             sendNumber = sendNumber.substring(1); // Lấy phần từ vị trí thứ hai đến hết chuỗi
                         }
-                        //sendverificationcode(sendNumber);
-                        Intent intent = new Intent(Login_Phone.this, MainActivity.class);
-                        intent.putExtra("id",PhoneNumber.getText().toString().trim());
-                        startActivity(intent);
+                        sendverificationcode(sendNumber);
 
                     } else {
                         // Nếu không, không phải là chuỗi số 10 ký tự
@@ -105,7 +101,6 @@ public class Login_Phone extends AppCompatActivity {
     }
 
     private void sendverificationcode(String number) {
-        Log.e(TAG, "Sending verification code to: " + cpp + number);
         PhoneAuthOptions options =
                 PhoneAuthOptions.newBuilder(mAuth)
                         .setPhoneNumber("+84"+number)
@@ -127,7 +122,7 @@ public class Login_Phone extends AppCompatActivity {
             final String code = phoneAuthCredential.getSmsCode();
             if(code != null){
                 Log.e(TAG,"code khac null");
-                verifycode(code);
+//                verifycode(code);
             }else{
                 Log.e(TAG,"code=null");
             }
@@ -170,9 +165,7 @@ public class Login_Phone extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(Login_Phone.this , "Dang nhap  thanh cong",Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(Login_Phone.this, MainActivity.class);
-                            intent.putExtra("id",PhoneNumber.getText().toString().trim());
                             startActivity(intent);
-
                         }
                     }
                 });

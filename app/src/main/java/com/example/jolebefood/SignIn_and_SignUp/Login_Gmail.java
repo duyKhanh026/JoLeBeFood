@@ -3,6 +3,7 @@ package com.example.jolebefood.SignIn_and_SignUp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +28,7 @@ public class Login_Gmail extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText Email,Password;
     Button btn_SignIn;
-    TextView SignUp;
+    TextView SignUp,QuenMK;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class Login_Gmail extends AppCompatActivity {
         Password = findViewById(R.id.Password_DN_email);
         btn_SignIn = findViewById(R.id.btn_SignIn_Email);
         SignUp = findViewById(R.id.TV_SignUp_Email);
+        QuenMK = findViewById(R.id.QuenMK);
 
         auth = FirebaseAuth.getInstance();
 
@@ -55,6 +57,32 @@ public class Login_Gmail extends AppCompatActivity {
             }
         });
 
+        QuenMK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = Email.getText().toString().trim();
+                if (!email.isEmpty()) {
+                    resetPassword(email);
+                } else {
+                    Toast.makeText(Login_Gmail.this, "Vui lòng nhập địa chỉ email", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
+
+    private void resetPassword(String email) {
+        auth.sendPasswordResetEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Login_Gmail.this, "Chúng tôi đã gửi một email để đặt lại mật khẩu của bạn.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(Login_Gmail.this, "Không thể gửi email đặt lại mật khẩu. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
     public void SignInEmail(View v){

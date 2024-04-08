@@ -49,9 +49,9 @@
     <EditText
         android:id="@+id/et_email"
         android:layout_below="@+id/Email"
+        android:drawableLeft="@drawable/baseline_email_24"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:drawableLeft="@drawable/baseline_email_24"
         android:drawablePadding="13dp"
         android:textSize="15dp"
         android:text=""

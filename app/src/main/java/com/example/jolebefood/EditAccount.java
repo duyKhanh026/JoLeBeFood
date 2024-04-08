@@ -15,8 +15,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +32,7 @@ public class EditAccount extends AppCompatActivity {
     private final String TAG = "Nam Test EditAccount";
     EditText Name,Email,Phone,Address;
     Button Update;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,8 +74,7 @@ public class EditAccount extends AppCompatActivity {
                 String newEmail = Email.getText().toString();
                 String newPhone = Phone.getText().toString();
                 String newAddress = Address.getText().toString();
-
-                // Cập nhật thông tin người dùng trên Firebase
+                // Cập nhật thông tin người dùng trên Realtime Database
                 DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("User").child(userId);
                 userRef.child("Name").setValue(newName);
                 userRef.child("Email").setValue(newEmail);
@@ -95,6 +97,21 @@ public class EditAccount extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void sendEmailVerification(FirebaseUser user, String newEmail) {
+        user.sendEmailVerification()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(EditAccount.this, "Verification email sent to " + newEmail, Toast.LENGTH_SHORT).show();
+                            // Cập nhật giao diện hoặc thực hiện hành động khác sau khi gửi email xác thực thành công
+                        } else {
+                            Toast.makeText(EditAccount.this, "Failed to send verification email: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 
 }

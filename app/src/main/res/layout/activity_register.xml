@@ -80,21 +80,19 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView10"
             app:layout_constraintWidth_percent=".8"
             android:backgroundTint="#CCCCCC" />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <com.hbb20.CountryCodePicker
-                android:layout_width="125dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/countrycode"/>
-            <EditText
-                android:id="@+id/ET_Phone"
-                android:layout_width="135dp"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ET_Email" />
-        </LinearLayout>
+
+        <EditText
+            android:id="@+id/ET_Phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#CCCCCC"
+            android:drawableLeft="@drawable/baseline_local_phone_24"
+            android:drawablePadding="13dp"
+            android:hint="Phone"
+            android:textColorHint="#CCCCCC"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ET_Email" />
 
         <EditText
             android:id="@+id/ET_Address"
