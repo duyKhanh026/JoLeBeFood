@@ -1,10 +1,13 @@
 package com.example.jolebefood.DAO.OrderDAO;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.jolebefood.DAO.CallRetrofit;
 import com.example.jolebefood.DTO.OrderDTO;
+import com.example.jolebefood.MainActivity;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -54,6 +57,7 @@ public class OrderDAO {
                         listener.onGetListOrderSuccess();
                     } else {
                         Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
+
                     }
                 } else {
                     Log.e(TAG, "Failed to get data. Code: " + response.code());
@@ -104,12 +108,14 @@ public class OrderDAO {
         call1.enqueue(new Callback<OrderDTO >() {
             @Override
             public void onResponse(Call<OrderDTO > call, Response<OrderDTO> response) {
-                Log.e(TAG, "Kiên test add order:"+orderDTO.getMaDH());
+                Toast.makeText(context,"Đơn hàng được tạo thành công",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
             }
 
             @Override
             public void onFailure(Call<OrderDTO > call, Throwable t) {
-                Log.e(TAG, "Kiên test add order thất bại:"+orderDTO.getMaDH());
+                Toast.makeText(context,"Đơn hàng được tạo thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }

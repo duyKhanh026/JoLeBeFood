@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Cart_Item;
+import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
 import com.example.jolebefood.AdapterRecycleView.Pay_Details_Item;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
@@ -38,10 +40,13 @@ import com.example.jolebefood.DAO.CartDAO.OnGetListCartListener;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
 import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
+import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DAO.RegisterDAO.OnGetRegiterListener;
 import com.example.jolebefood.DAO.RegisterDAO.Register_DAO;
 import com.example.jolebefood.DTO.CartDTO;
 import com.example.jolebefood.DTO.DiscountDTO;
+import com.example.jolebefood.DTO.OrderDTO;
+import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.DTO.UserDTO;
 
@@ -58,19 +63,31 @@ import java.util.concurrent.TimeUnit;
 public class ActivityForPay extends AppCompatActivity {
     private RecyclerView recyclerView;
 
-    private TextView txtName,txtPhone,txtDiaChi,txtTongTien,txtGiamGia,txtThanhTien,txtPhuongThuc,txtThoiGianDat,txtDiscount;
+    private TextView txtName,txtPhone,txtDiaChi,txtTongTien,txtGiamGia,txtThanhTien,txtPhuongThuc,txtThoiGianDat,txtDiscount,txtPhiGiao;
 
     private Button btnThanhToan;
+
+    private ImageButton btnBack;
 
     private Pay_Details_Item adapter;
 
     private UserDTO userDTO;
 
+    private DiscountDTO discountDTO;
+
     private ArrayList<CartDTO> datalist;
 
-    private String UID;
+    private ArrayList<DiscountDTO> listDiscount;
+
+    private ArrayList<OrderDTO> listOrder;
+
+    private OrderDTO orderObject;
+
+    private String UID, PhuongThuc = "";
 
     NumberFormat currencyFormat;
+
+    private final int PhiGiaoHang = 20000;
 
 
     // Định dạng mong muốn (ví dụ: "yyyy-MM-dd HH:mm:ss")
@@ -82,39 +99,91 @@ public class ActivityForPay extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_for_pay);
 
-        datalist = new ArrayList<>();
-        // Tạo một đối tượng NumberFormat với định dạng tiền tệ và quốc gia
-        currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+        KhoiTao();
 
-        userDTO = new UserDTO();
+        AnhXa();
 
         // Nhận Intent mà đã gửi từ Activity trước
         Intent intent = getIntent();
 
+        discountDTO = (DiscountDTO) intent.getSerializableExtra("DiscountDTO");
+
         UID = intent.getStringExtra("UID");
 
-        AnhXa();
+        PhuongThuc = intent.getStringExtra("PhuongThuc");
 
-        SetDataLichSu();
+        if (PhuongThuc != null){
+            txtPhuongThuc.setText(PhuongThuc);
+        }
 
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
+        SetData();
 
-        executor.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-                Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-                txtThoiGianDat.setText(dateFormat.format(currentTimestamp));
-            }
-        }, 0, 1, TimeUnit.SECONDS); // Lặp lại mỗi giây
 
 
         txtPhuongThuc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ShowDialog(ActivityForPay.this);
+                ShowDialogPaymentMethod(ActivityForPay.this);
             }
         });
 
+        txtDiscount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("Kien DIsPay",UID);
+                Intent intent1 = new Intent(ActivityForPay.this, Discount.class);
+                intent1.putExtra("UID",UID);
+                intent1.putExtra("PhuongThuc",txtPhuongThuc.getText().toString());
+                startActivity(intent1);
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        btnThanhToan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (txtPhuongThuc.getText().toString().equals("Chọn phương thức thanh toán")){
+                    Toast.makeText(ActivityForPay.this,"Vui lòng chọn phương thức thanh toán",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    orderObject.setMaDH("DH"+(listOrder.size()+1));
+                    orderObject.setMaKH(UID);
+                    orderObject.setPhuongThucThanhToan(txtPhuongThuc.getText().toString());
+                    if (!txtDiscount.getText().toString().equals("Chọn khuyến mãi")){
+                        orderObject.setMaKM(discountDTO.getMakm());
+                    }
+                    else {
+                        orderObject.setMaKM("Không");
+                    }
+
+                    // add list chi tiết đơn hàng
+                    SetOrderDetails(datalist);
+
+                    new OrderDAO().SetDataOrder(UID,orderObject,ActivityForPay.this);
+                }
+            }
+        });
+
+    }
+
+    public void KhoiTao(){
+        datalist = new ArrayList<>();
+
+        listDiscount = new ArrayList<>();
+
+        listOrder = new ArrayList<>();
+        // Tạo một đối tượng NumberFormat với định dạng tiền tệ và quốc gia
+        currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+
+        userDTO = new UserDTO();
+
+        orderObject = new OrderDTO();
 
 
     }
@@ -134,12 +203,27 @@ public class ActivityForPay extends AppCompatActivity {
         txtThoiGianDat = findViewById(R.id.txtThoiGianDat_CTHD_pay);
         btnThanhToan = findViewById(R.id.btnThanhToan_CTHD_pay);
         txtDiscount = findViewById(R.id.txtDiscount_CTHD_pay);
-
+        txtPhiGiao = findViewById(R.id.txtPhiGiaoHangCTHD_pay);
+        btnBack = findViewById(R.id.button_back_pay);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityForPay.this));
 
     }
 
-    public void SetDataLichSu() {
+    public void SetData() {
+        new OrderDAO().getList(UID, listOrder, new OnGetListOrderListener() {
+            @Override
+            public void onGetListOrderSuccess() {
+            }
+
+            @Override
+            public void onGetObjectSuccess() {
+
+            }
+        });
+
+
+
+
         new CartDAO().getList(UID, datalist, new OnGetListCartListener() {
             @Override
             public void onGetListCartSuccess() {
@@ -148,15 +232,34 @@ public class ActivityForPay extends AppCompatActivity {
 
                 recyclerView.setAdapter(adapter);
 
+
+
                 int totalAmount = calculateTotalAmount(datalist);
                 txtThanhTien.setText(currencyFormat.format(totalAmount));
 
-                int discountFee = 0;
-                txtGiamGia.setText(currencyFormat.format(discountFee));
+                txtPhiGiao.setText(currencyFormat.format(PhiGiaoHang));
 
-                int totalPayAmount = totalAmount - discountFee;
-                txtTongTien.setText(currencyFormat.format(totalPayAmount));
+                if (discountDTO != null){
+                    txtDiscount.setText(discountDTO.getTenkm());
 
+                    int discountFee = discountDTO.getGiatrikm();
+                    txtGiamGia.setText("- " + currencyFormat.format(discountFee));
+
+                    int totalPayAmount = totalAmount + PhiGiaoHang - discountFee;
+                    txtTongTien.setText(currencyFormat.format(totalPayAmount));
+
+                    orderObject.setTongTien(totalPayAmount);
+
+                }
+                else{
+                    int discountFee = 0;
+                    txtGiamGia.setText("- " + currencyFormat.format(discountFee));
+
+                    int totalPayAmount = totalAmount + PhiGiaoHang - discountFee;
+                    txtTongTien.setText(currencyFormat.format(totalPayAmount));
+
+                    orderObject.setTongTien(totalPayAmount);
+                }
 
 
 
@@ -181,7 +284,18 @@ public class ActivityForPay extends AppCompatActivity {
         });
 
 
+
+        // Set thời gian đặt
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        txtThoiGianDat.setText(dateFormat.format(currentTimestamp));
+        orderObject.setThoiGianDat(currentTimestamp);
+
+        //Set thời gian hoàn thành
+        long pastTimeMillis = 0; // Thời gian mong muốn (số mili giây kể từ 01/01/1970 UTC)
+        Timestamp pastTimestamp = new Timestamp(pastTimeMillis);
+        orderObject.setThoiGianHoanThanh(pastTimestamp);
     }
+
 
     private int calculateTotalAmount(ArrayList<CartDTO> cartItems) {
         int totalAmount = 0;
@@ -191,12 +305,10 @@ public class ActivityForPay extends AppCompatActivity {
         return totalAmount;
     }
 
-    private void ShowDialog(Context context) {
+    private void ShowDialogPaymentMethod(Context context) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_sheet_choose_pay);
-
-        Log.e("Kien 1","kkisdfsdf");
 
         RelativeLayout Item_Momo = dialog.findViewById(R.id.Item_MoMo_Choose_pay);
         RelativeLayout Item_Bth = dialog.findViewById(R.id.Item_Bth_Choose_pay);
@@ -224,4 +336,19 @@ public class ActivityForPay extends AppCompatActivity {
         dialog.getWindow().setGravity(Gravity.BOTTOM);
 
     }
+
+    public void SetOrderDetails(ArrayList<CartDTO> list){
+        List<OrderDetailsDTO> list_temp = new ArrayList<>();
+        for (CartDTO c : list){
+            OrderDetailsDTO a = new OrderDetailsDTO();
+            a.setMaDH(orderObject.getMaDH());
+            a.setMaMonAn(c.getMaMonAn());
+            a.setTenMonAn(c.getTenMonAn());
+            a.setSL(c.getSL());
+            a.setThanhTien(c.getTongTien());
+            list_temp.add(a);
+        }
+        orderObject.setListOrderDetails(list_temp);
+    }
+
 }

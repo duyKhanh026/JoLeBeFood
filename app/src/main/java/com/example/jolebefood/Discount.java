@@ -1,7 +1,9 @@
 package com.example.jolebefood;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -24,6 +26,8 @@ public class Discount extends AppCompatActivity {
     private RecyclerView recyclerView;
 
     private Discount_Item adapter;
+
+    private String UID,PhuongThuc;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +42,14 @@ public class Discount extends AppCompatActivity {
                 finish();
             }
         });
+
+        // Lấy mã người dùng từ giao diện ActivityForPay gửi tới
+        Intent intent = getIntent();
+
+        UID = intent.getStringExtra("UID");
+
+        PhuongThuc = intent.getStringExtra("PhuongThuc");
+
 
         recyclerView = findViewById(R.id.RecycleView_KhuyenMai);
 
@@ -56,7 +68,12 @@ public class Discount extends AppCompatActivity {
                     }
                 }
 
-                adapter = new Discount_Item(filteredList);
+                if (UID.equals("")){
+                    adapter = new Discount_Item(filteredList);
+                }
+                else{
+                    adapter = new Discount_Item(Discount.this,filteredList,UID,PhuongThuc);
+                }
 
                 recyclerView.setAdapter(adapter);
             }

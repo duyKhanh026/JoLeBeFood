@@ -4,15 +4,37 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#E1DCDC">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Thông tin đơn hàng"
-        android:textSize="18sp"
-        android:textColor="@color/black"
-        android:padding="15dp"
+        android:background="@color/white"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/txtTitle_CT"
-        android:background="@color/white"/>
+        >
+
+        <ImageButton
+            android:id="@+id/button_back_pay"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:background="@color/white"
+            android:src="@drawable/baseline_arrow_back_24"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="30px"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thông tin đơn hàng"
+            android:textSize="18dp"
+            android:textColor="@color/black"
+            android:layout_margin="15px"
+            android:textStyle="bold"
+            android:layout_toRightOf="@id/button_back_pay"
+            />
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -179,11 +201,12 @@
                 android:layout_marginTop="10dp"
                 android:padding="10dp"
                 android:background="@color/white">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Thành tiền:"
-                    android:id="@+id/labelTongTien_CTHD_pay"
+                    android:id="@+id/labelThanhTien_CTHD_pay"
                     android:textSize="15sp"
                     android:padding="5dp"/>
 
@@ -196,12 +219,32 @@
                     android:textSize="15sp"
                     android:padding="5dp"/>
 
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Phí giao hàng:"
+                    android:id="@+id/labelPhiGiaoHang_CTHD_pay"
+                    android:layout_below="@+id/labelThanhTien_CTHD_pay"
+                    android:textSize="15sp"
+                    android:padding="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="đ242.000"
+                    android:id="@+id/txtPhiGiaoHangCTHD_pay"
+                    android:layout_below="@+id/txtThanhTien_CTHD_pay"
+                    android:layout_alignParentRight="true"
+                    android:textSize="15sp"
+                    android:padding="5dp"/>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Giảm giá:"
                     android:id="@+id/labelGiamGia_CTHD_pay"
-                    android:layout_below="@+id/labelTongTien_CTHD_pay"
+                    android:layout_below="@+id/labelPhiGiaoHang_CTHD_pay"
                     android:textSize="15sp"
                     android:padding="5dp"/>
 
@@ -213,13 +256,13 @@
                     android:layout_alignParentRight="true"
                     android:textSize="15sp"
                     android:padding="5dp"
-                    android:layout_below="@+id/txtThanhTien_CTHD_pay"/>
+                    android:layout_below="@+id/txtPhiGiaoHangCTHD_pay"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tổng tiền:"
-                    android:id="@+id/labelThanhtien_CTHD_pay"
+                    android:id="@+id/labelTongTien_CTHD_pay"
                     android:layout_below="@+id/labelGiamGia_CTHD_pay"
                     android:textSize="15sp"
                     android:textStyle="bold"

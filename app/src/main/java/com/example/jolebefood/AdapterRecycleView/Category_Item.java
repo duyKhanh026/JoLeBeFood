@@ -1,5 +1,6 @@
 package com.example.jolebefood.AdapterRecycleView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -48,6 +49,7 @@ public class Category_Item extends RecyclerView.Adapter<Category_Item.MyViewHold
         return new MyViewHolder(view);
     }
 
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 

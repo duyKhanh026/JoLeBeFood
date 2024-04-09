@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,6 +43,8 @@ public class OrderDetails extends AppCompatActivity {
     private TextView txtName,txtPhone,txtDiaChi,txtTongTien,txtGiamGia,txtThanhTien,txtPhuongThuc,txtThoiGianDat,txtThoiGianHT,txtDiscount;
 
     private Button btnThanhToan;
+
+    private ImageButton btnBack;
 
     private Order_Details_Item adapter;
 
@@ -113,6 +116,13 @@ public class OrderDetails extends AppCompatActivity {
         // Set nội dung cho giao diện theo đơn hàng đã đặt
         SetDataLichSu();
 
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
 
     }
 
@@ -129,7 +139,7 @@ public class OrderDetails extends AppCompatActivity {
         txtThoiGianHT = findViewById(R.id.txtThoiGianHT_CTHD);
         btnThanhToan = findViewById(R.id.btnThanhToan_CTHD);
         txtDiscount = findViewById(R.id.txtDiscount_CTHD);
-
+        btnBack = findViewById(R.id.button_back_cthd);
     }
 
     public void SetDataLichSu(){

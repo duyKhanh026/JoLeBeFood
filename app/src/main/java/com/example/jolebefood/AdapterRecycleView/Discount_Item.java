@@ -1,6 +1,10 @@
 package com.example.jolebefood.AdapterRecycleView;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.ActivityForPay;
 import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.R;
 
@@ -21,8 +26,21 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
 
     ArrayList<DiscountDTO> dataList;
 
+    String UID = "";
+
+    String PhuongThuc = "";
+
+    Context context;
+
     public Discount_Item(ArrayList<DiscountDTO> dataList) {
         this.dataList = dataList;
+    }
+
+    public Discount_Item(Context context,ArrayList<DiscountDTO> dataList, String UID,String phuongThuc) {
+        this.context = context;
+        this.dataList = dataList;
+        this.UID = UID;
+        this.PhuongThuc = phuongThuc;
     }
 
     @NonNull
@@ -35,8 +53,6 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
-
-//        holder.bindData(dataList.get(position));
         holder.TenKM.setText(dataList.get(position).getTenkm());
         holder.pttt.setText(dataList.get(position).getPhuongthuctt());
         holder.img.setImageResource(R.drawable.momo_logo);
@@ -50,20 +66,26 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                // Lấy giá trị khuyến mãi từ DiscountDTO
-                DiscountDTO discount = dataList.get(position);
-
-
+                if (!UID.equals("")){
+                    DiscountDTO discountDTO = dataList.get(position);
+                    Intent intent = new Intent(view.getContext(), ActivityForPay.class);
+                    intent.putExtra("UID",UID);
+                    intent.putExtra("DiscountDTO",discountDTO);
+                    intent.putExtra("PhuongThuc",PhuongThuc);
+                    context.startActivity(intent);
+                }
             }
         });
 
     }
 
+
+
     @Override
     public int getItemCount() {
         return dataList.size();
     }
+
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         private TextView TenKM;
@@ -77,12 +99,6 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
             img = itemView.findViewById(R.id.imagemethod);
 
         }
-
-//       public void bindData(DiscountDTO dto1) {
-//
-//
-//        }
-
 
     }
 

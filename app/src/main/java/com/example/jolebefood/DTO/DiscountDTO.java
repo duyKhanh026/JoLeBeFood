@@ -1,6 +1,8 @@
 package com.example.jolebefood.DTO;
 
-public class DiscountDTO {
+import java.io.Serializable;
+
+public class DiscountDTO implements Serializable {
 
     String makm;
     String tenkm;
