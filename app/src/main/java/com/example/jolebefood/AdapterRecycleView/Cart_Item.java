@@ -82,6 +82,7 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
                     holder.Quantity.setText(String.valueOf(currentQuantity));
                     holder.ProductPrice.setText(currencyFormat.format(totalPrice));
                     updateCartItem(v.getContext(),cartItem);
+                    notifyDataSetChanged();
                 }
             }
         });
@@ -97,6 +98,7 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
                 holder.Quantity.setText(String.valueOf(currentQuantity));
                 holder.ProductPrice.setText(currencyFormat.format(totalPrice));
                 updateCartItem(v.getContext(),cartItem);
+                notifyDataSetChanged();
             }
         });
     }
@@ -118,10 +120,14 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     }
 
     private void deleteCartItem(CartDTO cartItem, int position) {
-        CartDAO cartDAO = new CartDAO();
-        cartDAO.deleteData(cartItem, userId);
-        datalist.remove(position);
-        notifyItemRemoved(position);
+        if (position >= 0 && position < datalist.size()) {
+            CartDAO cartDAO = new CartDAO();
+            cartDAO.deleteData(cartItem, userId);
+            datalist.remove(position);
+            notifyItemRemoved(position);
+        } else {
+            Log.e("Cart_Item", "Invalid position: " + position);
+        }
     }
 
     private void updateCartItem(Context context,CartDTO cartItem) {
