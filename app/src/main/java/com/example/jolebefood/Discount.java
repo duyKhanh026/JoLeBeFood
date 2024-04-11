@@ -68,7 +68,7 @@ public class Discount extends AppCompatActivity {
                     }
                 }
 
-                if (UID.equals("")){
+                if (UID == null){
                     adapter = new Discount_Item(filteredList);
                 }
                 else{

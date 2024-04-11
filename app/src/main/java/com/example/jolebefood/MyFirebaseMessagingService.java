@@ -43,11 +43,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Xử lý tin nhắn dữ liệu (nếu có)
         if (remoteMessage.getData().size() > 0) {
-            // Trích xuất dữ liệu từ remoteMessage.getData() và xử lý cho phù hợp
-            // Ví dụ:
-            // String dataTitle = remoteMessage.getData().get("title");
-            // String dataMessage = remoteMessage.getData().get("message");
-            // ...
+
         } else {
             // Xử lý tin nhắn thông báo
             String title = remoteMessage.getNotification().getTitle();

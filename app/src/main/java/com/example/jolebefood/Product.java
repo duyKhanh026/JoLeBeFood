@@ -56,7 +56,6 @@ public class Product extends AppCompatActivity {
         String categoryCode = getIntent().getStringExtra("category_code");
         String categoryName = getIntent().getStringExtra("category_name");
 
-        Toast.makeText(this, categoryCode, Toast.LENGTH_SHORT).show();
         TextView title_product = findViewById(R.id.title_product);
         title_product.setText(categoryName);
 
