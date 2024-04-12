@@ -130,7 +130,6 @@ public class ActivityForPay extends AppCompatActivity {
         txtDiscount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.e("Kien DIsPay",UID);
                 Intent intent1 = new Intent(ActivityForPay.this, Discount.class);
                 intent1.putExtra("UID",UID);
                 intent1.putExtra("PhuongThuc",txtPhuongThuc.getText().toString());
@@ -313,9 +312,18 @@ public class ActivityForPay extends AppCompatActivity {
         RelativeLayout Item_Momo = dialog.findViewById(R.id.Item_MoMo_Choose_pay);
         RelativeLayout Item_Bth = dialog.findViewById(R.id.Item_Bth_Choose_pay);
 
+        if (discountDTO != null){
+        }
+
         Item_Bth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (discountDTO != null){
+                    if (discountDTO.getPhuongthuctt().equals("Thanh toán bằng MoMo")){
+                        Toast.makeText(ActivityForPay.this,"Mã khuyến mãi chỉ áp dụng khi thanh toán bằng MoMo",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                 txtPhuongThuc.setText("Thanh toán khi nhận hàng");
                 dialog.dismiss();
             }
@@ -324,6 +332,12 @@ public class ActivityForPay extends AppCompatActivity {
         Item_Momo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (discountDTO != null){
+                    if (discountDTO.getPhuongthuctt().equals("Thanh toán khi nhận hàng")){
+                        Toast.makeText(ActivityForPay.this,"Mã khuyến mãi chỉ áp dụng thanh toán khi nhận hàng",Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                }
                 txtPhuongThuc.setText("Thanh toán bằng MoMo");
                 dialog.dismiss();
             }
