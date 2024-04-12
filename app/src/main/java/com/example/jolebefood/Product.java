@@ -42,6 +42,8 @@ public class Product extends AppCompatActivity {
     private ImageButton butcart;
 
     private String userId;
+    private String categoryCode = "DM001";
+    private String categoryName = "Sản phẩm";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -3,6 +3,7 @@ package com.example.jolebefood;
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,8 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -32,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnCart;
+    private static final int MY_PERMISSIONS_REQUEST_NOTIFICATION = 1;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -79,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        Notification_permission();
     }
 
     @SuppressLint("MissingSuperCall")
@@ -98,6 +102,21 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .setNegativeButton("Không", null)
                     .show();
+        }
+    }
+
+    public void Notification_permission(){
+        if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.POST_NOTIFICATIONS)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Quyền đã được cấp, có thể tạo thông báo
+            Toast.makeText(this, "Quyền thông báo đã được cấp", Toast.LENGTH_SHORT).show();
+
+        } else {
+            Toast.makeText(this, "Chưa cấp quyền thông báo", Toast.LENGTH_SHORT).show();
+            // Quyền chưa được cấp, yêu cầu người dùng cấp quyền
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
+                    MY_PERMISSIONS_REQUEST_NOTIFICATION);
         }
     }
 
