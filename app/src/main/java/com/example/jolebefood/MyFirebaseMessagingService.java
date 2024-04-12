@@ -2,6 +2,8 @@ package com.example.jolebefood;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
@@ -49,11 +51,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String title = remoteMessage.getNotification().getTitle();
             String message = remoteMessage.getNotification().getBody();
 
+            Intent intent = new Intent(this, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
             // Tạo và hiển thị thông báo
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                     .setSmallIcon(R.drawable.icon_fb) // Giả sử icon_fb có trong tài nguyên drawable của bạn
                     .setContentTitle(title)
                     .setContentText(message)
+                    .setContentIntent(pendingIntent)
                     .setAutoCancel(true);
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
