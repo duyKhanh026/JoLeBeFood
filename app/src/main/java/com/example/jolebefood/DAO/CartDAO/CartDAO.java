@@ -99,6 +99,25 @@ public class CartDAO {
         });
     }
 
+    public void deleteCart(String id) {
+        Call<Void> call = api.deleteCart(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Cart deleted successfully");
+                } else {
+                    Log.e(TAG, "Failed to delete Cart. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Error deleting cart: " + t.getMessage());
+            }
+        });
+    }
+
     public void getCartObject(String id, String MaMonAn, CartDTO cartDTO, OnGetListCartListener listener) {
         Call<CartDTO> call = api.getCartObject(id,MaMonAn);
         call.enqueue(new Callback<CartDTO>() {

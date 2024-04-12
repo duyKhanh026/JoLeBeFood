@@ -22,6 +22,7 @@ public interface API_Product {
     Call<ProductDTO> setData(@Path("new") String id, @Body ProductDTO object);
 
 
+
     // Tạo thử ai muốn dùng thì dùng như đối với app này thì không cần dùng hàm delete này
     @DELETE("/Discount/{id}.json")
     Call<Void> deleteData(@Path("id") String makm);

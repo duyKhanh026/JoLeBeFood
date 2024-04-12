@@ -41,6 +41,8 @@ import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
 import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
+import com.example.jolebefood.DAO.ProductDAO.OnGetListProductListener;
+import com.example.jolebefood.DAO.ProductDAO.ProductDAO;
 import com.example.jolebefood.DAO.RegisterDAO.OnGetRegiterListener;
 import com.example.jolebefood.DAO.RegisterDAO.Register_DAO;
 import com.example.jolebefood.DTO.CartDTO;
@@ -80,6 +82,8 @@ public class ActivityForPay extends AppCompatActivity {
     private ArrayList<DiscountDTO> listDiscount;
 
     private ArrayList<OrderDTO> listOrder;
+
+    private ArrayList<ProductDTO> listProduct;
 
     private OrderDTO orderObject;
 
@@ -164,7 +168,23 @@ public class ActivityForPay extends AppCompatActivity {
                     // add list chi tiết đơn hàng
                     SetOrderDetails(datalist);
 
+                    // Cập nhật chi tiết đơn hàng lên firebase
                     new OrderDAO().SetDataOrder(UID,orderObject,ActivityForPay.this);
+
+                    // Giảm số lượng của mã khuyến mãi
+
+                    discountDTO.setSoluong(discountDTO.getSoluong() - 1);
+
+                    new DiscountDAO().SetDataDiscount(discountDTO);
+
+                    // Tăng số lượng bán cho các món được mua
+                    for (OrderDetailsDTO temp : orderObject.getListOrderDetails()){
+                        TangSoLuongMua(temp);
+                    }
+
+                    new CartDAO().deleteCart(UID);
+
+
                 }
             }
         });
@@ -177,6 +197,8 @@ public class ActivityForPay extends AppCompatActivity {
         listDiscount = new ArrayList<>();
 
         listOrder = new ArrayList<>();
+
+        listProduct = new ArrayList<>();
         // Tạo một đối tượng NumberFormat với định dạng tiền tệ và quốc gia
         currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
@@ -220,9 +242,15 @@ public class ActivityForPay extends AppCompatActivity {
             }
         });
 
+        new ProductDAO().getList(listProduct, new OnGetListProductListener() {
+            @Override
+            public void onGetListProductSuccess(List<ProductDTO> list) {
+
+            }
+        });
 
 
-
+        // Lấy danh sách các món có trong giỏ hàng theo UID
         new CartDAO().getList(UID, datalist, new OnGetListCartListener() {
             @Override
             public void onGetListCartSuccess() {
@@ -268,6 +296,7 @@ public class ActivityForPay extends AppCompatActivity {
             }
         });
 
+        // Lấy thông tin người dùng
         new Register_DAO().getUserObject(UID, userDTO, new OnGetRegiterListener() {
                 @Override
                 public void OnSentGmail() {
@@ -363,6 +392,15 @@ public class ActivityForPay extends AppCompatActivity {
             list_temp.add(a);
         }
         orderObject.setListOrderDetails(list_temp);
+    }
+
+    public void TangSoLuongMua(OrderDetailsDTO detailsDTO){
+        for (ProductDTO s : listProduct){
+            if (s.getMaMonAn().equals(detailsDTO.getMaMonAn())){
+                s.setSoluongdaban(s.getSoluongdaban() + detailsDTO.getSL());
+                new ProductDAO().SetDataProduct(s);
+            }
+        }
     }
 
 }
