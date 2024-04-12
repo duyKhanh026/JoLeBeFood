@@ -72,7 +72,13 @@ public class Discount extends AppCompatActivity {
                     adapter = new Discount_Item(filteredList);
                 }
                 else{
-                    adapter = new Discount_Item(Discount.this,filteredList,UID,PhuongThuc);
+                    Log.e("Kien tee",PhuongThuc);
+                    if (!PhuongThuc.equals("Chọn phương thức thanh toán")){
+                        adapter = new Discount_Item(Discount.this,getListTheoPhuongThuc(filteredList,PhuongThuc),UID,PhuongThuc);
+                    }
+                    else {
+                        adapter = new Discount_Item(Discount.this,filteredList,UID,PhuongThuc);
+                    }
                 }
 
                 recyclerView.setAdapter(adapter);
@@ -84,6 +90,16 @@ public class Discount extends AppCompatActivity {
             }
         });
 
+    }
+
+    public ArrayList<DiscountDTO> getListTheoPhuongThuc(ArrayList<DiscountDTO> dataList, String PhuongThuc){
+        ArrayList<DiscountDTO> list = new ArrayList<>();
+        for (DiscountDTO s : dataList){
+            if (s.getPhuongthuctt().equals(PhuongThuc)){
+                list.add(s);
+            }
+        }
+        return list;
     }
 
 

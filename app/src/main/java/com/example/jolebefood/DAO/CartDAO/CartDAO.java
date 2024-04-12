@@ -70,6 +70,7 @@ public class CartDAO {
             @Override
             public void onResponse(Call<CartDTO > call, Response<CartDTO> response) {
                 Toast.makeText(context, "Thêm sản phẩm vào giỏ thành công", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
@@ -94,6 +95,25 @@ public class CartDAO {
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
                 Log.e(TAG, "Error deleting item: " + t.getMessage());
+            }
+        });
+    }
+
+    public void deleteCart(String id) {
+        Call<Void> call = api.deleteCart(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Cart deleted successfully");
+                } else {
+                    Log.e(TAG, "Failed to delete Cart. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Error deleting cart: " + t.getMessage());
             }
         });
     }

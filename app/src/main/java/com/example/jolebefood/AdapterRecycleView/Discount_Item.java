@@ -57,9 +57,9 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
         holder.pttt.setText(dataList.get(position).getPhuongthuctt());
         holder.img.setImageResource(R.drawable.momo_logo);
 
-        if (dataList.get(position).getPhuongthuctt().equals("MOMO")){
+        if (dataList.get(position).getPhuongthuctt().equals("Thanh toán bằng MoMo")){
             holder.img.setImageResource(R.drawable.momo_logo);
-           }else if (dataList.get(position).getPhuongthuctt().equals("CASH")){
+           }else if (dataList.get(position).getPhuongthuctt().equals("Thanh toán khi nhận hàng")){
             holder.img.setImageResource(R.drawable.cash);
            }
 
