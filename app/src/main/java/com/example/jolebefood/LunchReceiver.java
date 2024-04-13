@@ -23,8 +23,12 @@ public class LunchReceiver extends BroadcastReceiver {
         Intent appIntent = new Intent(context, MainActivity.class);
         appIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, appIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context,
+                0,
+                appIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Thêm FLAG_IMMUTABLE
+        );
         // Tạo NotificationCompat.Builder để xây dựng thông báo
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, Notification.CHANNEL_ID)
                 .setSmallIcon(R.drawable.icon_km)

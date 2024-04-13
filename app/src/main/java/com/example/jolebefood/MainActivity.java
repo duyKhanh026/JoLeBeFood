@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton btnCart, btnnoti;
     private static final int MY_PERMISSIONS_REQUEST_NOTIFICATION = 1;
     private static final String CHANNEL_ID = "my_firebase_channel";
-    private Notification notification;
+    public Notification notification;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -103,22 +103,17 @@ public class MainActivity extends AppCompatActivity {
                notification = new Notification(MainActivity.this);
 
                 // Gọi phương thức showLunchNotification() để hiển thị thông báo ăn trưa
-                notification.showLunchNotification();
+                notification.scheduleLunchNotification();
             }
 
         });
 
         Notification_permission();
-//
-//        Notification notification = new Notification(MainActivity.this);
-//        notification.showLunchNotification();       // Hiển thị thông báo lúc 11h hàng ngày
-//        notification.showDinnerNotification();      // Hiển thị thông báo lúc 18h hàng ngày
-
         notification = new Notification(this);
 
-        // Gọi phương thức để đặt thông báo cho 11h (nếu chưa được đặt)
-//        notification.scheduleLunchNotification();
-//        notification.scheduleDinnerNotification();
+
+        notification.scheduleLunchNotification();       // 11h
+        notification.scheduleDinnerNotification();      // 18h
     }
 
     @SuppressLint("MissingSuperCall")

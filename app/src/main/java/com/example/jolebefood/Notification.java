@@ -26,8 +26,12 @@ public class Notification {
         lunchIntent.putExtra("notification_content", "Bạn hãy chuẩn bị cho bữa ăn trưa nhé!");
 
         // Tạo PendingIntent để gửi broadcast khi thông báo được kích hoạt
-        PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(context, 0, lunchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(
+                context,
+                0,
+                lunchIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Thêm FLAG_IMMUTABLE
+        );
         // Lấy thời điểm hiện tại
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 9); // Đặt giờ là 8
@@ -74,12 +78,16 @@ public class Notification {
         lunchIntent.putExtra("notification_title", "Thông báo 11h");
         lunchIntent.putExtra("notification_content", "Bạn hãy chuẩn bị cho bữa trưa nhé!");
 
-        PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(context, 0, lunchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(
+                context,
+                0,
+                lunchIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Thêm FLAG_IMMUTABLE
+        );
         // Đặt thông báo cho 11h
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 9);
-        calendar.set(Calendar.MINUTE, 30);
+        calendar.set(Calendar.HOUR_OF_DAY, 11);
+        calendar.set(Calendar.MINUTE, 00);
         calendar.set(Calendar.SECOND, 0);
 
         if (alarmManager != null) {
@@ -95,12 +103,16 @@ public class Notification {
         lunchIntent.putExtra("notification_title", "Thông báo 18h");
         lunchIntent.putExtra("notification_content", "Bạn hãy chuẩn bị cho bữa tối nhé!");
 
-        PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(context, 0, lunchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
+        PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(
+                context,
+                0,
+                lunchIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Thêm FLAG_IMMUTABLE
+        );
         // Đặt thông báo cho 11h
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 9);
-        calendar.set(Calendar.MINUTE, 40);
+        calendar.set(Calendar.HOUR_OF_DAY, 18);
+        calendar.set(Calendar.MINUTE, 00);
         calendar.set(Calendar.SECOND, 0);
 
         if (alarmManager != null) {
