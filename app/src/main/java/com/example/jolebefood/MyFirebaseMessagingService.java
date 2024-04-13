@@ -1,5 +1,6 @@
 package com.example.jolebefood;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -17,12 +18,17 @@ import com.example.jolebefood.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Calendar;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String CHANNEL_ID = "my_firebase_channel"; // Thay thế bằng ID kênh mong muốn của bạn
     private static final String CHANNEL_PRODUCT = "product_channel";
     private static final String CHANNEL_DISCOUNT = "discount_channel";
     private static final String CHANNEL_DELIVERY = "delivery_channel";
+
+    public String title;
+    public String message;
 
     @Override
     public void onCreate() {
@@ -62,8 +68,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         super.onMessageReceived(remoteMessage);
 
         // Xử lý tin nhắn thông báo
-        String title = remoteMessage.getNotification().getTitle();
-        String message = remoteMessage.getNotification().getBody();
+        title = remoteMessage.getNotification().getTitle();
+        message = remoteMessage.getNotification().getBody();
 
         String channelId = determineChannelId(title);
 
@@ -119,5 +125,40 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private int getNotificationId() {
         return (int) System.currentTimeMillis(); // ID duy nhất dựa trên thời gian hiện tại
     }
+
+//    private void setLunchNotification() {
+//        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE); // Lấy AlarmManager
+//        if (alarmManager == null) {
+//            // Xử lý lỗi: Không thể lấy AlarmManager
+//            return;
+//        }
+//
+//        // Tạo intent cho LunchReceiver (giả sử nó là một BroadcastReceiver)
+//        Intent lunchIntent = new Intent(this, LunchReceiver.class);
+//        lunchIntent.setAction("LUNCH_NOTIFICATION");
+//
+//        PendingIntent lunchPendingIntent; // Khai báo PendingIntent bên ngoài try-catch
+//        try {
+//            lunchPendingIntent = PendingIntent.getBroadcast(this, 0, lunchIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        } catch (SecurityException e) {
+//            // Xử lý lỗi: Quyền tạo PendingIntent bị từ chối
+//            return;
+//        }
+//
+//        // Cài đặt thời gian thông báo (8:01 sáng)
+//        Calendar calendar = Calendar.getInstance();
+//        calendar.set(Calendar.HOUR_OF_DAY, 8);
+//        calendar.set(Calendar.MINUTE, 16);
+//        calendar.set(Calendar.SECOND, 0);
+//
+//        // Sử dụng setExactAndAllowWhileIdle cho API level 23 (Marshmallow) trở lên
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), lunchPendingIntent);
+//        } else {
+//            alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), lunchPendingIntent);
+//        }
+//    }
+
+
 
 }

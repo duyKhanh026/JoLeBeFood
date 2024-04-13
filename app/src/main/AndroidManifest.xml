@@ -101,6 +101,8 @@
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
+        <receiver android:name=".LunchReceiver" />
+
     </application>
 
 </manifest>

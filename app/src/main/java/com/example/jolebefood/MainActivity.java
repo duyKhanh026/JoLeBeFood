@@ -1,9 +1,12 @@
 package com.example.jolebefood;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +20,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -30,12 +35,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Calendar;
 //import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton btnCart;
+    private ImageButton btnCart, btnnoti;
     private static final int MY_PERMISSIONS_REQUEST_NOTIFICATION = 1;
+    private static final String CHANNEL_ID = "my_firebase_channel";
+    private Notification notification;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -83,7 +92,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+        btnnoti = findViewById(R.id.btn_notifi);
+        btnnoti.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Đã nhấn", Toast.LENGTH_SHORT).show();
+//                setLunchNotification();
+
+               notification = new Notification(MainActivity.this);
+
+                // Gọi phương thức showLunchNotification() để hiển thị thông báo ăn trưa
+                notification.showLunchNotification();
+            }
+
+        });
+
         Notification_permission();
+//
+//        Notification notification = new Notification(MainActivity.this);
+//        notification.showLunchNotification();       // Hiển thị thông báo lúc 11h hàng ngày
+//        notification.showDinnerNotification();      // Hiển thị thông báo lúc 18h hàng ngày
+
+        notification = new Notification(this);
+
+        // Gọi phương thức để đặt thông báo cho 11h (nếu chưa được đặt)
+        notification.scheduleLunchNotification();
+        notification.scheduleDinnerNotification();
     }
 
     @SuppressLint("MissingSuperCall")
@@ -119,5 +154,6 @@ public class MainActivity extends AppCompatActivity {
                     MY_PERMISSIONS_REQUEST_NOTIFICATION);
         }
     }
+
 
 }
