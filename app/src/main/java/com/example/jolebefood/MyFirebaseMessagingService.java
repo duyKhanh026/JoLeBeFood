@@ -61,95 +61,63 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
-        // Xử lý tin nhắn dữ liệu (nếu có)
-        if (remoteMessage.getData().size() > 0) {
+        // Xử lý tin nhắn thông báo
+        String title = remoteMessage.getNotification().getTitle();
+        String message = remoteMessage.getNotification().getBody();
 
+        String channelId = determineChannelId(title);
+
+        Intent mainIntent = new Intent(this, MainActivity.class);
+        mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent mainPendingIntent = PendingIntent.getActivity(this, 0, mainIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Intent secondaryIntent;
+        if (channelId.equals(CHANNEL_DISCOUNT)) {
+            secondaryIntent = new Intent(this, Discount.class);
+        } else if (channelId.equals(CHANNEL_DELIVERY)) {
+            secondaryIntent = new Intent(this, Cart.class);
         } else {
-            // Xử lý tin nhắn thông báo
-            String title = remoteMessage.getNotification().getTitle();
-            String message = remoteMessage.getNotification().getBody();
-
-            String channelId = determineChannelId(title);
-
-            Intent mainIntent  = new Intent(this, MainActivity.class);
-            mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            PendingIntent mainPendingIntent = PendingIntent.getActivity(this, 0, mainIntent, 0);
-
-//            Intent productIntent = new Intent(this, MainActivity.class);
-
-            Intent discountIntent = new Intent(this, Discount.class);
-
-            Intent deliveryIntent = new Intent(this, Cart.class);
-
-            Intent secondaryIntent = new Intent(this, Cart.class);
-
-
-            PendingIntent secondaryPendingIntent = PendingIntent.getActivity(this, 0, secondaryIntent, 0);
-
-            PendingIntent discountPendingIntent = PendingIntent.getActivity(this, 0, discountIntent,0);
-
-            PendingIntent deliveryPendingIntent = PendingIntent.getActivity(this, 0, deliveryIntent,0);
-
-
-            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-            stackBuilder.addNextIntentWithParentStack(mainIntent);      // thêm activity 1
-
-//            if (channelId.equals("Khuyến mãi")){
-//                stackBuilder.addNextIntent(discountIntent);
-//            } else if (channelId.equals("Giao hàng")) {
-//                stackBuilder.addNextIntent(deliveryIntent);
-//            }
-
-            stackBuilder.addNextIntent(deliveryIntent);         // thêm activity 2     // thay dòng này bằng 4 dòng if else ở trên thì
-                                                                                        //nó ko chạy được
-
-            PendingIntent fullPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
-
-//            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-//            PendingIntent productPendingIntent = PendingIntent.getActivity(this, 0, productIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-
-
-
-
-            // Tạo và hiển thị thông báo
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
-                    .setSmallIcon(R.drawable.icon_km)
-                    .setContentTitle(title)
-                    .setContentText(message)
-                    .setContentIntent(fullPendingIntent)
-                    .setAutoCancel(true);
-
-            if (channelId.equals(CHANNEL_PRODUCT)) {
-//                builder.setContentIntent(productPendingIntent);
-            } else if (channelId.equals(CHANNEL_DISCOUNT)) {
-//                builder.setContentIntent(discountPendingIntent);
-            } else if (channelId.equals(CHANNEL_DELIVERY)) {
-//                builder.setContentIntent(deliveryPendingIntent);
-            }
-
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-            notificationManager.notify(getNotificationId(), builder.build());
+            secondaryIntent = mainIntent; // Hoặc Intent mặc định nếu không có kênh phù hợp
         }
+        PendingIntent secondaryPendingIntent = PendingIntent.getActivity(this, 0, secondaryIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addNextIntentWithParentStack(mainIntent);
+        stackBuilder.addNextIntent(secondaryIntent);
+
+        PendingIntent fullPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        // Tạo và hiển thị thông báo
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.icon_km)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setAutoCancel(true);
+
+        // Đặt PendingIntent tùy thuộc vào channelId
+        if (channelId.equals(CHANNEL_PRODUCT)) {
+            builder.setContentIntent(mainPendingIntent); // Ví dụ: mở MainActivity
+        } else {
+            builder.setContentIntent(fullPendingIntent); // Mở MainActivity và sau đó Discount hoặc Cart
+        }
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(getNotificationId(), builder.build());
     }
 
     private String determineChannelId(String title) {
-        // Ví dụ: dựa vào tiêu đề để xác định loại thông báo
         if (title.contains("Sản phẩm")) {
             return CHANNEL_PRODUCT;
         } else if (title.contains("Khuyến mãi")) {
             return CHANNEL_DISCOUNT;
-        } else if (title.contains("Giao hàng")) {
+        } else if (title.contains("Giỏ hàng")) {
             return CHANNEL_DELIVERY;
         }
-        // Mặc định trả về CHANNEL_ID mặc định nếu không khớp loại nào
-        return CHANNEL_ID;
+        return CHANNEL_ID; // Mặc định trả về CHANNEL_ID mặc định nếu không khớp
     }
 
-    // Phương thức để lấy ID định danh cho thông báo
     private int getNotificationId() {
-        // Mã ID có thể được tạo một cách duy nhất dựa trên thời gian, hoặc sử dụng ID duy nhất từ server
-        return (int) System.currentTimeMillis(); // Ví dụ đơn giản sử dụng thời gian hiện tại làm ID
+        return (int) System.currentTimeMillis(); // ID duy nhất dựa trên thời gian hiện tại
     }
+
 }
