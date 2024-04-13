@@ -46,10 +46,7 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
 
     CallFirebaseStrorage callFirebaseStrorage;
 
-    long pastTimeMillis = 0; // Ví dụ: 01/01/1900 00:00:00 UTC
-    Timestamp pastTimestamp = new Timestamp(pastTimeMillis);
-
-
+    Timestamp currrentTime = new Timestamp(System.currentTimeMillis());
 
     NumberFormat currencyFormat;
 
@@ -83,7 +80,8 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
         holder.txtGia.setText(currencyFormat.format(dataList.get(position).getListOrderDetails().get(0).getThanhTien()));
         holder.SetIMG(callFirebaseStrorage,dataList.get(position).getListOrderDetails().get(0).getMaMonAn());
         holder.txtTenMonAn.setText(dataList.get(position).getListOrderDetails().get(0).getTenMonAn());
-        if (dataList.get(position).getThoiGianHoanThanh().getTime() == pastTimestamp.getTime()){
+
+        if (dataList.get(position).getThoiGianHoanThanh().after(currrentTime)){
             holder.txtTinhTrang.setText("Đơn hàng chưa hoàn tất");
         }else{
             holder.txtTinhTrang.setText("Đơn hàng được giao thành công");
