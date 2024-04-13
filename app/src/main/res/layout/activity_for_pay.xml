@@ -282,32 +282,6 @@
                     android:textStyle="bold"/>
             </RelativeLayout>
 
-
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:layout_marginTop="10dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thời gian đặt hàng"
-                    android:textSize="15sp"
-                    android:id="@+id/labelThoiGianDat_CTHD_pay"
-                    android:padding="10dp"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="03-03-2024 18:56"
-                    android:id="@+id/txtThoiGianDat_CTHD_pay"
-                    android:layout_alignParentRight="true"
-                    android:textSize="15sp"
-                    android:padding="10dp"/>
-
-            </RelativeLayout>
-
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -58,6 +58,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -182,7 +183,7 @@ public class ActivityForPay extends AppCompatActivity {
                         TangSoLuongMua(temp);
                     }
 
-                    new CartDAO().deleteCart(UID);
+                    //new CartDAO().deleteCart(UID);
 
 
                 }
@@ -221,7 +222,6 @@ public class ActivityForPay extends AppCompatActivity {
         txtGiamGia = findViewById(R.id.txtGiamGia_CTHD_pay);
         txtThanhTien = findViewById(R.id.txtThanhTien_CTHD_pay);
         txtPhuongThuc = findViewById(R.id.txtPhuongThuc_CTHD_pay);
-        txtThoiGianDat = findViewById(R.id.txtThoiGianDat_CTHD_pay);
         btnThanhToan = findViewById(R.id.btnThanhToan_CTHD_pay);
         txtDiscount = findViewById(R.id.txtDiscount_CTHD_pay);
         txtPhiGiao = findViewById(R.id.txtPhiGiaoHangCTHD_pay);
@@ -314,14 +314,14 @@ public class ActivityForPay extends AppCompatActivity {
 
 
         // Set thời gian đặt
-        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
-        txtThoiGianDat.setText(dateFormat.format(currentTimestamp));
-        orderObject.setThoiGianDat(currentTimestamp);
+        Timestamp ThoiGianDat = new Timestamp(System.currentTimeMillis());
+        orderObject.setThoiGianDat(ThoiGianDat);
 
         //Set thời gian hoàn thành
-        long pastTimeMillis = 0; // Thời gian mong muốn (số mili giây kể từ 01/01/1970 UTC)
-        Timestamp pastTimestamp = new Timestamp(pastTimeMillis);
-        orderObject.setThoiGianHoanThanh(pastTimestamp);
+        Random random = new Random();
+        long millisecondsInTenMinutes = (random.nextInt(6) + 7) * 60 * 1000; // 10 phút trong milliseconds
+        Timestamp ThoiGianHoanThanh = new Timestamp(ThoiGianDat.getTime() + millisecondsInTenMinutes);
+        orderObject.setThoiGianHoanThanh(ThoiGianHoanThanh);
     }
 
 

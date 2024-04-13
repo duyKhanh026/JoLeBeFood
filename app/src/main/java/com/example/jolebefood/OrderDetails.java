@@ -29,6 +29,7 @@ import com.example.jolebefood.DTO.OrderDTO;
 import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.DTO.UserDTO;
 
+import java.sql.Timestamp;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -161,7 +162,15 @@ public class OrderDetails extends AppCompatActivity {
 
                 txtPhuongThuc.setText(orderDTO.getPhuongThucThanhToan());
                 txtThoiGianDat.setText(sdf.format(orderDTO.getThoiGianDat()));
-                txtThoiGianHT.setText(sdf.format(orderDTO.getThoiGianHoanThanh()));
+
+                // Kiểm tra thời gian hoàn thành với thời gian hiện tại
+                Timestamp currrentTime = new Timestamp(System.currentTimeMillis());
+                if (currrentTime.before(orderDTO.getThoiGianHoanThanh())){
+                    txtThoiGianHT.setText("Đơn hàng chưa hoàn thành");
+                }else {
+                    txtThoiGianHT.setText(sdf.format(orderDTO.getThoiGianHoanThanh()));
+                }
+
                 txtTongTien.setText(currencyFormat.format(orderDTO.getTongTien()));
 
                 new Register_DAO().getUserObject(orderDTO.getMaKH(), userDTO, new OnGetRegiterListener() {

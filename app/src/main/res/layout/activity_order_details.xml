@@ -8,8 +8,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="10dp"
-        android:layout_marginTop="20dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="20dp"
         android:id="@+id/txtTitle_CT"
         >
 
@@ -27,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Thông tin đơn hàng"
-            android:textSize="18dp"
+            android:textSize="20dp"
             android:textColor="@color/black"
             android:layout_margin="15px"
             android:textStyle="bold"
