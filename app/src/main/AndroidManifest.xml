@@ -58,6 +58,7 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,24 +68,31 @@
         </activity>
         <activity
             android:name=".OrderDetails"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".OrderHistory"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Discount"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".SignIn_and_SignUp.Intro"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Product"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".fragment.tab_home.importCategory"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".Cart"
+            android:screenOrientation="portrait"
             android:exported="false" />
 
         <service
