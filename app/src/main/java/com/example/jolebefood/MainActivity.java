@@ -117,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
         notification = new Notification(this);
 
         // Gọi phương thức để đặt thông báo cho 11h (nếu chưa được đặt)
-        notification.scheduleLunchNotification();
-        notification.scheduleDinnerNotification();
+//        notification.scheduleLunchNotification();
+//        notification.scheduleDinnerNotification();
     }
 
     @SuppressLint("MissingSuperCall")
