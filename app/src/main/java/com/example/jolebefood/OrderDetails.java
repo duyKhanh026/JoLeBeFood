@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
+import com.example.jolebefood.AsyncTask.AsyncTask_OrderDetails;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
@@ -46,6 +48,8 @@ public class OrderDetails extends AppCompatActivity {
     private Button btnThanhToan;
 
     private ImageButton btnBack;
+
+    private ProgressBar progressBar;
 
     private Order_Details_Item adapter;
 
@@ -141,6 +145,7 @@ public class OrderDetails extends AppCompatActivity {
         btnThanhToan = findViewById(R.id.btnThanhToan_CTHD);
         txtDiscount = findViewById(R.id.txtDiscount_CTHD);
         btnBack = findViewById(R.id.button_back_cthd);
+        progressBar = findViewById(R.id.progressBar_CTDH);
     }
 
     public void SetDataLichSu(){
@@ -155,10 +160,7 @@ public class OrderDetails extends AppCompatActivity {
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(OrderDetails.this));
 
-                adapter = new Order_Details_Item(orderDTO.getListOrderDetails());
-
-
-                recyclerView.setAdapter(adapter);
+                new AsyncTask_OrderDetails(recyclerView,progressBar,OrderDetails.this, (ArrayList<OrderDetailsDTO>) orderDTO.getListOrderDetails()).execute();
 
                 txtPhuongThuc.setText(orderDTO.getPhuongThucThanhToan());
                 txtThoiGianDat.setText(sdf.format(orderDTO.getThoiGianDat()));

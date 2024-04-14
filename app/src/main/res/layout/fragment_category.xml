@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -58,17 +58,17 @@
                 android:autoStart="true"
                 android:flipInterval="3000"
                 android:inAnimation="@android:anim/slide_in_left"
-                android:outAnimation="@android:anim/slide_out_right">
+                android:outAnimation="@android:anim/slide_out_right"
+                android:id="@+id/slide_category">
 
                 <ImageView
-
                     android:layout_width="match_parent"
                     android:layout_height="565px"
                     android:src="@drawable/picture_category"
                     android:layout_alignParentLeft="true"
                     />
-                <ImageView
 
+                <ImageView
                     android:layout_width="match_parent"
                     android:layout_height="565px"
                     android:src="@drawable/picture_discount"
@@ -81,7 +81,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/background_radius"
-            android:layout_below="@+id/image_discount_qc"
+            android:layout_below="@id/slide_category"
             android:layout_margin="20px">
 
             <RelativeLayout
@@ -122,13 +122,25 @@
 
 
         </FrameLayout>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/progressBar_category"
+            android:layout_below="@id/slide_category"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone"
+            android:elevation="8dp"/>
+
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycleView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"/>
-        </LinearLayout>
+            android:layout_marginRight="5dp"
+            android:layout_below="@id/layout_to_discount"/>
+        </RelativeLayout>
 
     </ScrollView>
 

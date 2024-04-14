@@ -36,13 +36,14 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 
 public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History_Item.MyViewHolder>{
 
-    private List<OrderDTO> dataList;
+    private ArrayList<OrderDTO> dataList;
 
     CallFirebaseStrorage callFirebaseStrorage;
 
@@ -52,7 +53,7 @@ public class Purchase_History_Item extends RecyclerView.Adapter<Purchase_History
 
 
 
-    public Purchase_History_Item(List<OrderDTO> dataList) {
+    public Purchase_History_Item(ArrayList<OrderDTO> dataList) {
         this.dataList = dataList;
 
         callFirebaseStrorage = new CallFirebaseStrorage();

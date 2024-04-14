@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,6 +36,8 @@ import com.example.jolebefood.AdapterRecycleView.Cart_Item;
 import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
 import com.example.jolebefood.AdapterRecycleView.Pay_Details_Item;
+import com.example.jolebefood.AsyncTask.AsyncTask_OrderDetails;
+import com.example.jolebefood.AsyncTask.AsyncTask_PayDetails;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DAO.CartDAO.OnGetListCartListener;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
@@ -72,7 +75,7 @@ public class ActivityForPay extends AppCompatActivity {
 
     private ImageButton btnBack;
 
-    private Pay_Details_Item adapter;
+    private ProgressBar progressBar;
 
     private UserDTO userDTO;
 
@@ -226,6 +229,7 @@ public class ActivityForPay extends AppCompatActivity {
         txtDiscount = findViewById(R.id.txtDiscount_CTHD_pay);
         txtPhiGiao = findViewById(R.id.txtPhiGiaoHangCTHD_pay);
         btnBack = findViewById(R.id.button_back_pay);
+        progressBar = findViewById(R.id.progressBar_for_pay);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityForPay.this));
 
     }
@@ -255,9 +259,7 @@ public class ActivityForPay extends AppCompatActivity {
             @Override
             public void onGetListCartSuccess() {
 
-                adapter = new Pay_Details_Item(datalist);
-
-                recyclerView.setAdapter(adapter);
+                new AsyncTask_PayDetails(recyclerView,progressBar,ActivityForPay.this,datalist).execute();
 
 
 

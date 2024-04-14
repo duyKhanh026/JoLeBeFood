@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Category_Item;
 import com.example.jolebefood.AdapterRecycleView.Discount_Item;
+import com.example.jolebefood.AsyncTask.AsyncTask_Category;
 import com.example.jolebefood.DAO.CategoryDAO.CategoryDAO;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DTO.CategoryDTO;
@@ -84,6 +86,7 @@ public class CategoryFragment extends Fragment {
         ImageButton button_view_discount = view.findViewById(R.id.button_view_discount);
         FrameLayout layout_to_discount = view.findViewById(R.id.layout_to_discount);
 
+
 //        Button btndm = view.findViewById(R.id.adddm_btn);
 //        btndm.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -101,6 +104,9 @@ public class CategoryFragment extends Fragment {
             }
         });
 
+
+        ProgressBar progressBar = view.findViewById(R.id.progressBar_category);
+
         RecyclerView recyclerView = view.findViewById(R.id.recycleView);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext() , 2);
         recyclerView.setLayoutManager(gridLayoutManager);
@@ -108,12 +114,10 @@ public class CategoryFragment extends Fragment {
         ArrayList<CategoryDTO> dataList = new ArrayList<>();
 
         new CategoryDAO().getList(dataList, list -> {
-            adapter = new Category_Item(getContext(),dataList);
-            recyclerView.setAdapter(adapter);
+            new AsyncTask_Category(recyclerView,progressBar,getContext(),dataList).execute();
         });
 
-//        adapter = new Category_Item(getContext(),dataList);
-//        recyclerView.setAdapter(adapter);
+
         return view;
     }
 }

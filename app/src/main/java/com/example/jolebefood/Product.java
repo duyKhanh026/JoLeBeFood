@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
 import com.example.jolebefood.AdapterRecycleView.Product_Item;
+import com.example.jolebefood.AsyncTask.AsyncTask_Product;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.ProductDAO.ProductDAO;
 import com.example.jolebefood.DTO.ProductDTO;
@@ -38,12 +40,17 @@ import java.util.List;
 
 public class Product extends AppCompatActivity {
     private RecyclerView recyclerView;
+
+    private ProgressBar progressBar;
+
     private Product_Item adapter;
     private ImageButton butcart;
 
     private String userId;
     private String categoryCode = "DM001";
     private String categoryName = "Sản phẩm";
+
+    private ArrayList<ProductDTO> dataList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,11 +76,14 @@ public class Product extends AppCompatActivity {
             }
         });
 
+        progressBar = findViewById(R.id.progressBar_product);
+
         recyclerView = findViewById(R.id.recycleView_product);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(Product.this));
 
-        ArrayList<ProductDTO> dataList = new ArrayList<>();
 
+        dataList = new ArrayList<>();
 
         new ProductDAO().getList(dataList, list -> {
             ArrayList<ProductDTO> filteredList = new ArrayList<>();
@@ -84,8 +94,7 @@ public class Product extends AppCompatActivity {
                 }
             }
 
-            adapter = new Product_Item(filteredList,userId);
-            recyclerView.setAdapter(adapter);
+            new AsyncTask_Product(userId,recyclerView,progressBar,Product.this,filteredList).execute();
         });
 
         butcart = findViewById(R.id.button_cart);
@@ -99,5 +108,9 @@ public class Product extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+    }
 }

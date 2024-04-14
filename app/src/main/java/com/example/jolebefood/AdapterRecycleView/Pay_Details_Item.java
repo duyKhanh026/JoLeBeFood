@@ -22,13 +22,14 @@ import com.google.firebase.storage.StorageReference;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
 
 public class Pay_Details_Item extends RecyclerView.Adapter<Pay_Details_Item.MyViewHolder>{
 
-    private List<CartDTO> dataList;
+    private ArrayList<CartDTO> dataList;
 
     // Lấy đơn vị tiền tệ dựa trên quốc gia (ở đây là Việt Nam)
     Currency currency = Currency.getInstance(new Locale("vi", "VN"));
@@ -38,7 +39,7 @@ public class Pay_Details_Item extends RecyclerView.Adapter<Pay_Details_Item.MyVi
 
     CallFirebaseStrorage callFirebaseStrorage;
 
-    public Pay_Details_Item(List<CartDTO> dataList) {
+    public Pay_Details_Item(ArrayList<CartDTO> dataList) {
         this.dataList = dataList;
         // Đặt đơn vị tiền tệ cho đối tượng định dạng
         currencyFormat.setCurrency(currency);
