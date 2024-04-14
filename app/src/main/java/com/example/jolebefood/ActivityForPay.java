@@ -294,7 +294,7 @@ public class ActivityForPay extends AppCompatActivity {
 
             }
             @Override
-            public void onGetObjectSuccess() {
+            public void onGetListCartEmpty() {
             }
         });
 

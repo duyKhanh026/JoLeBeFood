@@ -10,14 +10,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.jolebefood.AdapterRecycleView.Cart_Item;
 import com.example.jolebefood.AsyncTask.AsyncTask_Cart;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DAO.CartDAO.OnGetListCartListener;
 import com.example.jolebefood.DTO.CartDTO;
+import com.example.jolebefood.fragment.tab_home.CategoryFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -28,14 +31,10 @@ import java.util.Locale;
 public class Cart extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private Button payBtn;
-    private TextView total, delivery, total_pay;
-    private Cart_Item adapter;
+    private Button payBtn, orderBtn;
+    private TextView total_pay, emptyTxt;
     private ImageButton back_button;
-
     private ProgressBar progressBar;
-    private String userId;
-
     NumberFormat currencyFormat;
 
     @SuppressLint("MissingInflatedId")
@@ -47,16 +46,16 @@ public class Cart extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
 
-        // Tạo một đối tượng NumberFormat với định dạng tiền tệ và quốc gia
         currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
         recyclerView = findViewById(R.id.cardView);
         back_button = findViewById(R.id.button_back);
         payBtn = findViewById(R.id.payBtn);
-        total = findViewById(R.id.total);
-        delivery = findViewById(R.id.delivery);
         total_pay = findViewById(R.id.total_pay);
         progressBar = findViewById(R.id.progressBar_Cart);
+        emptyTxt = findViewById(R.id.emptyTxt);
+        ConstraintLayout layout = findViewById(R.id.layout);
+        orderBtn = findViewById(R.id.orderBtn);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(Cart.this));
 
@@ -72,27 +71,35 @@ public class Cart extends AppCompatActivity {
         new CartDAO().getList(userId, datalist, new OnGetListCartListener() {
             @Override
             public void onGetListCartSuccess() {
-                new AsyncTask_Cart(recyclerView,progressBar,Cart.this,datalist).execute();
+                new AsyncTask_Cart(recyclerView, progressBar, Cart.this, datalist).execute();
 
                 int totalAmount = calculateTotalAmount(datalist);
-                total.setText(currencyFormat.format(totalAmount));
-
-                int deliveryFee = 10000;
-                delivery.setText(currencyFormat.format(deliveryFee));
-
-                int totalPayAmount = totalAmount + deliveryFee;
-                total_pay.setText(currencyFormat.format(totalPayAmount));
+                total_pay.setText(currencyFormat.format(totalAmount));
             }
             @Override
-            public void onGetObjectSuccess() {
+            public void onGetListCartEmpty() {
+                emptyTxt.setVisibility(View.VISIBLE);
+                orderBtn.setVisibility(View.VISIBLE);
+                recyclerView.setVisibility(View.GONE);
+                layout.setVisibility(View.GONE);
             }
+
         });
+
 
         payBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Cart.this,ActivityForPay.class);
                 intent.putExtra("UID",userId);
+                startActivity(intent);
+            }
+        });
+
+        orderBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Cart.this, MainActivity.class);
                 startActivity(intent);
             }
         });
