@@ -45,11 +45,25 @@
             </RelativeLayout>
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cardView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/progressBar_Cart"
+                    android:elevation="8dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/cardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+
+            </RelativeLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

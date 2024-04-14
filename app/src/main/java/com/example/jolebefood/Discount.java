@@ -1,11 +1,13 @@
 package com.example.jolebefood;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Discount_Item;
+import com.example.jolebefood.AsyncTask.AsyncTask_Discount;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
 import com.example.jolebefood.DTO.DiscountDTO;
@@ -25,9 +28,10 @@ public class Discount extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    private Discount_Item adapter;
+    private ProgressBar progressBar;
 
     private String UID,PhuongThuc;
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,8 @@ public class Discount extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.RecycleView_KhuyenMai);
 
+        progressBar = findViewById(R.id.progressBar_Discount);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ArrayList<DiscountDTO> dataList = new ArrayList<>();
@@ -69,19 +75,17 @@ public class Discount extends AppCompatActivity {
                 }
 
                 if (UID == null){
-                    adapter = new Discount_Item(filteredList);
+                    new AsyncTask_Discount(recyclerView,progressBar,Discount.this,filteredList).execute();
                 }
                 else{
-                    Log.e("Kien tee",PhuongThuc);
                     if (!PhuongThuc.equals("Chọn phương thức thanh toán")){
-                        adapter = new Discount_Item(Discount.this,getListTheoPhuongThuc(filteredList,PhuongThuc),UID,PhuongThuc);
+                        new AsyncTask_Discount(UID,PhuongThuc,recyclerView,progressBar,Discount.this,getListTheoPhuongThuc(filteredList,PhuongThuc)).execute();
                     }
                     else {
-                        adapter = new Discount_Item(Discount.this,filteredList,UID,PhuongThuc);
+                        new AsyncTask_Discount(UID,PhuongThuc,recyclerView,progressBar,Discount.this,filteredList).execute();
                     }
                 }
 
-                recyclerView.setAdapter(adapter);
             }
 
             @Override

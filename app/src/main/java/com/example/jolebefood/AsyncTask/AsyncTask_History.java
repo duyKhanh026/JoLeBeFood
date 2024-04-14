@@ -51,7 +51,7 @@ public class AsyncTask_History extends AsyncTask<Void,OrderDTO,Void> {
         for (OrderDTO s : datalist){
             publishProgress(s);
             try{
-                Thread.sleep(1000);
+                Thread.sleep(500);
             }catch (InterruptedException e){
                 e.printStackTrace();
             }

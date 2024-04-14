@@ -2,47 +2,45 @@ package com.example.jolebefood.AsyncTask;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.AdapterRecycleView.Product_Item;
-import com.example.jolebefood.DTO.ProductDTO;
-
-import org.apache.http.conn.ConnectTimeoutException;
+import com.example.jolebefood.AdapterRecycleView.Cart_Item;
+import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
+import com.example.jolebefood.DTO.CartDTO;
+import com.example.jolebefood.DTO.OrderDTO;
 
 import java.util.ArrayList;
 
-public class AsyncTask_Product extends AsyncTask<Void,ProductDTO,Void> {
+public class AsyncTask_Cart extends AsyncTask<Void, CartDTO,Void> {
 
-    private String UID;
     private RecyclerView recyclerView;
 
     private ProgressBar progressBar;
 
     private Context context;
 
-    private Product_Item adapter;
+    private Cart_Item adapter;
 
     // List này sẽ được Product gửi qua sau khi đọc được từ firebase
-    private ArrayList<ProductDTO> datalist;
+    private ArrayList<CartDTO> datalist;
 
     // List này sẽ được add lần lượt item từ datalist để có thể làm asyncTask chạy lần lượt từng cái lên
-    private ArrayList<ProductDTO> listTemp = new ArrayList<>();
+    private ArrayList<CartDTO> listTemp = new ArrayList<>();
 
-    public AsyncTask_Product(String UID, RecyclerView recyclerView, ProgressBar progressBar, Context context, ArrayList<ProductDTO> datalist) {
+
+    public AsyncTask_Cart(RecyclerView recyclerView, ProgressBar progressBar, Context context, ArrayList<CartDTO> datalist) {
         this.recyclerView = recyclerView;
         this.progressBar = progressBar;
         this.context = context;
         this.datalist = datalist;
-        this.UID = UID;
     }
 
     @Override
     protected void onPreExecute() {
-        adapter = new Product_Item(listTemp,UID);
+        adapter = new Cart_Item(listTemp);
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.VISIBLE);
     }
@@ -50,7 +48,7 @@ public class AsyncTask_Product extends AsyncTask<Void,ProductDTO,Void> {
     @Override
     protected Void doInBackground(Void... voids) {
 
-        for (ProductDTO s : datalist){
+        for (CartDTO s : datalist){
             publishProgress(s);
             try{
                 Thread.sleep(500);
@@ -61,10 +59,8 @@ public class AsyncTask_Product extends AsyncTask<Void,ProductDTO,Void> {
         return null;
     }
 
-
-
     @Override
-    protected void onProgressUpdate(ProductDTO... values) {
+    protected void onProgressUpdate(CartDTO... values) {
         listTemp.add(values[0]);
         adapter.notifyDataSetChanged();
     }

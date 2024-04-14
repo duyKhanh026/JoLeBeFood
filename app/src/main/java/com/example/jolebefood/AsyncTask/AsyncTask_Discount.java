@@ -9,14 +9,16 @@ import android.widget.ProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Category_Item;
-import com.example.jolebefood.AdapterRecycleView.Product_Item;
+import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.DTO.CategoryDTO;
-import com.example.jolebefood.DTO.ProductDTO;
+import com.example.jolebefood.DTO.DiscountDTO;
 
 import java.util.ArrayList;
 
-public class AsyncTask_Category extends AsyncTask<Void, CategoryDTO,Void> {
+public class AsyncTask_Discount extends AsyncTask<Void, DiscountDTO,Void> {
 
+
+    private String UID = "", PhuongThuc = "";
 
     private RecyclerView recyclerView;
 
@@ -24,16 +26,25 @@ public class AsyncTask_Category extends AsyncTask<Void, CategoryDTO,Void> {
 
     private Context context;
 
-    private Category_Item adapter;
+    private Discount_Item adapter;
 
     // List này sẽ được Product gửi qua sau khi đọc được từ firebase
-    private ArrayList<CategoryDTO> datalist;
+    private ArrayList<DiscountDTO> datalist;
 
     // List này sẽ được add lần lượt item từ datalist để có thể làm asyncTask chạy lần lượt từng cái lên
-    private ArrayList<CategoryDTO> listTemp = new ArrayList<>();
+    private ArrayList<DiscountDTO> listTemp = new ArrayList<>();
 
 
-    public AsyncTask_Category(RecyclerView recyclerView, ProgressBar progressBar, Context context, ArrayList<CategoryDTO> datalist) {
+    public AsyncTask_Discount(RecyclerView recyclerView, ProgressBar progressBar, Context context, ArrayList<DiscountDTO> datalist) {
+        this.recyclerView = recyclerView;
+        this.progressBar = progressBar;
+        this.context = context;
+        this.datalist = datalist;
+    }
+
+    public AsyncTask_Discount(String UID, String phuongThuc, RecyclerView recyclerView, ProgressBar progressBar, Context context, ArrayList<DiscountDTO> datalist) {
+        this.UID = UID;
+        PhuongThuc = phuongThuc;
         this.recyclerView = recyclerView;
         this.progressBar = progressBar;
         this.context = context;
@@ -42,7 +53,13 @@ public class AsyncTask_Category extends AsyncTask<Void, CategoryDTO,Void> {
 
     @Override
     protected void onPreExecute() {
-        adapter = new Category_Item(context,listTemp);
+
+        if (UID.equals("")){
+            adapter = new Discount_Item(listTemp);
+        }
+        else {
+            adapter = new Discount_Item(context,listTemp,UID,PhuongThuc);
+        }
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.VISIBLE);
     }
@@ -50,8 +67,7 @@ public class AsyncTask_Category extends AsyncTask<Void, CategoryDTO,Void> {
     @Override
     protected Void doInBackground(Void... voids) {
 
-
-        for (CategoryDTO s : datalist){
+        for (DiscountDTO s : datalist){
             publishProgress(s);
 
             try {
@@ -67,10 +83,9 @@ public class AsyncTask_Category extends AsyncTask<Void, CategoryDTO,Void> {
 
 
     @Override
-    protected void onProgressUpdate(CategoryDTO... values) {
+    protected void onProgressUpdate(DiscountDTO... values) {
 
         listTemp.add(values[0]);
-
         adapter.notifyDataSetChanged();
 
     }

@@ -50,7 +50,7 @@ public class AsyncTask_PayDetails extends AsyncTask<Void,CartDTO,Void> {
         for (CartDTO s : datalist){
             publishProgress(s);
             try{
-                Thread.sleep(1000);
+                Thread.sleep(500);
             }catch (InterruptedException e){
                 e.printStackTrace();
             }

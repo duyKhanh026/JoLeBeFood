@@ -1,10 +1,12 @@
 package com.example.jolebefood;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Cart_Item;
+import com.example.jolebefood.AsyncTask.AsyncTask_Cart;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DAO.CartDAO.OnGetListCartListener;
 import com.example.jolebefood.DTO.CartDTO;
@@ -29,10 +32,13 @@ public class Cart extends AppCompatActivity {
     private TextView total, delivery, total_pay;
     private Cart_Item adapter;
     private ImageButton back_button;
+
+    private ProgressBar progressBar;
     private String userId;
 
     NumberFormat currencyFormat;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +56,7 @@ public class Cart extends AppCompatActivity {
         total = findViewById(R.id.total);
         delivery = findViewById(R.id.delivery);
         total_pay = findViewById(R.id.total_pay);
+        progressBar = findViewById(R.id.progressBar_Cart);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(Cart.this));
 
@@ -65,8 +72,7 @@ public class Cart extends AppCompatActivity {
         new CartDAO().getList(userId, datalist, new OnGetListCartListener() {
             @Override
             public void onGetListCartSuccess() {
-                adapter = new Cart_Item(datalist);
-                recyclerView.setAdapter(adapter);
+                new AsyncTask_Cart(recyclerView,progressBar,Cart.this,datalist).execute();
 
                 int totalAmount = calculateTotalAmount(datalist);
                 total.setText(currencyFormat.format(totalAmount));

@@ -52,7 +52,7 @@ public class AsyncTask_OrderDetails  extends AsyncTask<Void, OrderDetailsDTO,Voi
         for (OrderDetailsDTO s : datalist){
             publishProgress(s);
             try{
-                Thread.sleep(1000);
+                Thread.sleep(500);
             }catch (InterruptedException e){
                 e.printStackTrace();
             }
