@@ -61,6 +61,7 @@
             android:drawableLeft="@drawable/baseline_key_24"
             android:drawablePadding="13dp"
             android:hint="Password"
+            android:inputType="textPassword"
             android:textColorHint="#CCCCCC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
