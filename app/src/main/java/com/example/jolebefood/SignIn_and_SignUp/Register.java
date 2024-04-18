@@ -104,7 +104,6 @@ public class Register extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             String useridd = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//                            databaseReference = FirebaseDatabase.getInstance().getReference("User").child(useridd);
                             UserDTO user = new UserDTO(userPassword,userName,userEmail,userAddress,userPhone);
                             new Register_DAO().SetDataUser(useridd, user,  new OnGetRegiterListener() {
                                 @Override

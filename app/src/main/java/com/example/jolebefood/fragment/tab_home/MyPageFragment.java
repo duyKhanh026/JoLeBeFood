@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
+import com.example.jolebefood.AsyncTask.AsyncTask_History;
 import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DTO.OrderDTO;
@@ -29,9 +31,6 @@ public class MyPageFragment extends Fragment {
 
     View view;
 
-    Purchase_History_Item adapter;
-
-    MainActivity mainActivity;
 
     String uid;
 
@@ -47,6 +46,8 @@ public class MyPageFragment extends Fragment {
 
         RecyclerView recyclerView = view.findViewById(R.id.RecycleView_LichSu);
 
+        ProgressBar progressBar = view.findViewById(R.id.progressBar_LichSu);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         ArrayList<OrderDTO> dataList = new ArrayList<>();
@@ -54,8 +55,7 @@ public class MyPageFragment extends Fragment {
         new OrderDAO().getList(uid, dataList, new OnGetListOrderListener() {
             @Override
             public void onGetListOrderSuccess() {
-                adapter = new Purchase_History_Item(dataList);
-                recyclerView.setAdapter(adapter);
+                new AsyncTask_History(recyclerView,progressBar,getContext(),dataList).execute();
             }
 
             @Override

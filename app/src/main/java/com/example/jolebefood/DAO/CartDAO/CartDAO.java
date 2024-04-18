@@ -51,7 +51,7 @@ public class CartDAO {
                         }
                         listener.onGetListCartSuccess();
                     } else {
-                        Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
+                        listener.onGetListCartEmpty();
                     }
                 } else {
                     Log.e(TAG, "Failed to get data. Code: " + response.code());
@@ -98,55 +98,5 @@ public class CartDAO {
             }
         });
     }
-
-    public void deleteCart(String id) {
-        Call<Void> call = api.deleteCart(id);
-        call.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    Log.d(TAG, "Cart deleted successfully");
-                } else {
-                    Log.e(TAG, "Failed to delete Cart. Code: " + response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Log.e(TAG, "Error deleting cart: " + t.getMessage());
-            }
-        });
-    }
-
-    public void getCartObject(String id, String MaMonAn, CartDTO cartDTO, OnGetListCartListener listener) {
-        Call<CartDTO> call = api.getCartObject(id,MaMonAn);
-        call.enqueue(new Callback<CartDTO>() {
-            @Override
-            public void onResponse(Call<CartDTO> call, Response<CartDTO> response) {
-                if (response.isSuccessful()) {
-                    CartDTO data = response.body();
-                    if (data != null) {
-                        Log.e(TAG, "sai"+cartDTO.getMaMonAn());
-                        cartDTO.setMaMonAn(data.getMaMonAn());
-                        cartDTO.setImage(data.getImage());
-                        cartDTO.setSL(data.getSL());
-                        cartDTO.setTenMonAn(data.getTenMonAn());
-                        cartDTO.setTongTien(data.getTongTien());
-                        listener.onGetObjectSuccess();
-                    } else {
-                        Log.e(TAG, "Data rỗng hoặc không hợp lệ.");
-                    }
-                } else {
-                    Log.e(TAG, "Failed to get data. Code: " + response.code());
-                }
-            }
-            @Override
-            public void onFailure(Call<CartDTO> call, Throwable t) {
-                Log.e(TAG, "Error getting data: " + t.getMessage());
-            }
-        });
-    }
-
-
 
 }

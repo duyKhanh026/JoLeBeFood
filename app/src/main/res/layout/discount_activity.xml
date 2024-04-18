@@ -57,6 +57,14 @@
             android:background="@drawable/background_radius"
             android:textStyle="bold"/>
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:id="@+id/progressBar_Discount"
+            android:elevation="8dp"/>
+
 
 
         <androidx.recyclerview.widget.RecyclerView

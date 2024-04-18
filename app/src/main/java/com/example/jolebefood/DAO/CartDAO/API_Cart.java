@@ -20,10 +20,4 @@ public interface API_Cart {
 
     @DELETE("/Cart/{id}/{MaMonAn}.json")
     Call<Void> deleteData(@Path("id") String id, @Path("MaMonAn") String MaMonAn);
-
-    @DELETE("/Cart/{id}.json")
-    Call<Void> deleteCart(@Path("id") String id);
-
-    @GET("/Cart/{id}/{news}.json")
-    Call<CartDTO> getCartObject(@Path("id") String id, @Path("MaMonAn") String MaMonAn);
 }

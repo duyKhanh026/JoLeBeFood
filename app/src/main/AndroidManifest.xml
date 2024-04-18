@@ -57,7 +57,7 @@
             android:name=".fragment.tab_home.ImportDisCount"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SignIn_and_SignUp.Intro"
             android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
@@ -79,7 +79,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".SignIn_and_SignUp.Intro"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity

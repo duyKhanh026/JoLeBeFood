@@ -27,7 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Login_Gmail extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText Email,Password;
-    Button btn_SignIn;
+    Button btn_SignIn,btnNextSDT;
     TextView SignUp,QuenMK;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +39,17 @@ public class Login_Gmail extends AppCompatActivity {
         btn_SignIn = findViewById(R.id.btn_SignIn_Email);
         SignUp = findViewById(R.id.TV_SignUp_Email);
         QuenMK = findViewById(R.id.QuenMK);
+        btnNextSDT = findViewById(R.id.NextDN_SDT);
 
         auth = FirebaseAuth.getInstance();
 
+        btnNextSDT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login_Gmail.this, Login_Phone.class);
+                startActivity(intent);
+            }
+        });
         btn_SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -52,7 +60,7 @@ public class Login_Gmail extends AppCompatActivity {
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Login_Gmail.this, MainMenu.class);
+                Intent intent = new Intent(Login_Gmail.this, Register.class);
                 startActivity(intent);
             }
         });

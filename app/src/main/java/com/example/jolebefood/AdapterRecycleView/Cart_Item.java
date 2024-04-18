@@ -120,13 +120,11 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     }
 
     private void deleteCartItem(CartDTO cartItem, int position) {
-        if (position >= 0 && position < datalist.size()) {
-            CartDAO cartDAO = new CartDAO();
-            cartDAO.deleteData(cartItem, userId);
+        CartDAO cartDAO = new CartDAO();
+        cartDAO.deleteData(cartItem, userId);
+        if (position < datalist.size()) {
             datalist.remove(position);
             notifyItemRemoved(position);
-        } else {
-            Log.e("Cart_Item", "Invalid position: " + position);
         }
     }
 

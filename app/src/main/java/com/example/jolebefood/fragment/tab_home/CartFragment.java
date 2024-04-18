@@ -44,7 +44,9 @@ public class CartFragment extends Fragment {
                 recyclerView.setAdapter(adapter);
             }
             @Override
-            public void onGetObjectSuccess() {
+            public void onGetListCartEmpty() {
+                adapter = new Cart_Item(datalist);
+                recyclerView.setAdapter(adapter);
             }
         });
 

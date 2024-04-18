@@ -28,7 +28,7 @@
         android:layout_height="30dp"
         android:id="@+id/textView7"
         android:fontFamily="cursive"
-        android:text="Design by Nhóm 5"
+        android:text="Chào mừng quý khách"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#FDFDFD"

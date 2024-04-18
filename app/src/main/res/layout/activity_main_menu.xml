@@ -58,7 +58,7 @@
             android:backgroundTint="@color/red"
             android:drawableLeft="@drawable/whitemail"
             android:paddingLeft="10dp"
-            android:text="SigIn with Email"
+            android:text="Đăng nhập với Email"
             android:textColor="#FFFFFF" />
 
         <Button
@@ -71,7 +71,7 @@
             android:drawableLeft="@drawable/phonewhite"
             android:gravity="center"
             android:paddingLeft="10dp"
-            android:text="SignIn with Phone"
+            android:text="Đăng nhập với số điện thoại"
             android:textColor="#FFFFFF" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -121,7 +121,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="7dp"
-                android:text="OR"
+                android:text="hoặc"
                 android:textAlignment="center"
                 android:textColor="#090909"
                 android:textSize="17sp" />
@@ -142,7 +142,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
             android:backgroundTint="@color/green"
-            android:text="Signup"
+            android:text="Đăng ký"
             android:textColor="#FFFFFF" />
 
     </LinearLayout>

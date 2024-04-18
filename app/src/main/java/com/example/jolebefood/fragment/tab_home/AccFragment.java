@@ -18,6 +18,9 @@ import android.widget.Toast;
 
 import com.example.jolebefood.Cart;
 import com.example.jolebefood.ChangePassword;
+import com.example.jolebefood.DAO.RegisterDAO.OnGetRegiterListener;
+import com.example.jolebefood.DAO.RegisterDAO.Register_DAO;
+import com.example.jolebefood.DTO.UserDTO;
 import com.example.jolebefood.Discount;
 import com.example.jolebefood.EditAccount;
 import com.example.jolebefood.OrderDetails;
@@ -27,6 +30,8 @@ import com.example.jolebefood.SignIn_and_SignUp.Login_Gmail;
 import com.example.jolebefood.SignIn_and_SignUp.Login_Phone;
 import com.example.jolebefood.SignIn_and_SignUp.MainMenu;
 import com.example.jolebefood.SignIn_and_SignUp.Register;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Set;
 
@@ -46,8 +51,9 @@ public class AccFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView KM,LSMH,GH,TTMH,Setting,CSTK;
+    TextView KM,LSMH,GH,TTMH,Setting,CSTK,NameUser;
     ViewPager vpadater;
+    UserDTO userDTO;
     public AccFragment(ViewPager vpadater) {
         this.vpadater = vpadater;
     }
@@ -93,7 +99,21 @@ public class AccFragment extends Fragment {
         TTMH = view.findViewById(R.id.TTMH);
         Setting = view.findViewById(R.id.Setting);
         CSTK = view.findViewById(R.id.CSTK);
+        NameUser = view.findViewById(R.id.NameUser);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        userDTO = new UserDTO();
+        // Lấy thông tin người dùng
+        new Register_DAO().getUserObject(user.getUid(), userDTO, new OnGetRegiterListener() {
+            @Override
+            public void OnSentGmail() {
 
+            }
+
+            @Override
+            public void GetUserSuccess() {
+                NameUser.setText(userDTO.getName());
+            }
+        });
         KM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
