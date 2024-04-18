@@ -71,7 +71,7 @@ public class Notification {
     }
 
     public void scheduleLunchNotification() {
-        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager1 = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         Intent lunchIntent = new Intent(context, LunchReceiver.class);
         lunchIntent.setAction("LUNCH_NOTIFICATION");
@@ -90,8 +90,8 @@ public class Notification {
         calendar.set(Calendar.MINUTE, 00);
         calendar.set(Calendar.SECOND, 0);
 
-        if (alarmManager != null) {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, lunchPendingIntent);
+        if (alarmManager1 != null) {
+            alarmManager1.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, lunchPendingIntent);
         }
     }
 

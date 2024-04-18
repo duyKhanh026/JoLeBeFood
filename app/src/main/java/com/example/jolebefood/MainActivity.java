@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_NOTIFICATION = 1;
     private static final String CHANNEL_ID = "my_firebase_channel";
     public Notification notification;
+    public Notification notification1;
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
@@ -110,9 +111,10 @@ public class MainActivity extends AppCompatActivity {
 
         Notification_permission();
         notification = new Notification(this);
+        notification1 = new Notification(this);
 
 
-        notification.scheduleLunchNotification();       // 11h
+        notification1.scheduleLunchNotification();       // 11h
         notification.scheduleDinnerNotification();      // 18h
     }
 
