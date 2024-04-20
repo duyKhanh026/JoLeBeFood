@@ -4,36 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.jolebefood.Cart;
-import com.example.jolebefood.ChangePassword;
+import com.example.jolebefood.Activity.Cart;
+import com.example.jolebefood.Activity.ChangePassword;
 import com.example.jolebefood.DAO.RegisterDAO.OnGetRegiterListener;
 import com.example.jolebefood.DAO.RegisterDAO.Register_DAO;
 import com.example.jolebefood.DTO.UserDTO;
-import com.example.jolebefood.Discount;
-import com.example.jolebefood.EditAccount;
-import com.example.jolebefood.OrderDetails;
-import com.example.jolebefood.OrderHistory;
+import com.example.jolebefood.Activity.Discount;
+import com.example.jolebefood.Activity.EditAccount;
 import com.example.jolebefood.R;
-import com.example.jolebefood.SignIn_and_SignUp.Login_Gmail;
-import com.example.jolebefood.SignIn_and_SignUp.Login_Phone;
-import com.example.jolebefood.SignIn_and_SignUp.MainMenu;
-import com.example.jolebefood.SignIn_and_SignUp.Register;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.

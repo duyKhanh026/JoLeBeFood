@@ -1,31 +1,22 @@
 package com.example.jolebefood.fragment.tab_home;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
 import com.example.jolebefood.AsyncTask.AsyncTask_History;
 import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DTO.OrderDTO;
-import com.example.jolebefood.DTO.OrderDetailsDTO;
-import com.example.jolebefood.MainActivity;
 import com.example.jolebefood.R;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 public class MyPageFragment extends Fragment {
 

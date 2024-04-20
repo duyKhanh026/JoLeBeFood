@@ -11,14 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.DAO.CallFirebaseStrorage;
 import com.example.jolebefood.DTO.CategoryDTO;
-import com.example.jolebefood.DTO.ProductDTO;
-import com.example.jolebefood.Product;
+import com.example.jolebefood.Activity.Product;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -27,7 +25,6 @@ import com.google.firebase.storage.StorageReference;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Category_Item extends RecyclerView.Adapter<Category_Item.MyViewHolder>{
     View view;

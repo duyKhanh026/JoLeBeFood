@@ -81,4 +81,6 @@ dependencies {
     implementation("com.google.firebase:firebase-storage")
     implementation("androidx.biometric:biometric:1.1.0")
     implementation ("androidx.core:core:1.7.0")
+
+    implementation("com.google.android.gms:play-services-location:21.2.0")
 }

@@ -10,6 +10,12 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <!-- Include only if your app benefits from precise location access. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,16 +27,16 @@
         android:theme="@style/Theme.JoLeBeFood"
         tools:targetApi="31">
         <activity
-            android:name=".ActivityForPay"
+            android:name=".Activity.ActivityForPay"
             android:exported="false" />
         <activity
             android:name=".SignIn_and_SignUp.Fingerprint"
             android:exported="false" />
         <activity
-            android:name=".ChangePassword"
+            android:name=".Activity.ChangePassword"
             android:exported="false" />
         <activity
-            android:name=".EditAccount"
+            android:name=".Activity.EditAccount"
             android:exported="false" />
         <activity
             android:name=".SignIn_and_SignUp.SendOtp"
@@ -67,23 +73,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OrderDetails"
+            android:name=".Activity.OrderDetails"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".OrderHistory"
+            android:name=".Activity.OrderHistory"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".Discount"
+            android:name=".Activity.Discount"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activity.MainActivity"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".Product"
+            android:name=".Activity.Product"
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
@@ -91,7 +97,7 @@
             android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".Cart"
+            android:name=".Activity.Cart"
             android:screenOrientation="portrait"
             android:exported="false" />
 
@@ -109,7 +115,7 @@
         <meta-data
             android:name="com.facebook.sdk.ClientToken"
             android:value="@string/facebook_client_token" />
-        <receiver android:name=".LunchReceiver" />
+        <receiver android:name=".Activity.LunchReceiver" />
 
     </application>
 

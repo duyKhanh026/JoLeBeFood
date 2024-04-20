@@ -1,4 +1,4 @@
-package com.example.jolebefood;
+package com.example.jolebefood.Activity;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;

@@ -1,6 +1,5 @@
 package com.example.jolebefood.DAO;
 
-import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -9,19 +8,15 @@ import android.content.Intent;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
-import androidx.core.app.NotificationChannelCompat;
 import androidx.core.app.NotificationCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import com.example.jolebefood.Cart;
-import com.example.jolebefood.Discount;
-import com.example.jolebefood.MainActivity;
+import com.example.jolebefood.Activity.Cart;
+import com.example.jolebefood.Activity.Discount;
+import com.example.jolebefood.Activity.MainActivity;
 import com.example.jolebefood.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
-
-import java.util.Calendar;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 

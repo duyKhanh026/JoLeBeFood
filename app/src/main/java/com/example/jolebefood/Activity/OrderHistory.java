@@ -1,4 +1,4 @@
-package com.example.jolebefood;
+package com.example.jolebefood.Activity;
 
 import android.os.Bundle;
 
@@ -11,6 +11,7 @@ import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
 import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DTO.OrderDTO;
+import com.example.jolebefood.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

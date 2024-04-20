@@ -1,4 +1,4 @@
-package com.example.jolebefood;
+package com.example.jolebefood.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -13,14 +13,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
 
-import com.example.jolebefood.AdapterRecycleView.Cart_Item;
 import com.example.jolebefood.AsyncTask.AsyncTask_Cart;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DAO.CartDAO.OnGetListCartListener;
 import com.example.jolebefood.DTO.CartDTO;
-import com.example.jolebefood.fragment.tab_home.CategoryFragment;
+import com.example.jolebefood.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
