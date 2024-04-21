@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
@@ -73,51 +74,89 @@ public class Notification {
     public void scheduleLunchNotification() {
         AlarmManager alarmManager1 = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        Intent lunchIntent = new Intent(context, LunchReceiver.class);
-        lunchIntent.setAction("LUNCH_NOTIFICATION");
-        lunchIntent.putExtra("notification_title", "Thông báo 11h");
-        lunchIntent.putExtra("notification_content", "Bạn hãy chuẩn bị cho bữa trưa nhé!");
+        if (!isPastLunchTime()){
+            Intent lunchIntent = new Intent(context, LunchReceiver.class);
+            lunchIntent.setAction("LUNCH_NOTIFICATION");
+            lunchIntent.putExtra("notification_title", "Thông báo 11h");
+            lunchIntent.putExtra("notification_content", "Bạn hãy chuẩn bị cho bữa trưa nhé!");
 
-        PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(
-                context,
-                0,
-                lunchIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Thêm FLAG_IMMUTABLE
-        );
-        // Đặt thông báo cho 11h
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 11);
-        calendar.set(Calendar.MINUTE, 00);
-        calendar.set(Calendar.SECOND, 0);
+            PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(
+                    context,
+                    0,
+                    lunchIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Thêm FLAG_IMMUTABLE
+            );
+            // Đặt thông báo cho 11h
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 11);
+            calendar.set(Calendar.MINUTE, 10);
+            calendar.set(Calendar.SECOND, 0);
 
-        if (alarmManager1 != null) {
-            alarmManager1.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, lunchPendingIntent);
+            if (alarmManager1 != null) {
+                alarmManager1.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, lunchPendingIntent);
+            }       // 11h
+        }else {
+            Toast.makeText(context.getApplicationContext(), "Đã quá muộn", Toast.LENGTH_SHORT).show();
         }
+
+
     }
 
     public void scheduleDinnerNotification() {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        Intent lunchIntent = new Intent(context, LunchReceiver.class);
-        lunchIntent.setAction("LUNCH_NOTIFICATION");
-        lunchIntent.putExtra("notification_title", "Thông báo 18h");
-        lunchIntent.putExtra("notification_content", "Bạn hãy chuẩn bị cho bữa tối nhé!");
+        if (!isPastLunchTime()){
+            Intent lunchIntent = new Intent(context, LunchReceiver.class);
+            lunchIntent.setAction("LUNCH_NOTIFICATION");
+            lunchIntent.putExtra("notification_title", "Thông báo 18h");
+            lunchIntent.putExtra("notification_content", "Bạn hãy chuẩn bị cho bữa tối nhé!");
 
-        PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(
-                context,
-                0,
-                lunchIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Thêm FLAG_IMMUTABLE
-        );
-        // Đặt thông báo cho 11h
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 18);
-        calendar.set(Calendar.MINUTE, 00);
-        calendar.set(Calendar.SECOND, 0);
+            PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(
+                    context,
+                    0,
+                    lunchIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Thêm FLAG_IMMUTABLE
+            );
+            // Đặt thông báo cho 18h
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, 18);
+            calendar.set(Calendar.MINUTE, 10);
+            calendar.set(Calendar.SECOND, 0);
 
-        if (alarmManager != null) {
-            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, lunchPendingIntent);
+            if (alarmManager != null) {
+                alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, lunchPendingIntent);
+            }       // 18h
+        }else {
+            Toast.makeText(context.getApplicationContext(), "Đã quá muộn", Toast.LENGTH_SHORT).show();
         }
+
+
+    }
+
+    private boolean isPastLunchTime() {
+        Calendar currentTime = Calendar.getInstance();
+        int currentHour = currentTime.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = currentTime.get(Calendar.MINUTE);
+
+        // Giả sử giờ ăn trưa là 11:00 AM
+        int lunchHour = 11;
+        int lunchMinute = 0;
+
+        // Kiểm tra xem thời gian hiện tại đã muộn hơn giờ ăn trưa hay chưa
+        return (currentHour > lunchHour) || (currentHour == lunchHour && currentMinute > lunchMinute);
+    }
+
+    private boolean isPastDinnerTime() {
+        Calendar currentTime = Calendar.getInstance();
+        int currentHour = currentTime.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = currentTime.get(Calendar.MINUTE);
+
+        // Giả sử giờ ăn tối là 6:00 PM
+        int dinnerHour = 18;
+        int dinnerMinute = 0;
+
+        // Kiểm tra xem thời gian hiện tại đã muộn hơn giờ ăn tối hay chưa
+        return (currentHour > dinnerHour) || (currentHour == dinnerHour && currentMinute > dinnerMinute);
     }
 }
 
