@@ -76,7 +76,6 @@ public class OrderDAO {
                 if (response.isSuccessful()) {
                     OrderDTO data = response.body();
                     if (data != null) {
-                        Log.e(TAG, "sai"+orderDTO.getMaDH());
                         orderDTO.setMaDH(data.getMaDH());
                         orderDTO.setMaKM(data.getMaKM());
                         orderDTO.setMaKH(data.getMaKH());
@@ -85,6 +84,7 @@ public class OrderDAO {
                         orderDTO.setListOrderDetails(data.getListOrderDetails());
                         orderDTO.setTongTien(data.getTongTien());
                         orderDTO.setPhuongThucThanhToan(data.getPhuongThucThanhToan());
+                        orderDTO.setDiaChiGiaoHang(data.getDiaChiGiaoHang());
                         listener.onGetObjectSuccess();
                     } else {
                         Log.e(TAG, "Data rỗng hoặc không hợp lệ.");

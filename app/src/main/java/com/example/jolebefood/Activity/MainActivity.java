@@ -103,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
         GPS_permission();
 
         Notification_permission();
+
         notification = new Notification(this);
         notification1 = new Notification(this);
 
