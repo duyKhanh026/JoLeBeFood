@@ -12,7 +12,9 @@ public class OrderDTO implements Serializable{
 
     private List<OrderDetailsDTO> listOrderDetails;
 
-    public OrderDTO(String maDH, String MaKH, String maKM, String phuongThucThanhToan, int tongTien, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, List<OrderDetailsDTO> listOrderDetails) {
+    private String DiaChiGiaoHang;
+
+    public OrderDTO(String maDH, String MaKH, String maKM, String phuongThucThanhToan, int tongTien, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, List<OrderDetailsDTO> listOrderDetails, String DiaChiGiaoHang) {
         MaDH = maDH;
         this.MaKH = MaKH;
         MaKM = maKM;
@@ -21,18 +23,9 @@ public class OrderDTO implements Serializable{
         ThoiGianDat = thoiGianDat;
         ThoiGianHoanThanh = thoiGianHoanThanh;
         this.listOrderDetails = listOrderDetails;
+        this.DiaChiGiaoHang = DiaChiGiaoHang;
     }
 
-    public OrderDTO(String maDH, String maKM, String phuongThucThanhToan, String MaKH, Timestamp thoiGianDat, Timestamp thoiGianHoanThanh, int tongTien, List<OrderDetailsDTO> listOrderDetails) {
-        MaDH = maDH;
-        this.MaKH = MaKH;
-        MaKM = maKM;
-        PhuongThucThanhToan = phuongThucThanhToan;
-        TongTien = tongTien;
-        ThoiGianDat = thoiGianDat;
-        ThoiGianHoanThanh = thoiGianHoanThanh;
-        this.listOrderDetails = listOrderDetails;
-    }
 
     public OrderDTO() {
     }
@@ -99,5 +92,13 @@ public class OrderDTO implements Serializable{
 
     public void setListOrderDetails(List<OrderDetailsDTO> listOrderDetails) {
         this.listOrderDetails = listOrderDetails;
+    }
+
+    public String getDiaChiGiaoHang() {
+        return DiaChiGiaoHang;
+    }
+
+    public void setDiaChiGiaoHang(String diaChiGiaoHang) {
+        DiaChiGiaoHang = diaChiGiaoHang;
     }
 }

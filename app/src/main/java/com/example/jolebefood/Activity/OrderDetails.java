@@ -44,7 +44,7 @@ public class OrderDetails extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    private TextView txtName,txtPhone,txtDiaChi,txtTongTien,txtGiamGia,txtThanhTien,txtPhuongThuc,txtThoiGianDat,txtThoiGianHT,txtDiscount;
+    private TextView txtName,txtPhone,txtDiaChi,txtTongTien,txtGiamGia,txtThanhTien,txtPhuongThuc,txtThoiGianDat,txtThoiGianHT,txtDiscount,txtPGH;
 
     private Button btnThanhToan;
 
@@ -147,6 +147,7 @@ public class OrderDetails extends AppCompatActivity {
         txtDiscount = findViewById(R.id.txtDiscount_CTHD);
         btnBack = findViewById(R.id.button_back_cthd);
         progressBar = findViewById(R.id.progressBar_CTDH);
+        txtPGH = findViewById(R.id.txtPGH_CTHD);
     }
 
     public void SetDataLichSu(){
@@ -163,8 +164,13 @@ public class OrderDetails extends AppCompatActivity {
 
                 new AsyncTask_OrderDetails(recyclerView,progressBar,OrderDetails.this, (ArrayList<OrderDetailsDTO>) orderDTO.getListOrderDetails()).execute();
 
+                txtDiaChi.setText(orderDTO.getDiaChiGiaoHang());
+
                 txtPhuongThuc.setText(orderDTO.getPhuongThucThanhToan());
+
                 txtThoiGianDat.setText(sdf.format(orderDTO.getThoiGianDat()));
+
+
 
                 // Kiểm tra thời gian hoàn thành với thời gian hiện tại
                 Timestamp currrentTime = new Timestamp(System.currentTimeMillis());
@@ -176,6 +182,10 @@ public class OrderDetails extends AppCompatActivity {
 
                 txtTongTien.setText(currencyFormat.format(orderDTO.getTongTien()));
 
+                int ThanhTien = calculateTotalAmount(orderDTO.getListOrderDetails());
+
+                txtThanhTien.setText(currencyFormat.format(ThanhTien));
+
                 new Register_DAO().getUserObject(orderDTO.getMaKH(), userDTO, new OnGetRegiterListener() {
                     @Override
                     public void OnSentGmail() {
@@ -183,7 +193,6 @@ public class OrderDetails extends AppCompatActivity {
 
                     @Override
                     public void GetUserSuccess() {
-                        txtDiaChi.setText(userDTO.getAddress());
                         txtName.setText(userDTO.getName());
                         txtPhone.setText(userDTO.getPhone());
                     }
@@ -194,6 +203,8 @@ public class OrderDetails extends AppCompatActivity {
                     txtGiamGia.setText("-"+currencyFormat.format(0));
                     txtThanhTien.setText(currencyFormat.format(orderDTO.getTongTien() - 0));
                     txtDiscount.setText(orderDTO.getMaKM());
+                    txtPGH.setText(currencyFormat.format(orderDTO.getTongTien() + 0 - ThanhTien));
+
                 }
                 else{
                     new DiscountDAO().getDiscountObject(orderDTO.getMaKM(), discountDTO, new OnGetListDiscountListener() {
@@ -204,8 +215,11 @@ public class OrderDetails extends AppCompatActivity {
 
                         @Override
                         public void onGetObjectSuccess() {
-                            txtGiamGia.setText("-"+currencyFormat.format(discountDTO.getGiatrikm()));
-                            txtThanhTien.setText(currencyFormat.format(orderDTO.getTongTien() - discountDTO.getGiatrikm()));
+
+                            txtGiamGia.setText("- "+currencyFormat.format(discountDTO.getGiatrikm()));
+
+                            txtPGH.setText(currencyFormat.format(orderDTO.getTongTien() + discountDTO.getGiatrikm() - ThanhTien));
+
                             txtDiscount.setText(discountDTO.getTenkm());
                         }
                     });
@@ -213,5 +227,13 @@ public class OrderDetails extends AppCompatActivity {
             }
         });
 
+    }
+
+    private int calculateTotalAmount(List<OrderDetailsDTO> list) {
+        int totalAmount = 0;
+        for (OrderDetailsDTO item : list) {
+            totalAmount += item.getThanhTien();
+        }
+        return totalAmount;
     }
 }

@@ -99,4 +99,25 @@ public class CartDAO {
         });
     }
 
+
+    // Xóa giỏ hàng khi thanh toán xong
+    public void deleteCart(String id) {
+        Call<Void> call = api.deleteCart(id);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d(TAG, "Cart deleted successfully");
+                } else {
+                    Log.e(TAG, "Failed to delete cart. Code: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e(TAG, "Error deleting cart: " + t.getMessage());
+            }
+        });
+    }
+
 }

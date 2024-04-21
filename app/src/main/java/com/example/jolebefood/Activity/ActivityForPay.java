@@ -214,6 +214,8 @@ public class ActivityForPay extends AppCompatActivity {
 
                     orderObject.setTongTien(calculateTotalAmount(datalist) + PhiGiaoHang - DiscountFee);
 
+                    orderObject.setDiaChiGiaoHang(txtDiaChi.getText().toString().trim());
+
                     // add list chi tiết đơn hàng
                     SetOrderDetails(datalist);
 
@@ -231,8 +233,7 @@ public class ActivityForPay extends AppCompatActivity {
                         TangSoLuongMua(temp);
                     }
 
-                    //new CartDAO().deleteCart(UID);
-
+                    new CartDAO().deleteCart(UID);
 
                 }
             }
