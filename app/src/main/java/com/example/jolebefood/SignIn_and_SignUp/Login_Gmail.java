@@ -16,12 +16,17 @@ import com.example.jolebefood.Activity.MainActivity;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.w3c.dom.Text;
 
 public class Login_Gmail extends AppCompatActivity {
     private FirebaseAuth auth;
     private EditText Email,Password;
+    private TextInputLayout TextInput_Email,TextInput_Password;
+
     Button btn_SignIn,btnNextSDT;
     TextView SignUp,QuenMK;
     @Override
@@ -29,22 +34,17 @@ public class Login_Gmail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_gmail);
 
-        Email = findViewById(R.id.Email_DN);
-        Password = findViewById(R.id.Password_DN_email);
+        TextInput_Email = findViewById(R.id.EmailTextInput);
+        TextInput_Password = findViewById(R.id.PasswordTextInput);
+
+        Email = TextInput_Email.getEditText();
+        Password = TextInput_Password.getEditText();
         btn_SignIn = findViewById(R.id.btn_SignIn_Email);
         SignUp = findViewById(R.id.TV_SignUp_Email);
         QuenMK = findViewById(R.id.QuenMK);
-        btnNextSDT = findViewById(R.id.NextDN_SDT);
 
         auth = FirebaseAuth.getInstance();
 
-        btnNextSDT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Login_Gmail.this, Login_Phone.class);
-                startActivity(intent);
-            }
-        });
         btn_SignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="@color/red"
+            android:background="@drawable/button_radius"
             android:drawableLeft="@drawable/whitemail"
             android:paddingLeft="10dp"
             android:text="Đăng nhập với Email"
@@ -67,11 +68,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:background="@drawable/button_radius"
             android:backgroundTint="@color/blueish"
             android:drawableLeft="@drawable/phonewhite"
             android:gravity="center"
             android:paddingLeft="10dp"
-            android:text="Đăng nhập với số điện thoại"
+            android:text="  Đăng nhập với số điện thoại"
             android:textColor="#FFFFFF" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -141,6 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
+            android:background="@drawable/button_radius"
             android:backgroundTint="@color/green"
             android:text="Đăng ký"
             android:textColor="#FFFFFF" />

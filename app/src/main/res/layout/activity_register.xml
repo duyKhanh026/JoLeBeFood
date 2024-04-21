@@ -21,7 +21,7 @@
     <LinearLayout
         android:id="@+id/linearlayout_dk"
         android:layout_width="275dp"
-        android:layout_height="420dp"
+        android:layout_height="490dp"
         android:background="@drawable/background_shape"
         android:orientation="vertical"
         android:padding="10dp"
@@ -36,87 +36,100 @@
             android:id="@+id/imageView10"
             android:layout_width="157dp"
             android:layout_height="65dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/logo_register" />
 
-        <EditText
-            android:id="@+id/ET_FullName"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#CCCCCC"
-            android:drawableLeft="@drawable/baseline_account_circle_24_black"
-            android:drawablePadding="13dp"
-            android:hint="Full name"
             android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView10"
-            app:layout_constraintWidth_percent=".8" />
-
-        <EditText
-            android:id="@+id/ET_Password"
+            android:id="@+id/FullnameTextInput"
+            android:hint="Họ và tên">
+            <com.google.android.material.textfield.TextInputEditText
+                android:drawableLeft="@drawable/baseline_account_circle_24_black"
+                android:id="@+id/FullnameEditText"
+                android:backgroundTint="#CCCCCC"
+                android:drawablePadding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#CCCCCC"
-            android:drawableLeft="@drawable/baseline_key_24"
-            android:drawablePadding="13dp"
-            android:hint="Password"
-            android:inputType="textPassword"
             android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView10"
-            app:layout_constraintWidth_percent=".8" />
-
-        <EditText
-            android:id="@+id/ET_Email"
+            android:id="@+id/EmailTextInput"
+            android:hint="Email">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/EmailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#CCCCCC"
+                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawablePadding="10dp"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_email_24"
-            android:drawablePadding="13dp"
-            android:hint="Email "
             android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView10"
-            app:layout_constraintWidth_percent=".8"
-            android:backgroundTint="#CCCCCC" />
-
-        <EditText
-            android:id="@+id/ET_Phone"
+            android:id="@+id/PasswordTextInput"
+            android:hint="Mật khẩu">
+            <com.google.android.material.textfield.TextInputEditText
+                android:drawableLeft="@drawable/baseline_key_24"
+                android:id="@+id/PasswordEditText"
+                android:backgroundTint="#CCCCCC"
+                android:drawablePadding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#CCCCCC"
-            android:drawableLeft="@drawable/baseline_local_phone_24"
-            android:drawablePadding="13dp"
-            android:hint="Phone"
+
             android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ET_Email" />
-
-
-        <EditText
-            android:id="@+id/ET_Address"
+            android:id="@+id/PhoneTextInput"
+            android:hint="Số điện thoại">
+            <com.google.android.material.textfield.TextInputEditText
+                android:drawableLeft="@drawable/baseline_local_phone_24"
+                android:id="@+id/PhoneEditText"
+                android:backgroundTint="#CCCCCC"
+                android:drawablePadding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#CCCCCC"
-            android:drawableLeft="@drawable/baseline_house_24"
-            android:drawablePadding="13dp"
-            android:hint="Address"
             android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView10"
-            app:layout_constraintWidth_percent=".8" />
+            android:id="@+id/AddressTextInput"
+            android:hint="Địa chỉ">
+            <com.google.android.material.textfield.TextInputEditText
+                android:drawableLeft="@drawable/baseline_house_24"
+                android:id="@+id/AddressEditText"
+                android:backgroundTint="#CCCCCC"
+                android:drawablePadding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1"/>
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/btn_Signup"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="25dp"
+            android:background="@drawable/button_radius"
             android:backgroundTint="@color/green"
-            android:text="Signup"
+            android:text="Đăng ký"
             android:textColor="#FFFFFF" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -128,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView6"
-                android:text="Already Registerred?"
+                android:text="Đã có tài khoản?"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -138,12 +151,11 @@
                 app:layout_constraintTop_toBottomOf="@+id/Signup"
                 app:layout_constraintVertical_bias="0.498"
                 />
-
             <TextView
                 android:id="@+id/TV_SignIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign In"
+                android:text="Đăng nhập ngay"
                 android:layout_marginLeft="5dp"
                 android:textAlignment="center"
                 android:textColor="@color/red"

@@ -17,6 +17,7 @@ import com.example.jolebefood.Activity.MainActivity;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Login_Phone extends AppCompatActivity {
     EditText PhoneNumber,OtpNumber;
+    private TextInputLayout TextInput_SDT,TextInput_Otp;
     private final String TAG = "Nam Test OTP";
     Button btn_sendotp,signinemail,btn_verifyotp;
     TextView signup;
@@ -40,12 +42,14 @@ public class Login_Phone extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_phone);
 
-        PhoneNumber = (EditText)findViewById(R.id.number);
+        TextInput_SDT = findViewById(R.id.SDTTextInput);
+        TextInput_Otp = findViewById(R.id.CodeTextInput);
+
+        PhoneNumber = TextInput_SDT.getEditText();
         btn_sendotp = (Button)findViewById(R.id.btnSendOTP);
-        signinemail=(Button)findViewById(R.id.btnEmail_LGPhone);
         signup = (TextView)findViewById(R.id.SignUp_LGPhone);
         btn_verifyotp = (Button)findViewById(R.id.btnVerifyOTP);
-        OtpNumber = (EditText)findViewById(R.id.otp_nhanduoc);
+        OtpNumber = TextInput_Otp.getEditText();
         mAuth = FirebaseAuth.getInstance();
 
         btn_sendotp.setOnClickListener(new View.OnClickListener() {
@@ -87,13 +91,6 @@ public class Login_Phone extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Login_Phone.this,Register.class));
-                finish();
-            }
-        });
-        signinemail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Login_Phone.this,Login_Gmail.class));
                 finish();
             }
         });

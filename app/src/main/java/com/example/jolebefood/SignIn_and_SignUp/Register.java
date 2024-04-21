@@ -20,6 +20,7 @@ import com.example.jolebefood.DTO.UserDTO;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -30,21 +31,28 @@ import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
     EditText name,email,password,phone,address;
+    private TextInputLayout TextInput_Fullname,TextInput_Email,TextInput_Password,TextInput_Phone,TextInput_Address;
     Button btn_signup;
     TextView SignIn;
     DatabaseReference databaseReference;
-    CountryCodePicker Cpp;
+
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        name = findViewById(R.id.ET_FullName);
-        email = findViewById(R.id.ET_Email);
-        password = findViewById(R.id.ET_Password);
-        phone = findViewById(R.id.ET_Phone);
-        address = findViewById(R.id.ET_Address);
+        TextInput_Fullname = findViewById(R.id.FullnameTextInput);
+        TextInput_Email = findViewById(R.id.EmailTextInput);
+        TextInput_Password = findViewById(R.id.PasswordTextInput);
+        TextInput_Phone = findViewById(R.id.PhoneTextInput);
+        TextInput_Address = findViewById(R.id.AddressTextInput);
+
+        name = TextInput_Fullname.getEditText();
+        email = TextInput_Email.getEditText();
+        password = TextInput_Password.getEditText();
+        phone = TextInput_Phone.getEditText();
+        address = TextInput_Address.getEditText();
         btn_signup = findViewById(R.id.btn_Signup);
         SignIn = findViewById(R.id.TV_SignIn);
 

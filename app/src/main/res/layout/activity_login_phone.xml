@@ -21,7 +21,7 @@
     <LinearLayout
         android:id="@+id/linearlayout_dk"
         android:layout_width="275dp"
-        android:layout_height="520dp"
+        android:layout_height="490dp"
         android:background="@drawable/background_shape"
         android:orientation="vertical"
         android:padding="10dp"
@@ -44,43 +44,71 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Verify phone number:"
+            android:text="Vui lòng nhập số điện thoại:"
             android:textSize="20dp"
-            android:drawablePadding="13dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView10" />
-
-        <EditText
-            android:id="@+id/number"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+            android:layout_marginBottom="10dp"
+            android:textColorHint="#CCCCCC"
+            android:id="@+id/SDTTextInput"
+            android:hint="Số điện thoại">
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/SDTEditText"
+            android:backgroundTint="#CCCCCC"
+            android:drawablePadding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btnSendOTP"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="15dp"
+            android:background="@drawable/button_radius"
+            android:layout_marginTop="5dp"
             android:backgroundTint="@color/blue_grey"
             android:text="SEND OTP"
             android:textColor="#FFFFFF" />
-        <EditText
-            android:id="@+id/otp_nhanduoc"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
+            android:text="Nhập mã otp nhận được:"
+            android:textSize="20dp"
+            android:layout_marginBottom="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnSendOTP" />
+            app:layout_constraintTop_toBottomOf="@+id/SDTEditText" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textColorHint="#CCCCCC"
+            android:id="@+id/CodeTextInput"
+            android:hint="Mã otp">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/CodeEditText"
+                android:backgroundTint="#CCCCCC"
+                android:drawablePadding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
         <Button
             android:id="@+id/btnVerifyOTP"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@drawable/button_radius"
             android:backgroundTint="@color/red"
             android:text="VERIFY OTP"
             android:textColor="#FFFFFF" />
@@ -104,73 +132,16 @@
                 app:layout_constraintTop_toBottomOf="@+id/Signup"
                 app:layout_constraintVertical_bias="0.498"
                 />
-
             <TextView
                 android:id="@+id/SignUp_LGPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sign Up"
+                android:text="Đăng ký ngay"
                 android:layout_marginLeft="5dp"
                 android:textAlignment="center"
                 android:textColor="@color/red"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-            <TableRow
-                android:id="@+id/hr"
-                android:layout_width="107dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black"/>
-            <TextView
-                android:layout_width="44dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/OR"
-                android:layout_gravity="center"
-                android:text="hoặc"
-                android:textColor="@color/black"
-                android:layout_marginTop="6dp"
-                android:textSize="15sp"
-                android:textAlignment="center"/>
-
-            <TableRow
-                android:id="@+id/dr"
-                android:layout_width="107dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black"/>
-
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/signphone"
-            android:layout_marginTop="20dp"
-            android:text="Đăng nhập với"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
-
-        <Button
-            android:id="@+id/btnEmail_LGPhone"
-            android:layout_width="105dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:backgroundTint="#F06292"
-            android:drawableLeft="@drawable/whitemail"
-            android:padding="10dp"
-            android:text="Email"
-            android:textColor="@color/white" />
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

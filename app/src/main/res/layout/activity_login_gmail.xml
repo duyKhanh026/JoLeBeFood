@@ -21,7 +21,7 @@
     <LinearLayout
         android:id="@+id/linearlayout_dk"
         android:layout_width="275dp"
-        android:layout_height="450dp"
+        android:layout_height="490dp"
         android:background="@drawable/background_shape"
         android:orientation="vertical"
         android:padding="10dp"
@@ -36,37 +36,61 @@
             android:id="@+id/imageView10"
             android:layout_width="157dp"
             android:layout_height="65dp"
+            android:layout_marginBottom="20dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/logo_dn_email" />
-
-        <EditText
-            android:id="@+id/Email_DN"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#CCCCCC"
-            android:drawableLeft="@drawable/baseline_email_24"
-            android:drawablePadding="13dp"
-            android:hint="Email"
+            android:layout_marginBottom="20dp"
             android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView10"
-            app:layout_constraintWidth_percent=".8" />
+            android:id="@+id/EmailTextInput"
+            android:hint="Email">
+            <com.google.android.material.textfield.TextInputEditText
+                android:drawableLeft="@drawable/baseline_email_24"
+                android:id="@+id/EmailEditText"
+                android:backgroundTint="#CCCCCC"
+                android:background="@drawable/edittext_border_gray"
+                android:drawablePadding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/Password_DN_email"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#CCCCCC"
-            android:drawableLeft="@drawable/baseline_key_24"
-            android:drawablePadding="13dp"
-            android:hint="Mật khẩu"
-            android:inputType="textPassword"
+            android:layout_marginBottom="10dp"
             android:textColorHint="#CCCCCC"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView10"
-            app:layout_constraintWidth_percent=".8" />
+            android:id="@+id/PasswordTextInput"
+            android:hint="Mật khẩu">
+            <com.google.android.material.textfield.TextInputEditText
+                android:drawableLeft="@drawable/baseline_key_24"
+                android:id="@+id/PasswordEditText"
+                android:backgroundTint="#CCCCCC"
+                android:background="@drawable/edittext_border_gray"
+                android:drawablePadding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+<!--        <EditText-->
+<!--            android:id="@+id/Password_DN_email"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:backgroundTint="#CCCCCC"-->
+<!--            android:drawableLeft="@drawable/baseline_key_24"-->
+<!--            android:drawablePadding="13dp"-->
+<!--            android:hint="Mật khẩu"-->
+<!--            android:background="@drawable/edittext_border_gray"-->
+<!--            android:inputType="textPassword"-->
+<!--            android:textColorHint="#CCCCCC"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/imageView10"-->
+<!--            app:layout_constraintWidth_percent=".8" />-->
         <TextView
             android:id="@+id/QuenMK"
             android:layout_marginTop="10dp"
@@ -81,7 +105,8 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/button_radius"
             android:backgroundTint="#F06292"
             android:text="Đăng nhập"
             android:textColor="#FFFFFF" />
@@ -117,55 +142,7 @@
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent" />
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-            <TableRow
-                android:id="@+id/hr"
-                android:layout_width="107dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black"/>
-            <TextView
-                android:layout_width="44dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/OR"
-                android:layout_gravity="center"
-                android:text="hoặc"
-                android:textColor="@color/black"
-                android:layout_marginTop="6dp"
-                android:textSize="16sp"
-                android:textAlignment="center"/>
-            <TableRow
-                android:id="@+id/dr"
-                android:layout_width="107dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black"/>
-        </LinearLayout>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/signphone"
-            android:layout_marginTop="20dp"
-            android:text="Đăng nhập với"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="15sp"/>
-        <Button
-            android:id="@+id/NextDN_SDT"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:backgroundTint="#64B5F6"
-            android:drawableLeft="@drawable/phonewhite"
-            android:padding="10dp"
-            android:text="Số điện thoại"
-            android:textColor="@color/white" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
