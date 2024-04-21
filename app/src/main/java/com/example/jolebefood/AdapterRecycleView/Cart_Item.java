@@ -16,12 +16,14 @@ import androidx.annotation.NonNull;
 
 import com.example.jolebefood.DAO.CallFirebaseStrorage;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
+import com.example.jolebefood.DAO.CartDAO.OnGetListCartListener;
 import com.example.jolebefood.DTO.CartDTO;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.annotations.NotNull;
 import com.google.firebase.storage.StorageReference;
 
 import java.text.NumberFormat;
@@ -32,14 +34,16 @@ import java.util.Locale;
 
 public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     View view;
-    private ArrayList<CartDTO> datalist;
+    ArrayList<CartDTO> datalist;
     CallFirebaseStrorage callFirebaseStrorage;
     private String userId;
+    TextView total_pay;
     Currency currency = Currency.getInstance(new Locale("vi", "VN"));
     NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
 
-    public Cart_Item(ArrayList<CartDTO> datalist) {
+    public Cart_Item(ArrayList<CartDTO> datalist, TextView total_pay) {
         this.datalist = datalist;
+        this.total_pay = total_pay;
         callFirebaseStrorage = new CallFirebaseStrorage();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         userId = user.getUid();
@@ -54,19 +58,21 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull @NotNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         CartDTO cartItem = datalist.get(position);
 
         holder.ProductName.setText(cartItem.getTenMonAn());
         holder.Quantity.setText(String.valueOf(cartItem.getSL()));
         holder.ProductPrice.setText(currencyFormat.format(cartItem.getTongTien()));
-        holder.SetIMG(callFirebaseStrorage,cartItem.getImage());
+        holder.SetIMG(callFirebaseStrorage, cartItem.getImage());
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 deleteCartItem(cartItem, position);
+                notifyItemRemoved(position);
+                calculateTotalAmount();
             }
         });
 
@@ -81,8 +87,9 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
                     cartItem.setTongTien(totalPrice);
                     holder.Quantity.setText(String.valueOf(currentQuantity));
                     holder.ProductPrice.setText(currencyFormat.format(totalPrice));
-                    updateCartItem(v.getContext(),cartItem);
+                    updateCartItem(v.getContext(), cartItem);
                     notifyDataSetChanged();
+                    calculateTotalAmount();
                 }
             }
         });
@@ -97,8 +104,9 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
                 cartItem.setTongTien(totalPrice);
                 holder.Quantity.setText(String.valueOf(currentQuantity));
                 holder.ProductPrice.setText(currencyFormat.format(totalPrice));
-                updateCartItem(v.getContext(),cartItem);
+                updateCartItem(v.getContext(), cartItem);
                 notifyDataSetChanged();
+                calculateTotalAmount();
             }
         });
     }
@@ -106,7 +114,7 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
     private int calculateTotalPrice(CartDTO cartItem) {
         int pricePerItem = cartItem.getTongTien();
         int quantity = cartItem.getSL();
-        if(quantity == 2) {
+        if (quantity == 2) {
             return pricePerItem * quantity;
         } else {
             return pricePerItem / (quantity - 1) * quantity;
@@ -128,11 +136,10 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
         }
     }
 
-    private void updateCartItem(Context context,CartDTO cartItem) {
+    private void updateCartItem(Context context, CartDTO cartItem) {
         CartDAO cartDAO = new CartDAO();
-        cartDAO.SetData(context,cartItem, userId);
+        cartDAO.SetData(context, cartItem, userId);
     }
-
 
 
     @Override
@@ -145,6 +152,7 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
 
         private ImageView imageProduct;
         private TextView ProductName, delete, btnMinus, btnPlus, Quantity, ProductPrice;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             imageProduct = itemView.findViewById(R.id.imageProduct);
@@ -156,26 +164,32 @@ public class Cart_Item extends RecyclerView.Adapter<Cart_Item.MyViewHolder> {
             ProductPrice = itemView.findViewById(R.id.ProductPrice);
         }
 
-        public void SetIMG(CallFirebaseStrorage callFirebaseStrorage, String imgURL){
+        public void SetIMG(CallFirebaseStrorage callFirebaseStrorage, String imgURL) {
             StorageReference mountainRef = callFirebaseStrorage.getStorageRef().child(imgURL);
 
             final long ONE_MEGABYTE = 1024 * 1024;
             mountainRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                 @Override
                 public void onSuccess(byte[] bytes) {
-                    // Convert bytes to Bitmap
                     Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
 
-                    // Set the Bitmap to the ImageView
                     imageProduct.setImageBitmap(bitmap);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
-                    Log.e("Kien Test ProductItem", "" + imgURL + " "+ exception.toString());
+                    Log.e("Kien Test ProductItem", "" + imgURL + " " + exception.toString());
                 }
             });
         }
+    }
+
+    private void calculateTotalAmount() {
+        int totalAmount = 0;
+        for (CartDTO item : datalist) {
+            totalAmount += item.getTongTien();
+        }
+        total_pay.setText(currencyFormat.format(totalAmount));
     }
 }
 

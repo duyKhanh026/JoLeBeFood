@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jolebefood.AdapterRecycleView.Cart_Item;
 import com.example.jolebefood.AsyncTask.AsyncTask_Cart;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DAO.CartDAO.OnGetListCartListener;
@@ -33,6 +35,7 @@ public class Cart extends AppCompatActivity {
     private TextView total_pay, emptyTxt;
     private ImageButton back_button;
     private ProgressBar progressBar;
+    private ImageView emptyCartImageView;
     NumberFormat currencyFormat;
 
     @SuppressLint("MissingInflatedId")
@@ -54,6 +57,7 @@ public class Cart extends AppCompatActivity {
         emptyTxt = findViewById(R.id.emptyTxt);
         ConstraintLayout layout = findViewById(R.id.layout);
         orderBtn = findViewById(R.id.orderBtn);
+        emptyCartImageView = findViewById(R.id.emptyCartImageView);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(Cart.this));
 
@@ -65,6 +69,8 @@ public class Cart extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
         new CartDAO().getList(userId, datalist, new OnGetListCartListener() {
             @Override
@@ -78,6 +84,7 @@ public class Cart extends AppCompatActivity {
             public void onGetListCartEmpty() {
                 emptyTxt.setVisibility(View.VISIBLE);
                 orderBtn.setVisibility(View.VISIBLE);
+                emptyCartImageView.setVisibility((View.VISIBLE));
                 recyclerView.setVisibility(View.GONE);
                 layout.setVisibility(View.GONE);
             }
@@ -105,6 +112,8 @@ public class Cart extends AppCompatActivity {
     }
 
     private int calculateTotalAmount(ArrayList<CartDTO> cartItems) {
+        Cart_Item adapter = new Cart_Item(cartItems, total_pay);
+        recyclerView.setAdapter(adapter);
         int totalAmount = 0;
         for (CartDTO item : cartItems) {
             totalAmount += item.getTongTien();

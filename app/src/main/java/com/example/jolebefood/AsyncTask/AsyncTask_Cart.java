@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,6 +30,7 @@ public class AsyncTask_Cart extends AsyncTask<Void, CartDTO,Void> {
 
     // List này sẽ được add lần lượt item từ datalist để có thể làm asyncTask chạy lần lượt từng cái lên
     private ArrayList<CartDTO> listTemp = new ArrayList<>();
+    private TextView total_pay;
 
 
     public AsyncTask_Cart(RecyclerView recyclerView, ProgressBar progressBar, Context context, ArrayList<CartDTO> datalist) {
@@ -40,7 +42,7 @@ public class AsyncTask_Cart extends AsyncTask<Void, CartDTO,Void> {
 
     @Override
     protected void onPreExecute() {
-        adapter = new Cart_Item(listTemp);
+        adapter = new Cart_Item(listTemp, total_pay);
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.VISIBLE);
     }

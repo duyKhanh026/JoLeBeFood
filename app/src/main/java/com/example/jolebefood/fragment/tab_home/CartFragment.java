@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.jolebefood.AdapterRecycleView.Cart_Item;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
@@ -23,6 +24,7 @@ public class CartFragment extends Fragment {
     RecyclerView recyclerView;
     Cart_Item adapter;
     String uid;
+    TextView total_pay;
 
     public CartFragment(String uid) { this.uid = uid; }
 
@@ -40,12 +42,12 @@ public class CartFragment extends Fragment {
         new CartDAO().getList(uid, datalist, new OnGetListCartListener() {
             @Override
             public void onGetListCartSuccess() {
-                adapter = new Cart_Item(datalist);
+                adapter = new Cart_Item(datalist, total_pay);
                 recyclerView.setAdapter(adapter);
             }
             @Override
             public void onGetListCartEmpty() {
-                adapter = new Cart_Item(datalist);
+                adapter = new Cart_Item(datalist, total_pay);
                 recyclerView.setAdapter(adapter);
             }
         });
