@@ -1,48 +1,37 @@
-package com.example.jolebefood;
+package com.example.jolebefood.Activity;
 
 import android.annotation.SuppressLint;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.jolebefood.R;
 import com.example.jolebefood.SignIn_and_SignUp.Intro;
 import com.example.jolebefood.fragment.HomeFragment;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-
-import java.util.Calendar;
 //import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnCart, btnnoti;
     private static final int MY_PERMISSIONS_REQUEST_NOTIFICATION = 1;
+
+    private static final int REQUEST_CODE_PERMISSIONS_GPS = 101; // Choose a unique code
+
     private static final String CHANNEL_ID = "my_firebase_channel";
     public Notification notification;
     public Notification notification1;
@@ -109,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+        GPS_permission();
+
         Notification_permission();
         notification = new Notification(this);
         notification1 = new Notification(this);
@@ -140,15 +131,24 @@ public class MainActivity extends AppCompatActivity {
     public void Notification_permission(){
         if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.POST_NOTIFICATIONS)
                 == PackageManager.PERMISSION_GRANTED) {
-            // Quyền đã được cấp, có thể tạo thông báo
-            Toast.makeText(this, "Quyền thông báo đã được cấp", Toast.LENGTH_SHORT).show();
+            Log.e("Kien Main","Đã được quyền thông báo cấp");
 
         } else {
-            Toast.makeText(this, "Chưa cấp quyền thông báo", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Chưa cấp quyền thông báo", Toast.LENGTH_SHORT).show();
             // Quyền chưa được cấp, yêu cầu người dùng cấp quyền
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{android.Manifest.permission.POST_NOTIFICATIONS},
                     MY_PERMISSIONS_REQUEST_NOTIFICATION);
+        }
+    }
+
+    public void GPS_permission(){
+        // Kiểm tra quyền truy cập vị trí hiện tại
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE_PERMISSIONS_GPS);
+        }
+        else{
+            Log.e("Kien Main","Đã được quyền gps cấp");
         }
     }
 

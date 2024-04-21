@@ -1,20 +1,17 @@
 package com.example.jolebefood.AdapterRecycleView;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.ActivityForPay;
+import com.example.jolebefood.Activity.ActivityForPay;
 import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.R;
 
@@ -30,17 +27,21 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
 
     String PhuongThuc = "";
 
+    double latitude, longitude;
+
     Context context;
 
     public Discount_Item(ArrayList<DiscountDTO> dataList) {
         this.dataList = dataList;
     }
 
-    public Discount_Item(Context context,ArrayList<DiscountDTO> dataList, String UID,String phuongThuc) {
-        this.context = context;
+    public Discount_Item( Context context,ArrayList<DiscountDTO> dataList, String UID, String phuongThuc, double latitude, double longitude) {
         this.dataList = dataList;
         this.UID = UID;
-        this.PhuongThuc = phuongThuc;
+        PhuongThuc = phuongThuc;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.context = context;
     }
 
     @NonNull
@@ -72,6 +73,8 @@ public class Discount_Item extends RecyclerView.Adapter<Discount_Item.MyViewHold
                     intent.putExtra("UID",UID);
                     intent.putExtra("DiscountDTO",discountDTO);
                     intent.putExtra("PhuongThuc",PhuongThuc);
+                    intent.putExtra("latitude",latitude);
+                    intent.putExtra("longitude",longitude);
                     context.startActivity(intent);
                 }
             }

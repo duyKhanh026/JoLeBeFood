@@ -20,6 +20,8 @@ public class AsyncTask_Discount extends AsyncTask<Void, DiscountDTO,Void> {
 
     private String UID = "", PhuongThuc = "";
 
+    private double latitude = 0, longitude = 0;
+
     private RecyclerView recyclerView;
 
     private ProgressBar progressBar;
@@ -42,9 +44,11 @@ public class AsyncTask_Discount extends AsyncTask<Void, DiscountDTO,Void> {
         this.datalist = datalist;
     }
 
-    public AsyncTask_Discount(String UID, String phuongThuc, RecyclerView recyclerView, ProgressBar progressBar, Context context, ArrayList<DiscountDTO> datalist) {
+    public AsyncTask_Discount(String UID, String phuongThuc, double latitude, double longitude, RecyclerView recyclerView, ProgressBar progressBar, Context context, ArrayList<DiscountDTO> datalist) {
         this.UID = UID;
         PhuongThuc = phuongThuc;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.recyclerView = recyclerView;
         this.progressBar = progressBar;
         this.context = context;
@@ -58,7 +62,7 @@ public class AsyncTask_Discount extends AsyncTask<Void, DiscountDTO,Void> {
             adapter = new Discount_Item(listTemp);
         }
         else {
-            adapter = new Discount_Item(context,listTemp,UID,PhuongThuc);
+            adapter = new Discount_Item(context,listTemp,UID,PhuongThuc,latitude,longitude);
         }
         recyclerView.setAdapter(adapter);
         progressBar.setVisibility(View.VISIBLE);

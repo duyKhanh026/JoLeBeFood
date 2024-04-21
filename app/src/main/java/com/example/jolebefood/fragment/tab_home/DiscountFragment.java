@@ -2,7 +2,6 @@ package com.example.jolebefood.fragment.tab_home;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,22 +10,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Discount_Item;
-import com.example.jolebefood.AdapterRecycleView.Purchase_History_Item;
-import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
-import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
-import com.example.jolebefood.DTO.DiscountDTO;
-import com.example.jolebefood.Discount;
+import com.example.jolebefood.Activity.Discount;
 import com.example.jolebefood.R;
-
-import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.

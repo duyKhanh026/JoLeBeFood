@@ -5,31 +5,24 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Category_Item;
-import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.AsyncTask.AsyncTask_Category;
 import com.example.jolebefood.DAO.CategoryDAO.CategoryDAO;
-import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DTO.CategoryDTO;
-import com.example.jolebefood.Discount;
-import com.example.jolebefood.Product;
+import com.example.jolebefood.Activity.Discount;
 import com.example.jolebefood.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CategoryFragment extends Fragment {
     View view;

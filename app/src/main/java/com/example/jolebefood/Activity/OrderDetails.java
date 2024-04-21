@@ -1,4 +1,4 @@
-package com.example.jolebefood;
+package com.example.jolebefood.Activity;
 
 import static android.app.PendingIntent.getActivity;
 
@@ -30,6 +30,7 @@ import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.DTO.OrderDTO;
 import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.DTO.UserDTO;
+import com.example.jolebefood.R;
 
 import java.sql.Timestamp;
 import java.text.NumberFormat;

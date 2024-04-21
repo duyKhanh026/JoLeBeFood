@@ -21,19 +21,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.Cart;
 import com.example.jolebefood.DAO.CallFirebaseStrorage;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DTO.CartDTO;
-import com.example.jolebefood.DTO.DiscountDTO;
 import com.example.jolebefood.DTO.ProductDTO;
-import com.example.jolebefood.Product;
 import com.example.jolebefood.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;

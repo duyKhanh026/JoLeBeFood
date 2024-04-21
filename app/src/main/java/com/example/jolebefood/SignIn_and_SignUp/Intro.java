@@ -8,13 +8,8 @@ import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.jolebefood.MainActivity;
 import com.example.jolebefood.R;
 
 public class Intro extends AppCompatActivity {

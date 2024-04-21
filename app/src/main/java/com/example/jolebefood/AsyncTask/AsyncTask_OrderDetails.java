@@ -8,10 +8,7 @@ import android.widget.ProgressBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
-import com.example.jolebefood.AdapterRecycleView.Product_Item;
 import com.example.jolebefood.DTO.OrderDetailsDTO;
-import com.example.jolebefood.DTO.ProductDTO;
-import com.example.jolebefood.OrderDetails;
 
 import java.util.ArrayList;
 

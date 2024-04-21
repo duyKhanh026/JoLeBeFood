@@ -1,10 +1,8 @@
-package com.example.jolebefood;
+package com.example.jolebefood.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
@@ -14,12 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.AdapterRecycleView.Discount_Item;
 import com.example.jolebefood.AsyncTask.AsyncTask_Discount;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
 import com.example.jolebefood.DTO.DiscountDTO;
-import com.example.jolebefood.DTO.ProductDTO;
+import com.example.jolebefood.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +28,8 @@ public class Discount extends AppCompatActivity {
     private ProgressBar progressBar;
 
     private String UID,PhuongThuc;
+
+    private double longitude, latitude;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +52,11 @@ public class Discount extends AppCompatActivity {
         UID = intent.getStringExtra("UID");
 
         PhuongThuc = intent.getStringExtra("PhuongThuc");
+
+        latitude = intent.getDoubleExtra("latitude",0);
+
+        longitude = intent.getDoubleExtra("longitude",0);
+
 
 
         recyclerView = findViewById(R.id.RecycleView_KhuyenMai);
@@ -79,10 +83,10 @@ public class Discount extends AppCompatActivity {
                 }
                 else{
                     if (!PhuongThuc.equals("Chọn phương thức thanh toán")){
-                        new AsyncTask_Discount(UID,PhuongThuc,recyclerView,progressBar,Discount.this,getListTheoPhuongThuc(filteredList,PhuongThuc)).execute();
+                        new AsyncTask_Discount(UID,PhuongThuc,latitude,longitude,recyclerView,progressBar,Discount.this,getListTheoPhuongThuc(filteredList,PhuongThuc)).execute();
                     }
                     else {
-                        new AsyncTask_Discount(UID,PhuongThuc,recyclerView,progressBar,Discount.this,filteredList).execute();
+                        new AsyncTask_Discount(UID,PhuongThuc,latitude,longitude,recyclerView,progressBar,Discount.this,filteredList).execute();
                     }
                 }
 

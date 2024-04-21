@@ -7,12 +7,10 @@ import android.widget.Toast;
 
 import com.example.jolebefood.DAO.CallRetrofit;
 import com.example.jolebefood.DTO.OrderDTO;
-import com.example.jolebefood.MainActivity;
+import com.example.jolebefood.Activity.MainActivity;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;

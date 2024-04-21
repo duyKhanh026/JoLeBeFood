@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EditAccount">
+    tools:context=".Activity.EditAccount">
     <TextView
         android:id="@+id/ThanhTieuDe"
         android:text="Chỉnh sửa tài khoản"

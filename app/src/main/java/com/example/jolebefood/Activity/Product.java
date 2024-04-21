@@ -1,42 +1,25 @@
-package com.example.jolebefood;
+package com.example.jolebefood.Activity;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.AdapterRecycleView.Discount_Item;
-import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
 import com.example.jolebefood.AdapterRecycleView.Product_Item;
 import com.example.jolebefood.AsyncTask.AsyncTask_Product;
-import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
 import com.example.jolebefood.DAO.ProductDAO.ProductDAO;
 import com.example.jolebefood.DTO.ProductDTO;
-import com.example.jolebefood.fragment.tab_home.CartFragment;
+import com.example.jolebefood.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Product extends AppCompatActivity {
     private RecyclerView recyclerView;

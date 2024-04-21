@@ -1,47 +1,40 @@
-package com.example.jolebefood;
+package com.example.jolebefood.Activity;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jolebefood.AdapterRecycleView.Cart_Item;
-import com.example.jolebefood.AdapterRecycleView.Discount_Item;
-import com.example.jolebefood.AdapterRecycleView.Order_Details_Item;
-import com.example.jolebefood.AdapterRecycleView.Pay_Details_Item;
-import com.example.jolebefood.AsyncTask.AsyncTask_OrderDetails;
 import com.example.jolebefood.AsyncTask.AsyncTask_PayDetails;
 import com.example.jolebefood.DAO.CartDAO.CartDAO;
 import com.example.jolebefood.DAO.CartDAO.OnGetListCartListener;
 import com.example.jolebefood.DAO.DiscountDAO.DiscountDAO;
-import com.example.jolebefood.DAO.DiscountDAO.OnGetListDiscountListener;
 import com.example.jolebefood.DAO.OrderDAO.OnGetListOrderListener;
 import com.example.jolebefood.DAO.OrderDAO.OrderDAO;
 import com.example.jolebefood.DAO.ProductDAO.OnGetListProductListener;
@@ -54,22 +47,30 @@ import com.example.jolebefood.DTO.OrderDTO;
 import com.example.jolebefood.DTO.OrderDetailsDTO;
 import com.example.jolebefood.DTO.ProductDTO;
 import com.example.jolebefood.DTO.UserDTO;
+import com.example.jolebefood.R;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 public class ActivityForPay extends AppCompatActivity {
+
+    // Tọa độ của quán
+    private final static double latitude_Quan = 10.846364740875595;
+    private final static double longitude_Quan = 106.67100464207535;
+
     private RecyclerView recyclerView;
 
-    private TextView txtName,txtPhone,txtDiaChi,txtTongTien,txtGiamGia,txtThanhTien,txtPhuongThuc,txtThoiGianDat,txtDiscount,txtPhiGiao;
+    private TextView txtName,txtPhone,txtDiaChi,txtTongTien,txtGiamGia,txtThanhTien,txtPhuongThuc,txtDiscount,txtPhiGiao,txtKhoangCach,txtPhiGH_CT;
 
     private Button btnThanhToan;
 
@@ -93,13 +94,17 @@ public class ActivityForPay extends AppCompatActivity {
 
     private String UID, PhuongThuc = "";
 
+    private double latitude, longitude;
+
     NumberFormat currencyFormat;
 
-    private final int PhiGiaoHang = 20000;
+    private int PhiGiaoHang = 0, DiscountFee = 0;
 
 
     // Định dạng mong muốn (ví dụ: "yyyy-MM-dd HH:mm:ss")
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    FusedLocationProviderClient fusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,22 +116,52 @@ public class ActivityForPay extends AppCompatActivity {
 
         AnhXa();
 
-        // Nhận Intent mà đã gửi từ Activity trước
-        Intent intent = getIntent();
+        ChuyenActivity();
 
-        discountDTO = (DiscountDTO) intent.getSerializableExtra("DiscountDTO");
-
-        UID = intent.getStringExtra("UID");
-
-        PhuongThuc = intent.getStringExtra("PhuongThuc");
-
-        if (PhuongThuc != null){
-            txtPhuongThuc.setText(PhuongThuc);
-        }
 
         SetData();
 
+        txtDiaChi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (ActivityCompat.checkSelfPermission(ActivityForPay.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(ActivityForPay.this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(ActivityForPay.this,"App chưa được cấp quyền truy cập vị trí",Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                fusedLocationClient.getLastLocation()
+                        .addOnSuccessListener(location -> {
+                            if (location != null) {
+                                // Xử lý vị trí hiện tại
+                                latitude = location.getLatitude();
+                                longitude = location.getLongitude();
+
+                                double distance = calculateDistance(latitude,longitude);
+
+                                PhiGiaoHang = (int) (distance * 5000);
+
+                                txtDiaChi.setText(getAddress(latitude,longitude));
+
+                                DecimalFormat df = new DecimalFormat("#.##");
+                                String formattedDistance = df.format(distance);
+
+                                // Tính khoảng cách giữa hai điểm
+                                txtKhoangCach.setText(formattedDistance);
+
+                                txtPhiGH_CT.setText(currencyFormat.format(PhiGiaoHang));
+
+                                txtPhiGiao.setText(currencyFormat.format(PhiGiaoHang));
+
+                                int totalAmount = calculateTotalAmount(datalist) + PhiGiaoHang - DiscountFee;
+                                txtTongTien.setText(currencyFormat.format(totalAmount));
+
+
+                            } else {
+                                Toast.makeText(ActivityForPay.this, "Bạn hãy bật GPS của điện thoại lên", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+            }
+        });
 
         txtPhuongThuc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,6 +176,8 @@ public class ActivityForPay extends AppCompatActivity {
                 Intent intent1 = new Intent(ActivityForPay.this, Discount.class);
                 intent1.putExtra("UID",UID);
                 intent1.putExtra("PhuongThuc",txtPhuongThuc.getText().toString());
+                intent1.putExtra("latitude",latitude);
+                intent1.putExtra("longitude",longitude);
                 startActivity(intent1);
             }
         });
@@ -148,43 +185,48 @@ public class ActivityForPay extends AppCompatActivity {
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent intent = new Intent(ActivityForPay.this,Cart.class);
+                startActivity(intent);
             }
         });
 
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if (txtDiaChi.getText().toString().trim().equals("Nhấn để lấy vị trí hiện tại")){
+                    Toast.makeText(ActivityForPay.this,"Vui lòng chọn địa điểm giao hàng",Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 if (txtPhuongThuc.getText().toString().equals("Chọn phương thức thanh toán")){
                     Toast.makeText(ActivityForPay.this,"Vui lòng chọn phương thức thanh toán",Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    orderObject.setMaDH("DH"+(listOrder.size()+1));
-                    orderObject.setMaKH(UID);
-                    orderObject.setPhuongThucThanhToan(txtPhuongThuc.getText().toString());
-                    if (!txtDiscount.getText().toString().equals("Chọn khuyến mãi")){
-                        orderObject.setMaKM(discountDTO.getMakm());
-                    }
-                    else {
-                        orderObject.setMaKM("Không");
-                    }
-
-                    // add list chi tiết đơn hàng
-                    SetOrderDetails(datalist);
-
-                    // Cập nhật chi tiết đơn hàng lên firebase
-                    new OrderDAO().SetDataOrder(UID,orderObject,ActivityForPay.this);
-
-                    // Giảm số lượng của mã khuyến mãi
-
-                    discountDTO.setSoluong(discountDTO.getSoluong() - 1);
-
-                    new DiscountDAO().SetDataDiscount(discountDTO);
-
-                    // Tăng số lượng bán cho các món được mua
-                    for (OrderDetailsDTO temp : orderObject.getListOrderDetails()){
-                        TangSoLuongMua(temp);
-                    }
+//                    orderObject.setMaDH("DH"+(listOrder.size()+1));
+//                    orderObject.setMaKH(UID);
+//                    orderObject.setPhuongThucThanhToan(txtPhuongThuc.getText().toString());
+//                    if (!txtDiscount.getText().toString().equals("Chọn khuyến mãi")){
+//                        orderObject.setMaKM(discountDTO.getMakm());
+//                    }
+//                    else {
+//                        orderObject.setMaKM("Không");
+//                    }
+//
+//                    // add list chi tiết đơn hàng
+//                    SetOrderDetails(datalist);
+//
+//                    // Cập nhật chi tiết đơn hàng lên firebase
+//                    new OrderDAO().SetDataOrder(UID,orderObject,ActivityForPay.this);
+//
+//                    // Giảm số lượng của mã khuyến mãi
+//
+//                    discountDTO.setSoluong(discountDTO.getSoluong() - 1);
+//
+//                    new DiscountDAO().SetDataDiscount(discountDTO);
+//
+//                    // Tăng số lượng bán cho các món được mua
+//                    for (OrderDetailsDTO temp : orderObject.getListOrderDetails()){
+//                        TangSoLuongMua(temp);
+//                    }
 
                     //new CartDAO().deleteCart(UID);
 
@@ -210,6 +252,11 @@ public class ActivityForPay extends AppCompatActivity {
 
         orderObject = new OrderDTO();
 
+        // Khởi tạo FusedLocationProviderClient
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+
+
 
     }
 
@@ -231,7 +278,8 @@ public class ActivityForPay extends AppCompatActivity {
         btnBack = findViewById(R.id.button_back_pay);
         progressBar = findViewById(R.id.progressBar_for_pay);
         recyclerView.setLayoutManager(new LinearLayoutManager(ActivityForPay.this));
-
+        txtKhoangCach = findViewById(R.id.txtKhoangCach_CTHD_pay);
+        txtPhiGH_CT = findViewById(R.id.txtPhiGH_CTHD_pay);
     }
 
     public void SetData() {
@@ -268,28 +316,13 @@ public class ActivityForPay extends AppCompatActivity {
 
                 txtPhiGiao.setText(currencyFormat.format(PhiGiaoHang));
 
-                if (discountDTO != null){
-                    txtDiscount.setText(discountDTO.getTenkm());
 
-                    int discountFee = discountDTO.getGiatrikm();
-                    txtGiamGia.setText("- " + currencyFormat.format(discountFee));
+                txtGiamGia.setText("- " + currencyFormat.format(DiscountFee));
 
-                    int totalPayAmount = totalAmount + PhiGiaoHang - discountFee;
-                    txtTongTien.setText(currencyFormat.format(totalPayAmount));
+                int totalPayAmount = totalAmount + PhiGiaoHang - DiscountFee;
+                txtTongTien.setText(currencyFormat.format(totalPayAmount));
 
-                    orderObject.setTongTien(totalPayAmount);
-
-                }
-                else{
-                    int discountFee = 0;
-                    txtGiamGia.setText("- " + currencyFormat.format(discountFee));
-
-                    int totalPayAmount = totalAmount + PhiGiaoHang - discountFee;
-                    txtTongTien.setText(currencyFormat.format(totalPayAmount));
-
-                    orderObject.setTongTien(totalPayAmount);
-                }
-
+                orderObject.setTongTien(totalPayAmount);
 
 
             }
@@ -309,7 +342,6 @@ public class ActivityForPay extends AppCompatActivity {
                 public void GetUserSuccess() {
                     txtName.setText(userDTO.getName());
                     txtPhone.setText(userDTO.getPhone());
-                    txtDiaChi.setText(userDTO.getAddress());
                 }
         });
 
@@ -403,6 +435,121 @@ public class ActivityForPay extends AppCompatActivity {
                 new ProductDAO().SetDataProduct(s);
             }
         }
+    }
+
+    // Phương thức này sẽ lấy địa chỉ từ tọa độ vị trí (latitude và longitude)
+    public String getAddress(double latitude, double longitude) {
+        // Tạo một đối tượng Geocoder để chuyển đổi tọa độ thành địa chỉ
+        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+
+        String addressText = ""; // Chuỗi để lưu trữ địa chỉ
+
+        try {
+            // Gọi phương thức getFromLocation để lấy danh sách địa chỉ từ tọa độ
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+
+            // Kiểm tra xem danh sách địa chỉ có dữ liệu hay không
+            if (addresses != null && addresses.size() > 0) {
+                Address address = addresses.get(0); // Lấy địa chỉ đầu tiên trong danh sách
+
+                // Trích xuất thông tin chi tiết địa chỉ từ đối tượng Address
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
+                    sb.append(address.getAddressLine(i)).append("\n"); // Nối các dòng địa chỉ lại với nhau
+                }
+                addressText = sb.toString(); // Gán thông tin địa chỉ vào chuỗi addressText
+            } else {
+                addressText = "Không tìm thấy địa chỉ cho vị trí này";
+            }
+        } catch (IOException e) {
+            // Xử lý ngoại lệ nếu có lỗi xảy ra trong quá trình chuyển đổi địa chỉ
+            e.printStackTrace();
+            addressText = "Lỗi: " + e.getMessage();
+        }
+
+        // Trả về chuỗi chứa thông tin địa chỉ hoặc thông báo lỗi
+        return addressText;
+    }
+
+
+    // Hàm để tính khoảng cách giữa hai điểm dựa trên tọa độ latitude và longitude
+    public double calculateDistance(double lat1, double lon1) {
+        Location startPoint = new Location("point A");
+        startPoint.setLatitude(lat1);
+        startPoint.setLongitude(lon1);
+
+        Location endPoint = new Location("point B");
+        endPoint.setLatitude(latitude_Quan);
+        endPoint.setLongitude(longitude_Quan);
+
+        // Tính khoảng cách giữa hai điểm tính bằng mét
+        float distanceInMeters = startPoint.distanceTo(endPoint);
+
+        // Chuyển đổi khoảng cách từ mét sang kilômét và giới hạn số chữ số sau dấu thập phân
+        double distanceInKilometers = distanceInMeters / 1000.0;
+
+        return distanceInKilometers;
+    }
+
+
+    public void ChuyenActivity(){
+        // Nhận Intent mà đã gửi từ Activity trước
+        Intent intent = getIntent();
+
+        discountDTO = (DiscountDTO) intent.getSerializableExtra("DiscountDTO");
+
+        UID = intent.getStringExtra("UID");
+
+        PhuongThuc = intent.getStringExtra("PhuongThuc");
+
+        latitude = intent.getDoubleExtra("latitude",0);
+
+        longitude = intent.getDoubleExtra("longitude",0);
+
+
+        if (PhuongThuc != null){
+            txtPhuongThuc.setText(PhuongThuc);
+        }
+
+        if (discountDTO != null){
+            txtDiscount.setText(discountDTO.getTenkm());
+            DiscountFee = discountDTO.getGiatrikm();
+        }
+
+        if (latitude == 0 && longitude == 0){
+            // Hiển thị thông báo
+            AlertDialog.Builder builder = new AlertDialog.Builder(ActivityForPay.this);
+            builder.setTitle("Thông báo")
+                    .setMessage("Ứng dụng này cần truy cập vị trí của bạn để hoạt động. Vui lòng bật GPS trong cài đặt.")
+                    .setPositiveButton("Bật GPS", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                            startActivity(intent);
+                        }
+                    })
+                    .setNegativeButton("Hủy", null)
+                    .show();
+        }
+        else{
+            double distance = calculateDistance(latitude,longitude);
+
+            PhiGiaoHang = (int) (distance * 5000);
+
+            txtDiaChi.setText(getAddress(latitude,longitude));
+
+            DecimalFormat df = new DecimalFormat("#.##");
+            String formattedDistance = df.format(distance);
+
+            // Tính khoảng cách giữa hai điểm
+            txtKhoangCach.setText(formattedDistance);
+
+            txtPhiGH_CT.setText(currencyFormat.format(PhiGiaoHang));
+
+            txtPhiGiao.setText(currencyFormat.format(PhiGiaoHang));
+        }
+
+
     }
 
 }
