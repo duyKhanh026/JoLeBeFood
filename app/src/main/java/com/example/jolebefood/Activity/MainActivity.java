@@ -23,6 +23,8 @@ import com.example.jolebefood.SignIn_and_SignUp.Intro;
 import com.example.jolebefood.fragment.HomeFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.Calendar;
 //import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
@@ -92,8 +94,13 @@ public class MainActivity extends AppCompatActivity {
 
                notification = new Notification(MainActivity.this);
 
+               if (!isPastLunchTime()){
+                   notification.scheduleLunchNotification();
+               }else {
+                   Toast.makeText(MainActivity.this, "Đã quá muộn", Toast.LENGTH_SHORT).show();
+               }
                 // Gọi phương thức showLunchNotification() để hiển thị thông báo ăn trưa
-                notification.scheduleLunchNotification();
+
             }
 
         });
@@ -104,8 +111,43 @@ public class MainActivity extends AppCompatActivity {
         notification = new Notification(this);
         notification1 = new Notification(this);
 
-        notification1.scheduleLunchNotification();       // 11h
-        notification.scheduleDinnerNotification();      // 18h
+        if (!isPastLunchTime()){
+            notification.scheduleLunchNotification();       // 11h
+        }else {
+            Toast.makeText(MainActivity.this, "Đã qua giờ ăn trưa", Toast.LENGTH_SHORT).show();
+        }
+
+        if (!isPastDinnerTime()){
+            notification.scheduleDinnerNotification();      // 18h
+        }else {
+            Toast.makeText(MainActivity.this, "Đã qua giờ ăn tối", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private boolean isPastLunchTime() {
+        Calendar currentTime = Calendar.getInstance();
+        int currentHour = currentTime.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = currentTime.get(Calendar.MINUTE);
+
+        // Giả sử giờ ăn trưa là 11:00 AM
+        int lunchHour = 11;
+        int lunchMinute = 0;
+
+        // Kiểm tra xem thời gian hiện tại đã muộn hơn giờ ăn trưa hay chưa
+        return (currentHour > lunchHour) || (currentHour == lunchHour && currentMinute > lunchMinute);
+    }
+
+    private boolean isPastDinnerTime() {
+        Calendar currentTime = Calendar.getInstance();
+        int currentHour = currentTime.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = currentTime.get(Calendar.MINUTE);
+
+        // Giả sử giờ ăn tối là 6:00 PM
+        int dinnerHour = 18;
+        int dinnerMinute = 0;
+
+        // Kiểm tra xem thời gian hiện tại đã muộn hơn giờ ăn tối hay chưa
+        return (currentHour > dinnerHour) || (currentHour == dinnerHour && currentMinute > dinnerMinute);
     }
 
     @SuppressLint("MissingSuperCall")
