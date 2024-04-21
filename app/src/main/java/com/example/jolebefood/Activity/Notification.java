@@ -74,7 +74,7 @@ public class Notification {
     public void scheduleLunchNotification() {
         AlarmManager alarmManager1 = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
-        if (!isPastLunchTime()){
+        if (!isPastDinnerTime()){
             Intent lunchIntent = new Intent(context, LunchReceiver.class);
             lunchIntent.setAction("LUNCH_NOTIFICATION");
             lunchIntent.putExtra("notification_title", "Thông báo 11h");
