@@ -3,7 +3,7 @@
 
     <item android:id="@+id/tab_rate"
         android:icon="@drawable/home"
-        android:title="@string/tab_rate"
+        android:title="Danh mục"
         />
 
     <item android:id="@+id/tab_acc"

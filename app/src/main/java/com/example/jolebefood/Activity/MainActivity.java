@@ -104,7 +104,6 @@ public class MainActivity extends AppCompatActivity {
         notification = new Notification(this);
         notification1 = new Notification(this);
 
-
         notification1.scheduleLunchNotification();       // 11h
         notification.scheduleDinnerNotification();      // 18h
     }
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
             Log.e("Kien Main","Đã được quyền thông báo cấp");
 
         } else {
-//            Toast.makeText(this, "Chưa cấp quyền thông báo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Chưa cấp quyền thông báo", Toast.LENGTH_SHORT).show();
             // Quyền chưa được cấp, yêu cầu người dùng cấp quyền
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{android.Manifest.permission.POST_NOTIFICATIONS},

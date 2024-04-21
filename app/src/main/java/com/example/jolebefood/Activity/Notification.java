@@ -28,9 +28,9 @@ public class Notification {
         // Tạo PendingIntent để gửi broadcast khi thông báo được kích hoạt
         PendingIntent lunchPendingIntent = PendingIntent.getBroadcast(
                 context,
-                0,
+                0, // Đổi thành một requestCode duy nhất, ví dụ: 100
                 lunchIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE // Thêm FLAG_IMMUTABLE
+                PendingIntent.FLAG_UPDATE_CURRENT // Sử dụng FLAG_UPDATE_CURRENT thay vì FLAG_IMMUTABLE
         );
         // Lấy thời điểm hiện tại
         Calendar calendar = Calendar.getInstance();
