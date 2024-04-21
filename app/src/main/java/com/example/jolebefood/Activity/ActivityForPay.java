@@ -59,6 +59,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import com.example.jolebefood.SignIn_and_SignUp.Intro;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 
@@ -201,32 +202,34 @@ public class ActivityForPay extends AppCompatActivity {
                     Toast.makeText(ActivityForPay.this,"Vui lòng chọn phương thức thanh toán",Toast.LENGTH_SHORT).show();
                 }
                 else {
-//                    orderObject.setMaDH("DH"+(listOrder.size()+1));
-//                    orderObject.setMaKH(UID);
-//                    orderObject.setPhuongThucThanhToan(txtPhuongThuc.getText().toString());
-//                    if (!txtDiscount.getText().toString().equals("Chọn khuyến mãi")){
-//                        orderObject.setMaKM(discountDTO.getMakm());
-//                    }
-//                    else {
-//                        orderObject.setMaKM("Không");
-//                    }
-//
-//                    // add list chi tiết đơn hàng
-//                    SetOrderDetails(datalist);
-//
-//                    // Cập nhật chi tiết đơn hàng lên firebase
-//                    new OrderDAO().SetDataOrder(UID,orderObject,ActivityForPay.this);
-//
-//                    // Giảm số lượng của mã khuyến mãi
-//
-//                    discountDTO.setSoluong(discountDTO.getSoluong() - 1);
-//
-//                    new DiscountDAO().SetDataDiscount(discountDTO);
-//
-//                    // Tăng số lượng bán cho các món được mua
-//                    for (OrderDetailsDTO temp : orderObject.getListOrderDetails()){
-//                        TangSoLuongMua(temp);
-//                    }
+                    orderObject.setMaDH("DH"+(listOrder.size()+1));
+                    orderObject.setMaKH(UID);
+                    orderObject.setPhuongThucThanhToan(txtPhuongThuc.getText().toString());
+                    if (!txtDiscount.getText().toString().equals("Chọn khuyến mãi")){
+                        orderObject.setMaKM(discountDTO.getMakm());
+                    }
+                    else {
+                        orderObject.setMaKM("Không");
+                    }
+
+                    orderObject.setTongTien(calculateTotalAmount(datalist) + PhiGiaoHang - DiscountFee);
+
+                    // add list chi tiết đơn hàng
+                    SetOrderDetails(datalist);
+
+                    // Cập nhật chi tiết đơn hàng lên firebase
+                    new OrderDAO().SetDataOrder(UID,orderObject,ActivityForPay.this);
+
+                    // Giảm số lượng của mã khuyến mãi
+
+                    discountDTO.setSoluong(discountDTO.getSoluong() - 1);
+
+                    new DiscountDAO().SetDataDiscount(discountDTO);
+
+                    // Tăng số lượng bán cho các món được mua
+                    for (OrderDetailsDTO temp : orderObject.getListOrderDetails()){
+                        TangSoLuongMua(temp);
+                    }
 
                     //new CartDAO().deleteCart(UID);
 
@@ -321,9 +324,6 @@ public class ActivityForPay extends AppCompatActivity {
 
                 int totalPayAmount = totalAmount + PhiGiaoHang - DiscountFee;
                 txtTongTien.setText(currencyFormat.format(totalPayAmount));
-
-                orderObject.setTongTien(totalPayAmount);
-
 
             }
             @Override
@@ -551,5 +551,15 @@ public class ActivityForPay extends AppCompatActivity {
 
 
     }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        if (!isFinishing()) {
+            Intent intent = new Intent(ActivityForPay.this,Cart.class);
+            startActivity(intent);
+        }
+    }
+
 
 }
