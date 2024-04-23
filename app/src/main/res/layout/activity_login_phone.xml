@@ -75,7 +75,7 @@
             android:background="@drawable/button_radius"
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/blue_grey"
-            android:text="SEND OTP"
+            android:text="Gửi OTP"
             android:textColor="#FFFFFF" />
         <TextView
             android:layout_width="match_parent"
@@ -110,7 +110,7 @@
             android:layout_gravity="center"
             android:background="@drawable/button_radius"
             android:backgroundTint="@color/red"
-            android:text="VERIFY OTP"
+            android:text="XÁC NHẬN"
             android:textColor="#FFFFFF" />
 
         <LinearLayout
