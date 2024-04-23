@@ -78,30 +78,30 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        btnnoti = findViewById(R.id.btn_notifi);
-        btnnoti.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Đã nhấn", Toast.LENGTH_SHORT).show();
-//                setLunchNotification();
-
-               notification = new Notification(MainActivity.this);
-
-                // Gọi phương thức showLunchNotification() để hiển thị thông báo ăn trưa
-                notification.scheduleLunchNotification();
-            }
-
-        });
+//        btnnoti = findViewById(R.id.btn_notifi);
+//        btnnoti.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this, "Đã nhấn", Toast.LENGTH_SHORT).show();
+////                setLunchNotification();
+//
+//               notification = new Notification(MainActivity.this);
+//
+//                // Gọi phương thức showLunchNotification() để hiển thị thông báo ăn trưa
+//                notification.scheduleLunchNotification();
+//            }
+//
+//        });
 
         GPS_permission();
 
         Notification_permission();
 
-        notification = new Notification(this);
-        notification1 = new Notification(this);
-
-        notification1.scheduleLunchNotification();       // 11h
-        notification.scheduleDinnerNotification();      // 18h
+//        notification = new Notification(this);
+//        notification1 = new Notification(this);
+//
+//        notification1.scheduleLunchNotification();       // 11h
+//        notification.scheduleDinnerNotification();      // 18h
 
     }
 
