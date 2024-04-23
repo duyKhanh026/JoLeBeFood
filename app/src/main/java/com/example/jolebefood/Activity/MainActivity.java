@@ -5,12 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -21,11 +24,15 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.jolebefood.R;
 import com.example.jolebefood.SignIn_and_SignUp.Intro;
 import com.example.jolebefood.fragment.HomeFragment;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import java.util.Calendar;
-//import com.google.firebase.messaging.FirebaseMessaging;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
         // Bắt đầu một FragmentTransaction
         FragmentTransaction transaction = fragmentManager.beginTransaction();
 
-
-
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String userId = user.getUid();
 
@@ -62,18 +67,6 @@ public class MainActivity extends AppCompatActivity {
 
         // Thêm một Fragment vào FragmentContainerView hoặc FrameLayout với một id duy nhất và thực thi ngay lập tức
         transaction.replace(R.id.fragment_container, fragment).commitNow();
-
-
-//        FirebaseMessaging.getInstance().subscribeToTopic("News")
-//                .addOnCompleteListener(new OnCompleteListener<Void>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Void> task) {
-//                        String msq = "Done";
-//                        if (!task.isSuccessful()){
-//                            msq = "Failed";
-//                        }
-//                    }
-//                });
 
         btnCart = findViewById(R.id.btnMain_To_Cart);
         btnCart.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
         notification1.scheduleLunchNotification();       // 11h
         notification.scheduleDinnerNotification();      // 18h
+
     }
 
 
