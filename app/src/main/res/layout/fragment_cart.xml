@@ -44,7 +44,7 @@
         android:rotation="10"
         android:visibility="gone"
         android:layout_marginBottom="150dp"
-        android:src="@drawable/icon_fb"
+        android:src="@drawable/cart_bucket"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
