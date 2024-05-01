@@ -72,7 +72,7 @@
                     android:layout_width="100px"
                     android:layout_height="100px"
                     android:background="@color/privateColor"
-                    android:src="@drawable/baseline_arrow_back_24"
+                    android:src="@drawable/baseline_arrow_back_24_white"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="30px"
                     android:layout_marginLeft="10px"/>
@@ -81,12 +81,12 @@
                     android:id="@+id/Title_cart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="GIỎ HÀNG CỦA TÔI"
-                    android:textStyle="bold"
+                    android:layout_marginTop="25px"
+                    android:text="Giỏ hàng của tôi"
                     android:textAlignment="center"
-                    android:textSize="24sp"
                     android:textColor="@color/white"
-                    android:layout_marginTop="25px"/>
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
