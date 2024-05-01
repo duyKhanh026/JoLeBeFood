@@ -373,7 +373,7 @@ public class ActivityForPay extends AppCompatActivity {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.bottom_sheet_choose_pay);
 
-        RelativeLayout Item_Momo = dialog.findViewById(R.id.Item_MoMo_Choose_pay);
+        RelativeLayout Item_VNPay = dialog.findViewById(R.id.Item_VNPay_Choose_pay);
         RelativeLayout Item_Bth = dialog.findViewById(R.id.Item_Bth_Choose_pay);
 
         if (discountDTO != null){
@@ -383,8 +383,8 @@ public class ActivityForPay extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (discountDTO != null){
-                    if (discountDTO.getPhuongthuctt().equals("Thanh toán bằng MoMo")){
-                        Toast.makeText(ActivityForPay.this,"Mã khuyến mãi chỉ áp dụng khi thanh toán bằng MoMo",Toast.LENGTH_SHORT).show();
+                    if (discountDTO.getPhuongthuctt().equals("Thanh toán bằng VNPay")){
+                        Toast.makeText(ActivityForPay.this,"Mã khuyến mãi chỉ áp dụng khi thanh toán bằng VNPay",Toast.LENGTH_SHORT).show();
                         return;
                     }
                 }
@@ -393,7 +393,7 @@ public class ActivityForPay extends AppCompatActivity {
             }
         });
 
-        Item_Momo.setOnClickListener(new View.OnClickListener() {
+        Item_VNPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (discountDTO != null){
@@ -402,7 +402,7 @@ public class ActivityForPay extends AppCompatActivity {
                         return;
                     }
                 }
-                txtPhuongThuc.setText("Thanh toán bằng MoMo");
+                txtPhuongThuc.setText("Thanh toán bằng VNPay");
                 dialog.dismiss();
             }
         });
@@ -559,6 +559,7 @@ public class ActivityForPay extends AppCompatActivity {
         if (!isFinishing()) {
             Intent intent = new Intent(ActivityForPay.this,Cart.class);
             startActivity(intent);
+            finish();
         }
     }
 

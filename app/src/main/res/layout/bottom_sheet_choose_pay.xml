@@ -27,7 +27,7 @@
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/Item_MoMo_Choose_pay">
+        android:id="@+id/Item_VNPay_Choose_pay">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,11 +56,11 @@
         android:layout_height="1dp"
         android:layout_marginTop="10dp"
         android:background="#ABABAB"
-        android:layout_below="@id/Item_MoMo_Choose_pay"/>
+        android:layout_below="@id/Item_VNPay_Choose_pay"/>
 
 
     <RelativeLayout
-        android:layout_below="@id/Item_MoMo_Choose_pay"
+        android:layout_below="@id/Item_VNPay_Choose_pay"
         android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

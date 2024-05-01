@@ -121,4 +121,13 @@ public class Cart extends AppCompatActivity {
         return totalAmount;
     }
 
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        if (!isFinishing()) {
+            Intent intent = new Intent(Cart.this,MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 }
