@@ -2,6 +2,7 @@ package com.example.jolebefood.SignIn_and_SignUp;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -46,5 +47,17 @@ public class Intro extends AppCompatActivity {
                 finish();
             }
         },3000);
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        if (!isFinishing()) {
+            // Tạo Intent để quay về màn hình chính
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+            finish();
+        }
     }
 }

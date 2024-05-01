@@ -3,6 +3,7 @@ package com.example.jolebefood.SignIn_and_SignUp;
 import static androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG;
 import static androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -18,6 +19,8 @@ import androidx.biometric.BiometricManager;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 
+import com.example.jolebefood.Activity.ActivityForPay;
+import com.example.jolebefood.Activity.Cart;
 import com.example.jolebefood.Activity.MainActivity;
 import com.example.jolebefood.R;
 
@@ -146,5 +149,17 @@ public class MainMenu extends AppCompatActivity {
 //            }
 //        });
 
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onBackPressed() {
+        if (!isFinishing()) {
+            // Tạo Intent để quay về màn hình chính
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(intent);
+            finish();
+        }
     }
 }
