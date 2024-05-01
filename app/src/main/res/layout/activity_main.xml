@@ -13,24 +13,20 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="26sp"
-            android:paddingTop="25dp"
-            android:paddingRight="10dp"
-            android:paddingLeft="10dp"
-            android:paddingBottom="10dp"
+            android:textSize="24sp"
+            android:layout_marginTop="75px"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/white"
-            android:text="JoLiDeFood"/>
+            android:text="JoLiBeFood"/>
 
         <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100px"
+            android:layout_height="100px"
             android:layout_alignParentRight="true"
             android:background="@color/privateColor"
-            android:paddingTop="30dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginTop="75px"
+            android:layout_marginBottom="5px"
+            android:layout_marginRight="15dp"
             android:src="@drawable/cart"
             android:id="@+id/btnMain_To_Cart"/>
 
