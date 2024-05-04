@@ -1,6 +1,7 @@
 package com.example.jolebefood.SignIn_and_SignUp;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.jolebefood.Activity.MainActivity;
 import com.example.jolebefood.R;
@@ -29,6 +32,7 @@ import com.hbb20.CountryCodePicker;
 import java.util.concurrent.TimeUnit;
 
 public class Login_Phone extends AppCompatActivity {
+    private static final int MY_PERMISSIONS_REQUEST_SMS = 101;
     EditText PhoneNumber,OtpNumber;
     private TextInputLayout TextInput_SDT,TextInput_Otp;
     private final String TAG = "Nam Test OTP";
@@ -51,6 +55,8 @@ public class Login_Phone extends AppCompatActivity {
         btn_verifyotp = (Button)findViewById(R.id.btnVerifyOTP);
         OtpNumber = TextInput_Otp.getEditText();
         mAuth = FirebaseAuth.getInstance();
+
+        SMS_permission();
 
         btn_sendotp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,4 +173,19 @@ public class Login_Phone extends AppCompatActivity {
                     }
                 });
     }
+
+    public void SMS_permission(){
+        if (ContextCompat.checkSelfPermission(Login_Phone.this, android.Manifest.permission.SEND_SMS)
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.e("Kien Main", "Đã được quyền gửi tin nhắn");
+
+        } else {
+            Toast.makeText(this, "Chưa cấp quyền gửi tin nhắn", Toast.LENGTH_SHORT).show();
+            // Quyền chưa được cấp, yêu cầu người dùng cấp quyền
+            ActivityCompat.requestPermissions(Login_Phone.this,
+                    new String[]{android.Manifest.permission.SEND_SMS},
+                    MY_PERMISSIONS_REQUEST_SMS);
+        }
+    }
+
 }
